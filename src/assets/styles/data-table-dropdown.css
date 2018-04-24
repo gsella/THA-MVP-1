@@ -1,0 +1,35 @@
+.data-table-dropdown {
+  height: 100%;
+  width: 100%;
+}
+
+.data-table-dropdown__button{
+  background: none;
+  border: 0;
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
+  box-shadow: none;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.data-table-dropdown__button:hover,
+.data-table-dropdown__button:focus,
+.open > .dropdown-toggle{
+  background: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+.data-table-dropdown__menu-element {
+  text-align: center;
+  height: 35px;
+}
+
+li.data-table-dropdown__menu-element a {
+  height: 100%;
+  line-height: 35px ;
+}
+
+
