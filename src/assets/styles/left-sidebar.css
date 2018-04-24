@@ -1,0 +1,87 @@
+.left-sidebar {
+  background-color: #f0f0f0;
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.left-sidebar__logo {
+  padding: 30px 20px;
+  border-bottom: 3px solid #ffffff;;
+}
+
+.left-sidebar__series {
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-align: left;
+  color: #222;
+  padding: 20px 10px;
+}
+
+.left-sidebar__category, .left-sidebar__insight {
+  color: #222;
+}
+
+.left-sidebar__category--disable-border {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.panel-default > .panel-heading {
+  background-color: #f0f0f0;
+}
+
+.left-sidebar__category--underline a {
+  text-decoration: none;
+}
+
+.left-sidebar__category--padding-heading {
+  padding-left: 20px;
+}
+
+.left-sidebar__category--id, .left-sidebar__insight--id {
+  font-weight: 900;
+}
+
+.left-sidebar__category--vertical-border-22bae6 {
+  border-left: 8px solid #22bae6;
+}
+
+.left-sidebar__category--vertical-border-0fb54a {
+  border-left: 8px solid #0fb54a;
+}
+
+.left-sidebar__category--vertical-border-d92be5 {
+  border-left: 8px solid #d92be5;
+}
+
+.left-sidebar__insight--background:hover {
+  background-color: #d5d5d5;
+  cursor: pointer;
+}
+
+.left-sidebar__insight--visible-icon {
+  display: none;
+}
+
+.left-sidebar__insight--background:hover .left-sidebar__insight--visible-icon {
+  display: block;
+}
+
+.left-sidebar__insight--padding {
+  padding: 2px 0 2px 40px;
+}
+
+.left-sidebar__insight--align {
+  display: flex;
+}
+
+.left-sidebar__insight--eye-icon {
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}

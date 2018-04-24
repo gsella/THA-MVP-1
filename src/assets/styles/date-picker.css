@@ -1,0 +1,13 @@
+.pika-single.is-hidden {
+  display: none;
+}
+
+.custom-datepicker__dpk-input{
+  font-size: 1rem;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.custom-datepicker__dpk-label{
+  line-height: 20px;
+}
