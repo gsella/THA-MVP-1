@@ -22,15 +22,17 @@ class LeftSidebar extends React.Component {
     if (this.props.chartData && this.props.chartData.bubbles) {
       const chartData = this.props.chartData.bubbles.reduce((res, item) => {
         const category = this.props.chartData.categories[item.categoryId];
-        res[category.name] = res[category.name] ||
-          { data: [], color: this.props.chartData.categories[item.categoryId].color };
+        res[category.name] = res[category.name] || {
+          data: [],
+          color: this.props.chartData.categories[item.categoryId].color,
+        };
 
         res[category.name].data.push(item);
 
         return res;
       }, {});
 
-      return Object.keys(chartData).map((key) => ({
+      return Object.keys(chartData).map(key => ({
         category: key,
         color: chartData[key].color,
         data: chartData[key].data,
@@ -49,9 +51,7 @@ class LeftSidebar extends React.Component {
           <div>Gogoro 2 Series</div>
         </div>
         <div>
-          {(this.props.chartData && this.props.chartData.bubbles) &&
-          <Category categories={this.getChartData()} />
-          }
+          {this.props.chartData && this.props.chartData.bubbles && <Category categories={this.getChartData()} />}
         </div>
       </div>
     );

@@ -14,7 +14,7 @@ export default function (state = defaultState, { type, payload }) {
     default:
       return state;
   }
-};
+}
 
 function handleGetChartData(state, chartData) {
   return { ...state, chartData };

@@ -2,13 +2,12 @@
   background-color: #f0f0f0;
   width: 240px;
   height: 100%;
-  position: absolute;
   bottom: 0;
 }
 
 .left-sidebar__logo {
   padding: 30px 20px;
-  border-bottom: 3px solid #ffffff;;
+  border-bottom: 3px solid #ffffff;
 }
 
 .left-sidebar__thunder-icon {
@@ -25,7 +24,8 @@
   padding: 20px 10px;
 }
 
-.left-sidebar__category, .left-sidebar__insight {
+.left-sidebar__category,
+.left-sidebar__insight {
   color: #222;
 }
 
@@ -49,7 +49,8 @@
   padding-left: 40px;
 }
 
-.left-sidebar__category--id, .left-sidebar__insight--id {
+.left-sidebar__category--id,
+.left-sidebar__insight--id {
   font-weight: 900;
 }
 

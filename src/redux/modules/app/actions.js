@@ -43,12 +43,12 @@ const chartData = {
     },
     2: {
       name: 'Features',
-      color: '#0fb54a',
+      color: '#d92be5',
     },
     3: {
       name: 'Competition',
-      color: '#d92be5',
-    }
+      color: '#0fb54a',
+    },
   },
   bubbles: [
     {
@@ -57,7 +57,7 @@ const chartData = {
       tagId: 6,
       categoryKey: 'K1',
       insight: 'Home Use',
-      popularity: 0,
+      popularity: 1,
       instances: 555,
       description: 'Lorem ipsum dolor sit amet.',
     },
@@ -67,8 +67,8 @@ const chartData = {
       tagId: 4,
       categoryKey: 'K2',
       insight: 'Music Use',
-      popularity: 0,
-      instances: 555,
+      popularity: .75,
+      instances: 55,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -77,8 +77,8 @@ const chartData = {
       tagId: 3,
       categoryKey: 'K3',
       insight: 'Office Use',
-      popularity: 0,
-      instances: 555,
+      popularity: .5,
+      instances: 1000,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -87,8 +87,8 @@ const chartData = {
       tagId: 1,
       categoryKey: 'K4',
       insight: 'Kids Use',
-      popularity: 0,
-      instances: 555,
+      popularity: .25,
+      instances: 150,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -98,7 +98,7 @@ const chartData = {
       categoryKey: 'F1',
       insight: 'Speakers',
       popularity: 0,
-      instances: 555,
+      instances: 800,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -107,8 +107,8 @@ const chartData = {
       tagId: 2,
       categoryKey: 'F2',
       insight: 'Phone',
-      popularity: 0,
-      instances: 555,
+      popularity: -.25,
+      instances: 9999999,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -117,8 +117,8 @@ const chartData = {
       tagId: 3,
       categoryKey: 'F3',
       insight: 'Calendar',
-      popularity: 0,
-      instances: 555,
+      popularity: -.5,
+      instances: 7,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -127,8 +127,8 @@ const chartData = {
       tagId: 5,
       categoryKey: 'C1',
       insight: 'Siri',
-      popularity: 0,
-      instances: 555,
+      popularity: -.75,
+      instances: 666,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -137,7 +137,7 @@ const chartData = {
       tagId: 5,
       categoryKey: 'C2',
       insight: 'Google Home',
-      popularity: 0,
+      popularity: -1,
       instances: 555,
       description: 'Lorem ipsum dolor sit amet.',
     },
