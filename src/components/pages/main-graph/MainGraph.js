@@ -1,14 +1,7 @@
 import React from 'react';
-import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
 
-class MainGraph extends React.Component {
-  render() {
-    return (
-      <div>
-        <LeftSidebarContainer />
-      </div>
-    );
-  }
-}
+const MainGraph = () => {
+  return <div>main graph</div>;
+};
 
 export default MainGraph;

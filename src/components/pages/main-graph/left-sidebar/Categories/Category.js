@@ -20,7 +20,8 @@ class Category extends React.Component {
     return this.props.categories.map(item => (
       <Panel
         key={item.category}
-        className={bemClasses('category', ['disable-border', `vertical-border-${item.color.slice(1)}`])}
+        style={{ borderLeft: `8px solid ${item.color}` }}
+        className={bemClasses('category', 'disable-border')}
       >
         <Panel.Heading className={bemClasses('category', ['disable-border', 'padding-heading'])}>
           <Panel.Title toggle className={bemClasses('category', 'underline')}>

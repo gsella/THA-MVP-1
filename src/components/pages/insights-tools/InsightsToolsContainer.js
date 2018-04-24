@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from 'redux/modules/app/actions';
-import LeftSidebar from './LeftSidebar';
+import InsightsTools from './InsightsTools';
 
 const mapStateToProps = (state) => ({
   chartData: state.app.chartData,
@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getChartData: actions.getChartData,
+  getMatchingData: actions.getMatchingData,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftSidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(InsightsTools);

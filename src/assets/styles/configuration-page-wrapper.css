@@ -1,0 +1,40 @@
+.configuration-page-wrapper {
+  background-color: #f0f0f0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.configuration-page-wrapper__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+}
+
+.configuration-page-wrapper__user-name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.configuration-page-wrapper__title {
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.configuration-page-wrapper__menu-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.configuration-page-wrapper__footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  display: flex;
+  padding: 10px 50px;
+  justify-content: flex-end;
+}

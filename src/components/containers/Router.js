@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Route, Router, Switch, Redirect } from 'react-router-dom';
+import InsightsToolsContainer from 'components/pages/insights-tools/InsightsToolsContainer';
 import history from './history';
 import MainGraph from 'components/pages/main-graph/MainGraph';
-import DataTablePage from 'components/pages/data-table-page/DataTablePage.js';
 
 const AppComponent = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/main-graph" component={MainGraph} />
-        <Route exact path="/data-table" component={DataTablePage} />
+        <Route exact path="/create-insights" component={InsightsToolsContainer} />
 
-        <Redirect from="/" exact to="/main-graph" />
-        <Redirect from="*" exact to="/error/not-found"/>
+        <Redirect from="/" exact to="/create-insights" />
+        <Redirect from="*" exact to="/error/not-found" />
       </Switch>
     </Router>
   );

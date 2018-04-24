@@ -11,10 +11,16 @@
   border-bottom: 3px solid #ffffff;;
 }
 
+.left-sidebar__thunder-icon {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
 .left-sidebar__series {
+  display: flex;
+  align-items: center;
   font-size: 1.25rem;
   font-weight: 900;
-  text-align: left;
   color: #222;
   padding: 20px 10px;
 }
@@ -40,23 +46,11 @@
 }
 
 .left-sidebar__category--padding-heading {
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 .left-sidebar__category--id, .left-sidebar__insight--id {
   font-weight: 900;
-}
-
-.left-sidebar__category--vertical-border-22bae6 {
-  border-left: 8px solid #22bae6;
-}
-
-.left-sidebar__category--vertical-border-0fb54a {
-  border-left: 8px solid #0fb54a;
-}
-
-.left-sidebar__category--vertical-border-d92be5 {
-  border-left: 8px solid #d92be5;
 }
 
 .left-sidebar__insight--background:hover {
@@ -73,7 +67,7 @@
 }
 
 .left-sidebar__insight--padding {
-  padding: 2px 0 2px 40px;
+  padding: 2px 0 2px 60px;
 }
 
 .left-sidebar__insight--align {

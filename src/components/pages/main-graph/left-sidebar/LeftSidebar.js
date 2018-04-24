@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Category from 'components/pages/main-graph/left-sidebar/Categories/Category';
 import { getBEMClasses } from 'helper/BEMHelper';
+import ThunderIcon from 'assets/images/thunder-icon-small.svg' ;
 import 'assets/styles/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';
@@ -42,8 +43,10 @@ class LeftSidebar extends React.Component {
       <div className={bemClasses()}>
         <div className={bemClasses('logo')}>THINDERAct</div>
         <div className={bemClasses('series')}>
-          <span>LogoTh</span>
-          <span>Gogoro 2 Series</span>
+          <div className={bemClasses('thunder-icon')}>
+            <img src={ThunderIcon} alt="thunder" width={28} height={28} />
+          </div>
+          <div>Gogoro 2 Series</div>
         </div>
         <div>
           {(this.props.chartData && this.props.chartData.bubbles) &&

@@ -1,0 +1,24 @@
+.search-form__form {
+  margin-right: 10px;
+}
+
+.search-form__input--border {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  padding: 23px;
+}
+
+.search-form__input--addon-border {
+  background-color: rgb(255, 255, 255);
+  padding: 6px 0 6px 15px;
+}
+
+.search-form__input--search-icon {
+  color: #0070c0;
+}
+
+.search-form__input--border:focus {
+  border: none;
+  box-shadow: none;
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as action from 'redux/modules/app/actions';
 import SelectDateForm from './select-date-form/SelectDateForm';
 
@@ -10,12 +9,12 @@ class MainGraph extends React.Component {
     this.state = {
       selectedDate: new Date(),
     };
-    
+
     this.handleDataChange = this.handleDataChange.bind(this);
   }
 
   handleDataChange(newDate) {
-    let date = {};
+    const date = {};
 
     if ('selectedDate' in newDate) {
       date.selectedDate = newDate.selectedDate;
@@ -39,9 +38,9 @@ const mapStateToProps = (state) => ({
   dataTable: state.app.dataTable,
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getMainGraph: action.getMainGraph,
-}, dispatch);
+const mapDispatchToProps = {
+  getMainGraph: action.getChartData,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainGraph);
 

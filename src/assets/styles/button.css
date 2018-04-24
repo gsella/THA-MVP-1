@@ -1,0 +1,37 @@
+.button__btn {
+  border-radius: 0;
+  border: 0;
+}
+
+.button__btn--default {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #4a90e2;
+  padding: 10px 40px;
+}
+
+.button__btn--default:hover,
+.button__btn--default:focus,
+.button__btn--default:active:focus {
+  background: none;
+  color: #4a90e2 !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.button__btn--primary {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 10px 40px;
+  background-color: #0070c0;
+}
+
+.button__btn--primary:hover,
+.button__btn--primary:focus,
+.button__btn--primary:active:focus {
+  background: #0070c0;
+  color: #fff !important;
+  outline: none;
+  box-shadow: none;
+}

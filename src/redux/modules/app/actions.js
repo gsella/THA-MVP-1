@@ -8,6 +8,13 @@ export const getChartData = () => dispatch => {
   });
 };
 
+export const getMatchingData = () => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.GET_MATCHING_DATA,
+    payload: chartData,
+  })
+};
+
 const chartData = {
   tags: {
     1: {

@@ -2,6 +2,8 @@
   border-collapse: separate;
   border-spacing: 5px 15px;
   width: 100%;
+  margin-bottom: 100px;
+  padding: 0 75px 0 55px;
 }
 
 .data-table-row--is-new {
@@ -27,20 +29,7 @@
   padding: 0 10px;
 }
 
-.data-table-row__cell--background-22bae6{
-  background-color: #22bae6;
-  color: #fff;
-  font-weight: bold;
-}
-
-.data-table-row__cell--background-0fb54a{
-  background-color: #0fb54a;
-  color: #fff;
-  font-weight: bold;
-}
-
-.data-table-row__cell--background-d92be5{
-  background-color: #d92be5;
+.data-table-row__cell--for-color-cell{
   color: #fff;
   font-weight: bold;
 }
