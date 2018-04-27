@@ -18,3 +18,8 @@ html {
 #root {
   height: 100%;
 }
+
+.disable-default-a-style,
+.disable-default-a-style:hover {
+  text-decoration: none;
+}

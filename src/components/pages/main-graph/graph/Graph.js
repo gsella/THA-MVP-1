@@ -33,6 +33,7 @@ class Graph extends React.Component {
 
     const bubble = d3
       .pack()
+      .radius(d => radiuses[d.value])
       .size([diameter, diameter])
       .padding(5);
 
@@ -61,7 +62,7 @@ class Graph extends React.Component {
 
       node
         .append('circle')
-        .attr('r', d => radiuses[d.value])
+        .attr('r', d => d.r)
         .style('fill', d => d.data.color);
 
       node

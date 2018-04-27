@@ -1,0 +1,21 @@
+/*use nested selectors to overlap bootstrap styles*/
+.notification-container {
+  top: 40px;
+  right: 30px;
+  width: 260px;
+  padding: 5px;
+  z-index: 999;
+}
+
+.notification-info::before {
+  display: none;
+}
+
+.notification-info {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  opacity: 1;
+  margin: 0;
+  padding: 15px;
+  color: #222;
+}

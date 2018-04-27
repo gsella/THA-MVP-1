@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MenuIcon from 'react-icons/lib/fa/list-ul';
 import Button from 'components/common/button/Button';
 import { getBEMClasses } from 'helper/BEMHelper';
@@ -23,7 +24,9 @@ class ConfigurationPageWrapper extends React.Component {
         {this.props.children}
         <div className={bemClasses('footer')}>
           <Button buttonStyle='default' label='Preview' />
-          <Button buttonStyle='primary' label='Launch' />
+          <Link to="/main-graph">
+            <Button buttonStyle='primary' label='Launch' />
+          </Link>
         </div>
       </div>
     );

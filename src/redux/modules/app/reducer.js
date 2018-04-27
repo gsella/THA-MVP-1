@@ -2,6 +2,7 @@ import ACTION_CONSTANTS from './constants';
 
 const defaultState = {
   chartData: {},
+  newInsights: [],
 };
 
 export default function (state = defaultState, { type, payload }) {
@@ -10,6 +11,8 @@ export default function (state = defaultState, { type, payload }) {
       return handleGetChartData(state, payload);
     case ACTION_CONSTANTS.GET_MATCHING_DATA:
       return handleGetMatchingData(state, payload);
+    case ACTION_CONSTANTS.GET_NEW_INSIGHTS:
+      return handleGetNewInsights(state, payload);
       case ACTION_CONSTANTS.UPDATE_CHART_DATA:
       return handleUpdateChartData(state, payload);
     case ACTION_CONSTANTS.ADD_NEW_INSIGHT:
@@ -41,7 +44,7 @@ function handleUpdateChartData(state, updatedInsight) {
     }
     return item;
   })
-  
+
   return {...state, chartData: {...state.chartData, bubbles:  updateCategoryKey(newData, state.chartData.categories)}}
 }
 
@@ -63,7 +66,7 @@ function handleMoveInsightUp(state, id) {
     });
 
     return {...state, chartData: {...state.chartData, bubbles:  updateCategoryKey(newData, state.chartData.categories)}}
-    
+
   }
   return state;
 }
@@ -105,7 +108,7 @@ function findMaxIndex(arr) {
 
 function updateCategoryKey(arr, categories) {
   const categoriesArray = [];
-  
+
   Object.keys(categories).forEach((key) => {
     categoriesArray[key]=0;
   });
@@ -117,4 +120,7 @@ function updateCategoryKey(arr, categories) {
     }
     return item;
   });
+}
+function handleGetNewInsights(state, newInsights) {
+  return { ...state, newInsights };
 }

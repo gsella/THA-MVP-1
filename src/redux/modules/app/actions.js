@@ -23,28 +23,28 @@ const newInsight = {
   instances: 0,
   description: '',
   isNew: true,
-}
+};
 
 export const deleteInsight = (id) => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.DELETE_INSIGHT,
     payload: id,
   })
-}
+};
 
 export const moveInsightUp = (id) => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
     payload: id,
   })
-}
+};
 
 export const moveInsightDown = (id) => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
     payload: id,
   })
-}
+};
 
 export const getChartData = () => dispatch => {
   // TODO: get data from server
@@ -55,9 +55,19 @@ export const getChartData = () => dispatch => {
 };
 
 export const getMatchingData = () => dispatch => {
+  //TODO: request to server
   dispatch({
     type: ACTION_CONSTANTS.GET_MATCHING_DATA,
     payload: chartData,
+  });
+};
+
+
+export const getNewInsights = () => dispatch => {
+  //TODO: request to server
+  dispatch({
+    type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
+    payload: [{}],
   });
 };
 

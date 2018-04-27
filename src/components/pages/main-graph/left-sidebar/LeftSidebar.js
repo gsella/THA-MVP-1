@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ThunderLogo from 'assets/images/logo-thunder.png';
 import Category from 'components/pages/main-graph/left-sidebar/Categories/Category';
 import { getBEMClasses } from 'helper/BEMHelper';
-import ThunderIcon from 'assets/images/thunder-icon-small.svg' ;
+import ThunderIcon from 'assets/images/thunder-icon-small.svg';
 import 'assets/styles/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';
@@ -43,15 +44,19 @@ class LeftSidebar extends React.Component {
   render() {
     return (
       <div className={bemClasses()}>
-        <div className={bemClasses('logo')}>THINDERAct</div>
-        <div className={bemClasses('series')}>
+        <div className={bemClasses('logo')}>
+          <img src={ThunderLogo} alt="thunder-logo" width={240} />
+        </div>
+        <div className={bemClasses('insight-title')}>
           <div className={bemClasses('thunder-icon')}>
             <img src={ThunderIcon} alt="thunder" width={28} height={28} />
           </div>
           <div>Gogoro 2 Series</div>
         </div>
         <div>
-          {this.props.chartData && this.props.chartData.bubbles && <Category categories={this.getChartData()} />}
+          {(this.props.chartData && this.props.chartData.bubbles) &&
+          <Category categories={this.getChartData()} />
+          }
         </div>
       </div>
     );
