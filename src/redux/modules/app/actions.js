@@ -12,7 +12,7 @@ export const getMatchingData = () => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.GET_MATCHING_DATA,
     payload: chartData,
-  })
+  });
 };
 
 const chartData = {
@@ -58,7 +58,7 @@ const chartData = {
       categoryKey: 'K1',
       insight: 'Home Use',
       popularity: 1,
-      instances: 555,
+      instances: 5,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -67,8 +67,8 @@ const chartData = {
       tagId: 4,
       categoryKey: 'K2',
       insight: 'Music Use',
-      popularity: .75,
-      instances: 55,
+      popularity: 0,
+      instances: 2,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -77,8 +77,8 @@ const chartData = {
       tagId: 3,
       categoryKey: 'K3',
       insight: 'Office Use',
-      popularity: .5,
-      instances: 1000,
+      popularity: -1,
+      instances: 2,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -87,8 +87,8 @@ const chartData = {
       tagId: 1,
       categoryKey: 'K4',
       insight: 'Kids Use',
-      popularity: .25,
-      instances: 150,
+      popularity: 1,
+      instances: 3,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -98,7 +98,7 @@ const chartData = {
       categoryKey: 'F1',
       insight: 'Speakers',
       popularity: 0,
-      instances: 800,
+      instances: 2,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -107,8 +107,8 @@ const chartData = {
       tagId: 2,
       categoryKey: 'F2',
       insight: 'Phone',
-      popularity: -.25,
-      instances: 9999999,
+      popularity: -1,
+      instances: 2,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -117,8 +117,8 @@ const chartData = {
       tagId: 3,
       categoryKey: 'F3',
       insight: 'Calendar',
-      popularity: -.5,
-      instances: 7,
+      popularity: 0,
+      instances: 4,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -127,8 +127,8 @@ const chartData = {
       tagId: 5,
       categoryKey: 'C1',
       insight: 'Siri',
-      popularity: -.75,
-      instances: 666,
+      popularity: 0,
+      instances: 4,
       description: 'Lorem ipsum dolor sit amet.',
     },
     {
@@ -137,8 +137,8 @@ const chartData = {
       tagId: 5,
       categoryKey: 'C2',
       insight: 'Google Home',
-      popularity: -1,
-      instances: 555,
+      popularity: 0,
+      instances: 4,
       description: 'Lorem ipsum dolor sit amet.',
     },
   ],

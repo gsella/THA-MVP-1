@@ -12,7 +12,7 @@ class MainGraph extends React.Component {
         <div style={{ height: '100vh', flexBasis: '240px' }}>
           <LeftSidebarContainer />
         </div>
-        <div style={{ height: '100vh', flexGrow: 1 }}>
+        <div style={{ height: '100vh', flexGrow: 1, overflow: 'auto' }}>
           <GraphLayout data={this.props.chartData} />
         </div>
       </div>
