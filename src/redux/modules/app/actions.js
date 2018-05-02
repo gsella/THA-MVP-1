@@ -1,5 +1,51 @@
 import ACTION_CONSTANTS from './constants';
 
+export const updateChartData = (updatedInsight) => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
+    payload: updatedInsight,
+  });
+};
+
+export const addNewInsight = () => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.ADD_NEW_INSIGHT,
+    payload: newInsight,
+  });
+};
+
+const newInsight = {
+  categoryId: 0,
+  tagId: 0,
+  categoryKey: '',
+  insight: 'Google Home',
+  popularity: 0,
+  instances: 0,
+  description: '',
+  isNew: true,
+}
+
+export const deleteInsight = (id) => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.DELETE_INSIGHT,
+    payload: id,
+  })
+}
+
+export const moveInsightUp = (id) => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
+    payload: id,
+  })
+}
+
+export const moveInsightDown = (id) => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
+    payload: id,
+  })
+}
+
 export const getChartData = () => dispatch => {
   // TODO: get data from server
   dispatch({

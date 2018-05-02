@@ -5,11 +5,24 @@ import 'assets/styles/dropdown.css';
 import 'assets/styles/data-table-dropdown.css';
 
 class CustomDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.handleOptionClick = this.handleOptionClick.bind(this);
+  }
+
+  handleOptionClick(eventKey) {
+    this.props.handleChange(this.props.id, eventKey);
+  }
+
   renderListItems() {
     return this.props.options.map(item => (
       <MenuItem
         key={item.eventKey}
         className={this.props.bemClasses('menu-item')}
+        eventKey={item.eventKey}
+        onSelect={this.handleOptionClick}
       >
         {item.name}
       </MenuItem>
@@ -34,8 +47,9 @@ class CustomDropdown extends React.Component {
 }
 
 CustomDropdown.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   options: PropTypes.array.isRequired,
+  handleChange: PropTypes.func,
   bemClasses: PropTypes.func,
 };
 

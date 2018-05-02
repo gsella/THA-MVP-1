@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchForm from './search-form/SearchForm';
 import CustomDropdown from 'components/common/dropdown/CustomDropdown';
-import DataTableContainer from 'components/pages/data-table/DataTableContainer';
+import InsightsConfigurationContainer from 'components/pages/insights-configuration/InsightsConfigurationContainer';
 import ConfigurationPageWrapper from 'components/common/configuration-page-wrapper/ConfigurationPageWrapper';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/insights-tools.css';
@@ -28,7 +28,7 @@ class InsightsTools extends React.Component {
               bemClasses={dropdownStyles}
             />
           </div>
-          <DataTableContainer />
+          <InsightsConfigurationContainer />
         </div>
       </ConfigurationPageWrapper>
     );

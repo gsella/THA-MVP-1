@@ -7,7 +7,7 @@ import 'assets/styles/data-table.css';
 const dataTable = 'data-table';
 const bemClasses = getBEMClasses([dataTable]);
 
-class DataTable extends React.Component {
+class InsightsConfiguration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,34 +20,24 @@ class DataTable extends React.Component {
   renderTableContent(){
     const tags = this.props.chartData.tags;
     const categories = this.props.chartData.categories;
-    const tableData = [].concat(this.props.chartData.bubbles);
-    const tableLength = tableData.length + 1;
 
-    for (let i = tableLength; i < tableLength + 4; i++) {
-      tableData.push({
-        id: i,
-        categoryId: 0,
-        tagId: 0,
-        categoryKey: '',
-        insight: 'Google Home',
-        popularity: 0,
-        instances: 555,
-        description: '',
-        isNew: true,
-      });
-    }
-
-    return tableData.map((item) => 
+    return this.props.chartData.bubbles.map((item) => 
       <TableRow 
-        key={item.id}
+        key={`${item.categoryId}-${item.categoryKey}-${item.id}`}
         item={item}
         allCategories={categories}
         allTags={tags}
         isNew={('isNew' in item)}
+        updateChartData={this.props.updateChartData}
+        moveInsightUp={this.props.moveInsightUp}
+        moveInsightDown={this.props.moveInsightDown}
+        deleteInsight={this.props.deleteInsight}
       />
     )
   }
 
+  //TODO collapse rows by category and tags
+  //TODO create search
   render() {
     return (
       <table className={bemClasses()}>
@@ -59,8 +49,8 @@ class DataTable extends React.Component {
   }
 }
 
-DataTable.propTypes = {
+InsightsConfiguration.propTypes = {
   chartData: PropTypes.object.isRequired,
 };
 
-export default DataTable;
+export default InsightsConfiguration;
