@@ -7,7 +7,6 @@ import { format, parse } from 'helper/dateHelper';
 import 'pikaday/css/pikaday.css';
 import 'assets/styles/date-picker.css';
 
-
 const datepicker = 'datepicker';
 const bemClasses = getBEMClasses([datepicker]);
 
@@ -75,10 +74,7 @@ class DatePicker extends React.Component {
   }
 
   getCustomClasses() {
-    return new BEMHelper({
-      name: this.props.customClass,
-      outputIsString: true
-    });
+    return getBEMClasses([this.props.customClass]);
   }
 
   addClassNames() {

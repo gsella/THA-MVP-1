@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as action from 'redux/modules/app/actions';
 import SelectDateForm from './select-date-form/SelectDateForm';
 
-class MainGraph extends React.Component {
+class DateInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +24,6 @@ class MainGraph extends React.Component {
   render() {
     return (
       <div>
-        <p>Hello world</p>
         <p>Selected date: {this.state.selectedDate.toDateString()}</p>
         <SelectDateForm onSubmit={this.handleDataChange} />
       </div>
@@ -34,13 +31,5 @@ class MainGraph extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  dataTable: state.app.dataTable,
-});
-
-const mapDispatchToProps = {
-  getMainGraph: action.getChartData,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainGraph);
+export default DateInfo;
 

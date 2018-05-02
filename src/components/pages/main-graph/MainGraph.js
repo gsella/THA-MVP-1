@@ -76,16 +76,13 @@ class MainGraph extends React.Component {
           {this.renderNavigationIcons()}
 
           <div className={bemClasses('graph-content', 'align')}>
-
-            <div>
-              <GraphLayout data={this.props.chartData} />
-            </div>
-
-            <div className={bemClasses('zoom')}>
-              <FontAwesomeIcon icon={faPlus} className={bemClasses('zoom', 'color')} />
-              <FontAwesomeIcon icon={faMinus} className={bemClasses('zoom', 'color')} />
-            </div>
+            <GraphLayout data={this.props.chartData} />
           </div>
+        </div>
+
+        <div className={bemClasses('zoom')}>
+          <FontAwesomeIcon icon={faPlus} className={bemClasses('zoom', 'color')} />
+          <FontAwesomeIcon icon={faMinus} className={bemClasses('zoom', 'color')} />
         </div>
 
         {this.props.newInsights.length > 0 &&
