@@ -23,7 +23,7 @@ class InsightsConfiguration extends React.Component {
 
     return this.props.chartData.bubbles.map((item) => 
       <TableRow 
-        key={`${item.categoryId}-${item.categoryKey}-${item.id}`}
+        key={`${item.tagId}-${item.categoryKey}-${item.id}`}
         item={item}
         allCategories={categories}
         allTags={tags}

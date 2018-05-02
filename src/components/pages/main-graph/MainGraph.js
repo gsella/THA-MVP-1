@@ -72,18 +72,19 @@ class MainGraph extends React.Component {
     return (
       <div className={bemClasses()}>
         {!this.state.isFullScreen && <LeftSidebarContainer />}
-        <div className={bemClasses('graph-content')}>
+        <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
 
-          <div className={bemClasses('graph-content', 'align')}>
-            <GraphLayout data={this.props.chartData} />
+          <div className={bemClasses()}>
+            <GraphLayout data={this.props.chartData} className={bemClasses('graph-layout', 'align')} />
+
+            <div className={bemClasses('zoom')}>
+              <FontAwesomeIcon icon={faPlus} className={bemClasses('zoom', 'color')} />
+              <FontAwesomeIcon icon={faMinus} className={bemClasses('zoom', 'color')} />
+            </div>
           </div>
         </div>
 
-        <div className={bemClasses('zoom')}>
-          <FontAwesomeIcon icon={faPlus} className={bemClasses('zoom', 'color')} />
-          <FontAwesomeIcon icon={faMinus} className={bemClasses('zoom', 'color')} />
-        </div>
 
         {this.props.newInsights.length > 0 &&
         <Notification
