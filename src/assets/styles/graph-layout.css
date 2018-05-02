@@ -1,0 +1,27 @@
+.graph-layout {
+  width: 80%;
+  height: 80%;
+}
+
+.graph-layout__impact-block {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  border-top: 1px dashed #e6e6e6;
+  position: relative;
+}
+
+.graph-layout__impact-icon {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+}
+.graph-layout__impact-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  margin-left: 25px;
+  border-top: 1px solid #e6e6e6;
+  z-index: -1;
+}

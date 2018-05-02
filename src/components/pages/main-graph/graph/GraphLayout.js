@@ -2,16 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getBEMClasses } from 'helper/BEMHelper';
-import radiusHelper from 'helper/radiusHelper';
+import { radiusHelper } from 'helper/radiusHelper';
 import TagsSection from './TagsSection';
 import IMPACTS from 'constants/impactConstants';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
 
-import 'assets/styles/graph.css';
+import 'assets/styles/graph-layout.css';
 import Graph from './Graph';
 
-const graph = 'graph';
+const graph = 'graph-layout';
 const bemClasses = getBEMClasses([graph]);
 const impactsClasses = {
   '1': 'pos',
@@ -27,16 +27,18 @@ class GraphLayout extends React.Component {
 
   renderGraphs = (impact, radiuses) => {
     const { tags, bubbles, categories } = this.props.chartData;
+
     if (tags && bubbles && categories && radiuses) {
       const tagsArray = Object.values(tags);
 
-      bubbles.forEach(bubble => {
+      const filledBubbles = bubbles.map(bubble => {
         bubble.category = categories[bubble.categoryId];
         bubble.tag = tags[bubble.tagId].name;
+        return bubble;
       });
 
       const graphs = tagsArray.map((tag, i) => {
-        const currenBubbles = bubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
+        const currenBubbles = filledBubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
         const items = currenBubbles.map(bubble => ({
           label: bubble.categoryKey,
           color: bubble.category.color,
@@ -49,6 +51,7 @@ class GraphLayout extends React.Component {
             customClass={`graph-${impactsClasses[impact]}-${i}`}
             items={items}
             radiuses={radiuses}
+            bubbles={filledBubbles}
           />
         );
       });

@@ -1,6 +1,6 @@
 import ACTION_CONSTANTS from './constants';
 
-export const updateChartData = (updatedInsight) => dispatch => {
+export const updateChartData = updatedInsight => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
     payload: updatedInsight,
@@ -25,25 +25,25 @@ const newInsight = {
   isNew: true,
 };
 
-export const deleteInsight = (id) => dispatch => {
+export const deleteInsight = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.DELETE_INSIGHT,
     payload: id,
-  })
+  });
 };
 
-export const moveInsightUp = (id) => dispatch => {
+export const moveInsightUp = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
     payload: id,
-  })
+  });
 };
 
-export const moveInsightDown = (id) => dispatch => {
+export const moveInsightDown = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
     payload: id,
-  })
+  });
 };
 
 export const getChartData = () => dispatch => {
@@ -61,7 +61,6 @@ export const getMatchingData = () => dispatch => {
     payload: chartData,
   });
 };
-
 
 export const getNewInsights = () => dispatch => {
   //TODO: request to server
