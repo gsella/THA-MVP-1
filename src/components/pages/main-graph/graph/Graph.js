@@ -64,9 +64,7 @@ class Graph extends React.Component {
 	</div>`;
   };
 
-  drawChart = () => {
-    const { customClass, items, radiuses } = this.props;
-
+  drawChart = (customClass, items, radiuses) => {
     const diameter = 200;
 
     const tooltip = d3
@@ -143,14 +141,20 @@ class Graph extends React.Component {
     d3.select(window.frameElement).style('height', diameter + 'px');
   };
 
+  componentWillReceiveProps(newProps) {
+    const { customClass, items, radiuses } = newProps;
+    this.drawChart(customClass, items, radiuses);
+  }
+
   componentDidMount() {
-    this.drawChart();
+    const { customClass, items, radiuses } = this.props;
+    this.drawChart(customClass, items, radiuses);
   }
 
   render() {
     const { customClass } = this.props;
 
-    return <div className={customClass} />;
+    return <div className={`${customClass} graph-item`} />;
   }
 }
 

@@ -38,8 +38,14 @@ class GraphLayout extends React.Component {
       });
 
       const graphs = tagsArray.map((tag, i) => {
-        const currenBubbles = filledBubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
-        const items = currenBubbles.map(bubble => ({
+        const currentBubbles = bubbles.filter(
+          bubble =>
+            bubble.tag === tag.name &&
+            bubble.popularity === impact &&
+            !this.props.hiddenInsights.some(a => a === bubble.categoryKey),
+        );
+
+        const items = currentBubbles.map(bubble => ({
           label: bubble.categoryKey,
           color: bubble.category.color,
           size: bubble.instances,
@@ -63,6 +69,12 @@ class GraphLayout extends React.Component {
   render() {
     const { tags, bubbles, categories } = this.props.chartData;
     const radiuses = tags && bubbles && categories ? radiusHelper(tags, bubbles, categories) : undefined;
+
+    let nodes = document.getElementsByClassName('graph-item');
+    nodes = Array.prototype.slice.call(nodes);
+    nodes.forEach(node => {
+      node.innerHTML = '';
+    });
 
     return (
       <div>
@@ -93,6 +105,7 @@ class GraphLayout extends React.Component {
 
 const mapStateToProps = state => ({
   chartData: state.app.chartData,
+  hiddenInsights: state.app.hiddenInsights,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);

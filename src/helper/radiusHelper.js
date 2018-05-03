@@ -18,8 +18,8 @@ export function radiusHelper(tags, bubbles, categories) {
 
   impactsArray.forEach(impact => {
     tagsArray.forEach(tag => {
-      const currenBubbles = filledBubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
-      const items = currenBubbles.map(bubble => ({
+      const currentBubbles = filledBubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
+      const items = currentBubbles.map(bubble => ({
         label: bubble.categoryKey,
         color: bubble.category.color,
         size: bubble.instances,

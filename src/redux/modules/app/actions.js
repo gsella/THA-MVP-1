@@ -7,22 +7,27 @@ export const updateChartData = updatedInsight => dispatch => {
   });
 };
 
+export const hidingInsight = key => (dispatch, getState) => {
+  const hiddenInsights = [...getState().app.hiddenInsights];
+  const index = hiddenInsights.findIndex(insight => insight === key);
+
+  if (index === -1) {
+    hiddenInsights.push(key);
+  } else {
+    hiddenInsights.splice(index, 1);
+  }
+
+  dispatch({
+    type: ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT,
+    payload: hiddenInsights,
+  });
+};
+
 export const addNewInsight = () => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.ADD_NEW_INSIGHT,
     payload: newInsight,
   });
-};
-
-const newInsight = {
-  categoryId: 0,
-  tagId: 0,
-  categoryKey: '',
-  insight: 'Google Home',
-  popularity: 0,
-  instances: 0,
-  description: '',
-  isNew: true,
 };
 
 export const deleteInsight = id => dispatch => {
@@ -48,9 +53,17 @@ export const moveInsightDown = id => dispatch => {
 
 export const getChartData = () => dispatch => {
   // TODO: get data from server
+  const data = {
+    ...chartData,
+    bubbles: chartData.bubbles.map(bubble => {
+      bubble.isVisible = true;
+      return bubble;
+    }),
+  };
+
   dispatch({
     type: ACTION_CONSTANTS.GET_CHART_DATA,
-    payload: chartData,
+    payload: data,
   });
 };
 
@@ -68,6 +81,17 @@ export const getNewInsights = () => dispatch => {
     type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
     payload: [{}],
   });
+};
+
+const newInsight = {
+  categoryId: 0,
+  tagId: 0,
+  categoryKey: '',
+  insight: 'Google Home',
+  popularity: 0,
+  instances: 0,
+  description: '',
+  isNew: true,
 };
 
 const chartData = {

@@ -4,6 +4,7 @@ import LeftSidebar from './LeftSidebar';
 
 const mapStateToProps = state => ({
   chartData: state.app.chartData,
+  hiddenInsights: state.app.hiddenInsights,
 });
 
 const mapDispatchToProps = {

@@ -54,9 +54,10 @@ class LeftSidebar extends React.Component {
           <div>Gogoro 2 Series</div>
         </div>
         <div>
-          {(this.props.chartData && this.props.chartData.bubbles) &&
-          <Category categories={this.getChartData()} />
-          }
+          {this.props.chartData &&
+            this.props.chartData.bubbles && (
+              <Category categories={this.getChartData()} hiddenInsights={this.props.hiddenInsights} />
+            )}
         </div>
       </div>
     );

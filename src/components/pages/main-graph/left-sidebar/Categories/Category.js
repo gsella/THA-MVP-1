@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
-import Insight from './Insight';
+import Insight from './Insight/InsightContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/left-sidebar.css';
 
@@ -36,9 +36,9 @@ class Category extends React.Component {
               id={data.id}
               categoryKey={data.categoryKey}
               insight={data.insight}
+              hiddenInsights={this.props.hiddenInsights}
             />
-          ))
-          }
+          ))}
         </Panel.Collapse>
       </Panel>
     ));
@@ -57,6 +57,7 @@ class Category extends React.Component {
 
 Category.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  hiddenInsights: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Category;
