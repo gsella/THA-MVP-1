@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MenuItem, Dropdown } from 'react-bootstrap';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/fontawesome-free-solid';
 import 'assets/styles/dropdown.css';
 import 'assets/styles/data-table-dropdown.css';
 
@@ -35,8 +37,11 @@ class CustomDropdown extends React.Component {
         <Dropdown.Toggle
           id="dropdown-size-medium"
           className={this.props.bemClasses('button', 'default')}
-        >
+        > 
           {this.props.title}
+          <span className={this.props.bemClasses('caret-icon')}>
+            <FontAwesomeIcon icon={faCaretDown} />
+          </span>
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {this.props.options && this.renderListItems()}

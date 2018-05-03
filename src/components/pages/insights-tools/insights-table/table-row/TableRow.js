@@ -8,6 +8,7 @@ import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
 import ThunderIcon from 'assets/images/thunder-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/data-table.css';
+import 'assets/styles/right-click-dropdown.css';
 
 const tableRow = 'data-table-row';
 const bemClasses = getBEMClasses([tableRow]);
@@ -134,8 +135,20 @@ class TableRow extends React.Component {
   renderDropdown() {
     return (
       <ContextMenu id={`row-dropdown-${this.props.item.id}`}>
-       <MenuItem onClick={this.handleRightClickDropdown} data={{ action: 'move up' }}>Move Insight Up</MenuItem>
-        <MenuItem onClick={this.handleRightClickDropdown} data={{ action: 'move down' }}>Move Insight Down</MenuItem>
+        <MenuItem
+          disabled={(this.props.disable === 'moveUp')}
+          onClick={this.handleRightClickDropdown}
+          data={{ action: 'move up' }}
+        >
+          Move Insight Up
+        </MenuItem>
+        <MenuItem 
+          disabled={(this.props.disable === 'moveDown')}
+          onClick={this.handleRightClickDropdown}
+          data={{ action: 'move down' }}
+        >
+          Move Insight Down
+        </MenuItem>
         <MenuItem onClick={this.handleRightClickDropdown} data={{ action: 'delete' }}>Delete Selected Insight(s)</MenuItem>
         <SubMenu title="Mute Selected Insight(s)..">
           <MenuItem onClick={this.handleRightClickDropdown} data={{ action: 'mute till tomorrow' }}>Mute till Tomorrow</MenuItem>
@@ -173,7 +186,7 @@ class TableRow extends React.Component {
             {this.renderCategory()}
           </ContextMenuTrigger>
         </td>
-        <td className={bemClasses('cell')}>
+        <td className={bemClasses('cell', 'for-input')}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             <Input
               value={this.state.insight}
@@ -184,7 +197,7 @@ class TableRow extends React.Component {
             />
           </ContextMenuTrigger>
         </td>
-        <td className={bemClasses('cell')}>
+        <td className={bemClasses('cell', 'for-input')}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             <Input
               value={this.state.description}

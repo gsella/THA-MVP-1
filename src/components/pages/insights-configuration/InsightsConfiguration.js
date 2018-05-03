@@ -36,8 +36,6 @@ class InsightsConfiguration extends React.Component {
     )
   }
 
-  //TODO collapse rows by category and tags
-  //TODO create search
   render() {
     return (
       <table className={bemClasses()}>

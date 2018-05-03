@@ -1,10 +1,24 @@
 import ACTION_CONSTANTS from './constants';
 
-export const updateChartData = updatedInsight => dispatch => {
-  dispatch({
-    type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
-    payload: updatedInsight,
-  });
+export const updateChartData = (updatedInsight) => dispatch => {
+  if (updatedInsight.tagId === 0 && 
+      updatedInsight.categoryId === 0 && 
+      updatedInsight.insight.trim().length === 0 &&
+      updatedInsight.description.trim().length === 0
+    ) {
+    dispatch({
+      type: ACTION_CONSTANTS.DELETE_INSIGHT,
+      payload: updatedInsight.id,
+    });  
+  } else {
+    if (updatedInsight.tagId > 0 && updatedInsight.categoryId > 0 && updatedInsight.insight.trim().length > 0) {
+      updatedInsight.isNew = false;
+    }
+    dispatch({
+      type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
+      payload: updatedInsight,
+    });
+  }
 };
 
 export const hidingInsight = key => (dispatch, getState) => {
@@ -67,11 +81,10 @@ export const getChartData = () => dispatch => {
   });
 };
 
-export const getMatchingData = () => dispatch => {
-  //TODO: request to server
+export const getMatchingData = (querry) => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.GET_MATCHING_DATA,
-    payload: chartData,
+    payload: querry,
   });
 };
 
