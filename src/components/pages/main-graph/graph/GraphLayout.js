@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { radiusHelper } from 'helper/radiusHelper';
 import TagsSection from './TagsSection';
 import IMPACTS from 'constants/impactConstants';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
+import Preloader from 'components/common/preloader/Preloader';
+import ThunderIcon from 'assets/images/thunder-background.svg';
 
 import 'assets/styles/graph-layout.css';
 import Graph from './Graph';
@@ -23,6 +24,21 @@ class GraphLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  renderLaunchingPreloader() {
+    return (
+      <Preloader
+        preloadIcon={
+          <img src={ThunderIcon} alt="preloader-icon" width={150} />
+        }
+        title='Launching your Thunder...'
+        description=
+          {'Depending om the amount of data, fetching it can take a while or two.' +
+          '\n Good time to make yourself a cup of something'
+          }
+      />
+    );
   }
 
   renderGraphs = (impact, radiuses) => {
@@ -108,6 +124,4 @@ const mapStateToProps = state => ({
   hiddenInsights: state.app.hiddenInsights,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(GraphLayout);
+export default connect(mapStateToProps, null)(GraphLayout);

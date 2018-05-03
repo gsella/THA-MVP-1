@@ -10,10 +10,6 @@ const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);
 
 class Insight extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   toggleVisibleCategory() {
     this.props.hidingInsight(this.props.categoryKey);
   }

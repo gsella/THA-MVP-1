@@ -12,16 +12,21 @@ class Notification extends React.Component {
   };
 
   componentDidMount() {
-    this.createNotification('info')();
+    this.createNotification()();
   }
 
   createNotification = () => {
-    return () => NotificationManager.info((
-      <div>
-        <img src={this.props.thunderIco} alt="thunder-icon" width={20} height={20} /> &nbsp;
-        <span>{this.props.numberInsights} new insights found</span>
-      </div>
-    ), null, 0);
+    return () => NotificationManager.create({
+      id: 1,
+      type: 'info',
+      message: (
+        <div>
+          <img src={this.props.thunderIco} alt="thunder-icon" width={20} height={20} /> &nbsp;
+          <span>{this.props.numberInsights} new insights found</span>
+        </div>
+      ),
+      timeOut: 0,
+    });
   };
 
   render() {

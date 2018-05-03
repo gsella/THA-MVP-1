@@ -1,15 +1,15 @@
 import ACTION_CONSTANTS from './constants';
 
 export const updateChartData = (updatedInsight) => dispatch => {
-  if (updatedInsight.tagId === 0 && 
-      updatedInsight.categoryId === 0 && 
-      updatedInsight.insight.trim().length === 0 &&
-      updatedInsight.description.trim().length === 0
-    ) {
+  if (updatedInsight.tagId === 0 &&
+    updatedInsight.categoryId === 0 &&
+    updatedInsight.insight.trim().length === 0 &&
+    updatedInsight.description.trim().length === 0
+  ) {
     dispatch({
       type: ACTION_CONSTANTS.DELETE_INSIGHT,
       payload: updatedInsight.id,
-    });  
+    });
   } else {
     if (updatedInsight.tagId > 0 && updatedInsight.categoryId > 0 && updatedInsight.insight.trim().length > 0) {
       updatedInsight.isNew = false;
@@ -75,10 +75,11 @@ export const getChartData = () => dispatch => {
     }),
   };
 
-  dispatch({
-    type: ACTION_CONSTANTS.GET_CHART_DATA,
-    payload: data,
-  });
+  setTimeout(() =>
+    dispatch({
+      type: ACTION_CONSTANTS.GET_CHART_DATA,
+      payload: data,
+    }), 3000);
 };
 
 export const getMatchingData = (querry) => dispatch => {
@@ -90,10 +91,41 @@ export const getMatchingData = (querry) => dispatch => {
 
 export const getNewInsights = () => dispatch => {
   //TODO: request to server
-  dispatch({
-    type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-    payload: [{}],
-  });
+  setTimeout(() =>
+    dispatch({
+      type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
+      payload: [{}],
+    }), 4000);
+};
+
+export const refreshThunder = (bubble) => (dispatch, getState) => {
+  const isRefresh = { ...getState().app }.isRefresh;
+  //TODO: request to server
+  //TODO: create middleware
+
+  return new Promise((resolve, reject) => (
+    resolve(
+      dispatch({
+        type: ACTION_CONSTANTS.REFRESH_THUNDER,
+        payload: chartData,
+      }),
+
+      dispatch({
+        type: ACTION_CONSTANTS.PRELOADER,
+        payload: !isRefresh,
+      }),
+
+      dispatch({
+        type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
+        payload: [],
+      }),
+
+      setTimeout(() =>
+        dispatch({
+          type: ACTION_CONSTANTS.PRELOADER,
+          payload: isRefresh,
+        }), 1000)
+    )));
 };
 
 const newInsight = {

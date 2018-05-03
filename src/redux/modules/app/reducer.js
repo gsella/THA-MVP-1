@@ -5,6 +5,7 @@ const defaultState = {
   newInsights: [],
   hiddenInsights: [],
   matchingData: [],
+  isRefresh: false,
 };
 
 export default function(state = defaultState, { type, payload }) {
@@ -27,6 +28,10 @@ export default function(state = defaultState, { type, payload }) {
       return handleDeleteInsight(state, payload);
     case ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT:
       return handleToggleVisibleInsight(state, payload);
+    case ACTION_CONSTANTS.REFRESH_THUNDER:
+      return handleRefreshThunder(state, payload);
+    case ACTION_CONSTANTS.PRELOADER:
+      return handlePreloader(state, payload);
 
     default:
       return state;
@@ -64,13 +69,13 @@ function handleUpdateChartData(state, updatedInsight) {
   newData.forEach((item, key) => {
     if (item.id === updatedInsight.id) itemKey = key;
   });
-  
+
   if (itemKey > -1) {
-    newData[itemKey] = updatedInsight;  
+    newData[itemKey] = updatedInsight;
   } else {
     newData.push(updatedInsight);
   }
-  
+
   return {...state, chartData: {...state.chartData, bubbles:  updateCategoryKey(newData, state.chartData.categories)}}
 }
 
@@ -96,9 +101,9 @@ function handleMoveInsightUp(state, id) {
 
     newBubblesData.splice(itemKey, 1);
     newBubblesData.splice(itemKey - 1, 0, item);
-    
+
     return {...state, chartData: {...state.chartData, bubbles: updateCategoryKey(newBubblesData, state.chartData.categories)}}
-    
+
   }
   return state;
 }
@@ -116,9 +121,9 @@ function handleMoveInsightDown(state, id) {
 
     newBubblesData.splice(itemKey, 1);
     newBubblesData.splice(itemKey + 1, 0, item);
-    
+
     return {...state, chartData: {...state.chartData, bubbles: updateCategoryKey(newBubblesData, state.chartData.categories)}}
-    
+
   }
   return state;
 }
@@ -131,7 +136,7 @@ function handleDeleteInsight(state, id) {
     if (item.id === id) itemKey = key;
   });
   newBubblesData.splice(itemKey, 1);
-    
+
   return {...state, chartData: {...state.chartData, bubbles: updateCategoryKey(newBubblesData, state.chartData.categories)}}
 }
 
@@ -139,7 +144,7 @@ function updateCategoryKey(arr, categories) {
   const categoriesArray = [];
 
   Object.keys(categories).forEach((key) => {
-    categoriesArray[key]=0;
+    categoriesArray[key] = 0;
   });
 
   return arr.map((item) => {
@@ -153,4 +158,12 @@ function updateCategoryKey(arr, categories) {
 
 function handleGetNewInsights(state, newInsights) {
   return { ...state, newInsights };
+}
+
+function handleRefreshThunder(state, chartData) {
+  return { ...state, chartData }
+}
+
+function handlePreloader(state, isRefresh) {
+  return { ...state, isRefresh };
 }
