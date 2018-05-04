@@ -1,7 +1,10 @@
-.select-date-form{
-  padding: 10px;
+.select-date-form {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.select-date-form__input{
+.select-date-form__input {
   display: inline-block;
 }

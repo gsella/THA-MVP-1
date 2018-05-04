@@ -4,9 +4,6 @@ import SelectDateForm from './select-date-form/SelectDateForm';
 class DateInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedDate: new Date(),
-    };
 
     this.handleDataChange = this.handleDataChange.bind(this);
   }
@@ -24,7 +21,6 @@ class DateInfo extends React.Component {
   render() {
     return (
       <div>
-        <p>Selected date: {this.state.selectedDate.toDateString()}</p>
         <SelectDateForm onSubmit={this.handleDataChange} />
       </div>
     );
@@ -32,4 +28,3 @@ class DateInfo extends React.Component {
 }
 
 export default DateInfo;
-

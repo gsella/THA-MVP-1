@@ -3,11 +3,12 @@ import ThunderIconSmall from 'assets/images/thunder-icon-small.svg';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { MenuItem, ButtonToolbar, DropdownButton } from 'react-bootstrap';
 import { faEllipsisV, faRedoAlt, faPlus, faMinus, faExpand } from '@fortawesome/fontawesome-free-solid';
+import ThunderIcon from 'assets/images/thunder-background.svg';
 import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
 import GraphLayout from './graph/GraphLayout';
 import Notification from 'components/containers/Notification';
 import Preloader from 'components/common/preloader/Preloader';
-import ThunderIcon from 'assets/images/thunder-background.svg';
+import DateInfo from './DateInfo';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/main-graph.css';
 
@@ -152,7 +153,10 @@ class MainGraph extends React.Component {
           {this.renderNavigationIcons()}
 
           {(tags && bubbles && categories) ?
-            this.renderGraphLayout() :
+            <div>
+              {this.renderGraphLayout()}
+              <DateInfo />
+            </div> :
             this.renderLaunchingPreloader()
           }
         </div>
