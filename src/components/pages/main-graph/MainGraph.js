@@ -24,7 +24,7 @@ class MainGraph extends React.Component {
   }
 
   static getDerivedStateFromProps(newProps) {
-    let bubble = document.getElementsByClassName('graph-item');
+    let bubble = document.querySelectorAll('.graph-layout__graph-container');
     bubble = Array.prototype.slice.call(bubble);
 
     if (newProps.isRefresh) {
@@ -86,40 +86,42 @@ class MainGraph extends React.Component {
 
   renderNavigationIcons() {
     return (
-      <div className={bemClasses('navigate-icons')}>
-        <div className={bemClasses('navigate-icons', 'self-icon')}>
-          <FontAwesomeIcon
-            icon={faRedoAlt}
-            rotation={270}
-            onClick={() => this.refreshThunder()}
-            className={bemClasses('navigate-icons', 'size')}
-          />
-        </div>
-        <div className={bemClasses('navigate-icons', 'self-icon')}>
-          <FontAwesomeIcon
-            icon={faExpand}
-            className={bemClasses('navigate-icons', 'size')}
-            onClick={() => this.toggleFullScreenGraph()}
-          />
-        </div>
-        <div className={bemClasses('navigate-icons', 'self-icon')}>
-          <ButtonToolbar>
-            <DropdownButton
-              title={
-                <FontAwesomeIcon
-                  icon={faEllipsisV}
-                  className={bemClasses('navigate-icons', 'size')}
-                />
-              }
-              pullRight
-              id="button-pulL-right"
-              className={bemClasses('navigate-icons', 'more-info-btn')}
-            >
-              <MenuItem eventKey="1">Edit Diagram</MenuItem>
-              <MenuItem eventKey="2">Email Diagram</MenuItem>
-              <MenuItem eventKey="3">Print Diagram</MenuItem>
-            </DropdownButton>
-          </ButtonToolbar>
+      <div style={{ position: 'fixed', right: 0 }}>
+        <div className={bemClasses('navigate-icons')}>
+          <div className={bemClasses('navigate-icons', 'self-icon')}>
+            <FontAwesomeIcon
+              icon={faRedoAlt}
+              rotation={270}
+              onClick={() => this.refreshThunder()}
+              className={bemClasses('navigate-icons', 'size')}
+            />
+          </div>
+          <div className={bemClasses('navigate-icons', 'self-icon')}>
+            <FontAwesomeIcon
+              icon={faExpand}
+              className={bemClasses('navigate-icons', 'size')}
+              onClick={() => this.toggleFullScreenGraph()}
+            />
+          </div>
+          <div className={bemClasses('navigate-icons', 'self-icon')}>
+            <ButtonToolbar>
+              <DropdownButton
+                title={
+                  <FontAwesomeIcon
+                    icon={faEllipsisV}
+                    className={bemClasses('navigate-icons', 'size')}
+                  />
+                }
+                pullRight
+                id="button-pulL-right"
+                className={bemClasses('navigate-icons', 'more-info-btn')}
+              >
+                <MenuItem eventKey="1">Edit Diagram</MenuItem>
+                <MenuItem eventKey="2">Email Diagram</MenuItem>
+                <MenuItem eventKey="3">Print Diagram</MenuItem>
+              </DropdownButton>
+            </ButtonToolbar>
+          </div>
         </div>
       </div>
     );
@@ -127,7 +129,7 @@ class MainGraph extends React.Component {
 
   renderGraphLayout() {
     return (
-      <div className={bemClasses()}>
+      <div className={bemClasses(null, 'padding')}>
         <GraphLayout
           data={this.props.chartData}
           className={bemClasses('graph-layout', 'align')}

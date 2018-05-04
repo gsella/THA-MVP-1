@@ -3,6 +3,10 @@
   justify-content: space-between;
 }
 
+.main-graph--padding {
+  padding-top: 50px;
+}
+
 .main-graph__graph-layout {
   width: 100%;
   overflow: auto;
@@ -18,7 +22,6 @@
 
 .main-graph__navigate-icons {
   display: flex;
-  justify-content: flex-end;
 }
 
 .main-graph__navigate-icons--self-icon {
