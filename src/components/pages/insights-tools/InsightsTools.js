@@ -14,9 +14,8 @@ class InsightsTools extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isGrouped: true,
+      isGrouped: false,
       groupedBy: 'categories',
-      showSearchResults: false,
     };
 
     this.handleGroupInsights = this.handleGroupInsights.bind(this);
@@ -36,12 +35,8 @@ class InsightsTools extends React.Component {
   handleSearch(querry) {
     if ('searchForm' in querry) {
       if (querry.searchForm.trim().length > 0) {
-        this.setState({showSearchResults: true}, () => this.props.getMatchingData(querry.searchForm));
-      } else {
-        this.setState({showSearchResults: false});
-      } 
-    } else {
-      this.setState({showSearchResults: false});
+        this.props.getMatchingData(querry.searchForm);
+      }
     }
   }
 
@@ -62,7 +57,6 @@ class InsightsTools extends React.Component {
           <InsightsTable
             isGrouped={this.state.isGrouped}
             groupedBy={this.state.groupedBy}
-            showSearchResults={this.state.showSearchResults}
           />
         </div>
       </ConfigurationPageWrapper>

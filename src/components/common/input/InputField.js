@@ -1,31 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControl } from 'react-bootstrap';
+import { Field } from 'redux-form';
 import { getBEMClasses } from 'helper/BEMHelper';
 
 import 'assets/styles/data-table-input.css';
 
 const baseClass = 'input-component';
 
-const Input = (props) => {
+export const InputComponent = (props) => {
   const classes = getBEMClasses([baseClass, props.customClass]);
-  
+  const { input } = props;
+
   return (
     <FormControl
-      value={props.value}
+      {...input}
       placeholder={props.placeholder}
-      name={props.name}
-      onChange={props.handleChange}
       className={classes()}
     />
   );
 };
 
+const Input = (props) => {
+  return <Field name={props.name} component={InputComponent} {...props}/>
+}
+
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
   customClass: PropTypes.string,
   classModifiers: PropTypes.arrayOf(PropTypes.string),
 };

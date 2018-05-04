@@ -4,6 +4,7 @@ const defaultState = {
   chartData: {},
   newInsights: [],
   hiddenInsights: [],
+  showSearchResults: false,
   matchingData: [],
   isRefresh: false,
 };
@@ -58,8 +59,8 @@ function handleGetMatchingData(state, querry) {
 
     const matchingIds = matchingData.map(item => item.id);
 
-    return { ...state, matchingData: matchingIds };
-  } else return {...state, matchingData: []};
+    return { ...state, matchingData: matchingIds, showSearchResults: true };
+  } else return {...state, matchingData: [], showSearchResults: false};
 }
 
 function handleUpdateChartData(state, updatedInsight) {

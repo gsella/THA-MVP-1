@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from 'react-contextmenu';
 import CustomDropdown from 'components/common/dropdown/CustomDropdown';
-import Input from 'components/common/input/Input';
+import Input from 'components/common/input/InputField';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
 import ThunderIcon from 'assets/images/thunder-icon.svg';
@@ -189,10 +189,8 @@ class TableRow extends React.Component {
         <td className={bemClasses('cell', 'for-input')}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             <Input
-              value={this.state.insight}
               placeholder="Key words"
-              name="insight"
-              handleChange={this.handleChangeValue}
+              name={`insight-${this.props.item.id}`}
               customClass={inputClass}
             />
           </ContextMenuTrigger>
@@ -200,10 +198,8 @@ class TableRow extends React.Component {
         <td className={bemClasses('cell', 'for-input')}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             <Input
-              value={this.state.description}
               placeholder="Description"
-              name="description"
-              handleChange={this.handleChangeValue}
+              name={`description-${this.props.item.id}`}
               customClass={inputClass}
             />
           </ContextMenuTrigger>

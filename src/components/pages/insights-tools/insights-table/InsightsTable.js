@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TableRow from './table-row/TableRow';
 import TableGroup from './table-group/TableGroup';
-import { getBEMClasses } from 'helper/BEMHelper';
+import {getBEMClasses} from 'helper/BEMHelper';
 import 'assets/styles/data-table.css';
 
 const dataTable = 'data-table';
@@ -17,8 +17,14 @@ class InsightsTable extends React.Component {
   componentDidMount() {
     this.props.getChartData();
   }
-  
-  renderTableContent(){
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.chartData.bubbles && nextProps.chartData.bubbles) {
+      this.props.initialize(nextProps.initialValues);
+    }
+  }
+
+  renderTableContent() {
     const tags = this.props.chartData.tags;
     const categories = this.props.chartData.categories;
     let matchingData = [];
@@ -35,8 +41,8 @@ class InsightsTable extends React.Component {
     if (!this.props.isGrouped) {
       const amount = matchingData.length;
 
-      return matchingData.map((item, key) => 
-        <TableRow 
+      return matchingData.map((item, key) =>
+        <TableRow
           key={item.id}
           item={item}
           allCategories={categories}
@@ -50,20 +56,20 @@ class InsightsTable extends React.Component {
       const options = [];
       const data = matchingData;
       let filterField = '';
-  
+
       if (this.props.groupedBy === 'tags') {
-        Object.keys(tags).forEach(function(key) {
+        Object.keys(tags).forEach(function (key) {
           options[key] = {name: tags[key].name}
         });
         filterField = 'tagId';
       } else {
-        Object.keys(categories).forEach(function(key) {
+        Object.keys(categories).forEach(function (key) {
           options[key] = {name: `${categories[key].name[0]} - ${categories[key].name}`, color: categories[key].color}
         });
         filterField = 'categoryId';
       }
 
-      const groups = options.map((item, key) => 
+      const groups = options.map((item, key) =>
         <TableGroup
           key={`${this.state.groupedBy}-${key}`}
           groupName={item.name}
@@ -76,18 +82,18 @@ class InsightsTable extends React.Component {
       );
       let ungrouped = data.filter(item => (item[filterField] === 0));
       const amount = ungrouped.length;
-      
-      ungrouped = ungrouped.map((item, key) => 
-          <TableRow 
-            key={item.id}
-            item={item}
-            allCategories={categories}
-            allTags={tags}
-            isNew={('isNew' in item) ? item.isNew : false}
-            {...this.props}
-            disable={(key === 0) ? 'moveUp' : (key === amount - 1) ? 'moveDown' : 'none'}
-          />
-        );
+
+      ungrouped = ungrouped.map((item, key) =>
+        <TableRow
+          key={item.id}
+          item={item}
+          allCategories={categories}
+          allTags={tags}
+          isNew={('isNew' in item) ? item.isNew : false}
+          {...this.props}
+          disable={(key === 0) ? 'moveUp' : (key === amount - 1) ? 'moveDown' : 'none'}
+        />
+      );
 
       return (
         <React.Fragment>
@@ -103,9 +109,9 @@ class InsightsTable extends React.Component {
 
     if (this.props.chartData.bubbles) {
       this.props.chartData.bubbles.forEach(element => {
-        if (newId < element.id) newId=element.id;
+        if (newId < element.id) newId = element.id;
       });
-      
+
       newId += 1;
     }
 
@@ -120,9 +126,9 @@ class InsightsTable extends React.Component {
       description: '',
       isNew: true,
     }
-    
+
     return (
-      <TableRow 
+      <TableRow
         key={newInsight.id}
         item={newInsight}
         allCategories={this.props.chartData.categories}
@@ -137,12 +143,14 @@ class InsightsTable extends React.Component {
   render() {
     return (
       <div className={bemClasses()}>
-        <table className={bemClasses('content')}>
-          <tbody>
-            {this.props.chartData.bubbles && this.renderTableContent()}
-            {this.props.chartData.bubbles && this.renderEmptyRow()}
-          </tbody>
-        </table>
+        <form>
+          <table className={bemClasses('content')}>
+            <tbody>
+              {this.props.chartData.bubbles && this.renderTableContent()}
+              {/*this.props.chartData.bubbles && this.renderEmptyRow()*/}
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
@@ -152,4 +160,4 @@ InsightsTable.propTypes = {
   chartData: PropTypes.object.isRequired,
 };
 
-export default InsightsTable;
+export default InsightsTable; 
