@@ -7,21 +7,34 @@
   width: 100%;
   height: 200px;
   display: flex;
-  border-top: 1px dashed #e6e6e6;
   position: relative;
 }
 
 .graph-layout__impact-icon {
+  width: 14px;
   margin: 0 10px;
   display: flex;
   align-items: center;
   font-weight: 800;
 }
-.graph-layout__impact-icon::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  margin-left: 25px;
-  border-top: 1px solid #e6e6e6;
-  z-index: -1;
+
+.graph-layout__graph-container {
+  border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+}
+
+.graph-layout__graph-container:not(.graph-layout__graph-container--neg) {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2) 60%, rgba(255,255,255,0) 0%);
+  background-position: bottom;
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+}
+
+.graph-layout__graph-container--neg {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.graph-layout__graph-container--graph-pos-0,
+.graph-layout__graph-container--graph-zero-0,
+.graph-layout__graph-container--graph-neg-0 {
+  border-left: 1.5px solid rgba(0, 0, 0, 0.2);
 }

@@ -42,7 +42,7 @@ class GraphLayout extends React.Component {
   }
 
   renderGraphs = (impact, radiuses) => {
-    const { tags, bubbles, categories } = this.props.chartData;
+    const {tags, bubbles, categories} = this.props.chartData;
 
     if (tags && bubbles && categories && radiuses) {
       const tagsArray = Object.values(tags);
@@ -67,10 +67,14 @@ class GraphLayout extends React.Component {
           size: bubble.instances,
         }));
 
+        const key = `graph-${impactsClasses[impact]}-${i}`;
+
         return (
           <Graph
-            key={`graph-${impactsClasses[impact]}-${i}`}
-            customClass={`graph-${impactsClasses[impact]}-${i}`}
+            key={key}
+            id={key}
+            customClass={graph}
+            classModifiers={[impactsClasses[impact], key]}
             items={items}
             radiuses={radiuses}
             bubbles={filledBubbles}
@@ -83,10 +87,10 @@ class GraphLayout extends React.Component {
   };
 
   render() {
-    const { tags, bubbles, categories } = this.props.chartData;
+    const {tags, bubbles, categories} = this.props.chartData;
     const radiuses = tags && bubbles && categories ? radiusHelper(tags, bubbles, categories) : undefined;
 
-    let nodes = document.getElementsByClassName('graph-item');
+    let nodes = document.getElementsByClassName('graph__graph-container');
     nodes = Array.prototype.slice.call(nodes);
     nodes.forEach(node => {
       node.innerHTML = '';
