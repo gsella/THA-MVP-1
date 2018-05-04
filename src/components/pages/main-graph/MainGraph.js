@@ -20,6 +20,7 @@ class MainGraph extends React.Component {
     super(props);
     this.state = {
       isFullScreen: false,
+      zoom: 1,
     };
   }
 
@@ -28,9 +29,9 @@ class MainGraph extends React.Component {
     bubble = Array.prototype.slice.call(bubble);
 
     if (newProps.isRefresh) {
-      bubble.forEach(item => item.style.opacity = 0.25);
+      bubble.forEach(item => (item.style.opacity = 0.25));
     } else {
-      bubble.forEach(item => item.style.opacity = 1);
+      bubble.forEach(item => (item.style.opacity = 1));
     }
     return null;
   }
@@ -51,20 +52,12 @@ class MainGraph extends React.Component {
   renderRefreshingPreloader() {
     return (
       <Preloader
-        preloadIcon={
-          <FontAwesomeIcon
-            icon={faRedoAlt}
-            size='10x'
-            rotation={270}
-            spin
-            style={{ color: '#0070c0' }}
-          />
-        }
-        title='Refreshing your Thunder...'
-        description=
-          {'Depending om the amount of data, fetching it can take a while or two.' +
+        preloadIcon={<FontAwesomeIcon icon={faRedoAlt} size="10x" rotation={270} spin style={{ color: '#0070c0' }} />}
+        title="Refreshing your Thunder..."
+        description={
+          'Depending om the amount of data, fetching it can take a while or two.' +
           '\n Good time to make yourself a cup of something'
-          }
+        }
       />
     );
   }
@@ -72,14 +65,12 @@ class MainGraph extends React.Component {
   renderLaunchingPreloader() {
     return (
       <Preloader
-        preloadIcon={
-          <img src={ThunderIcon} alt="preloader-icon" width={150} />
-        }
-        title='Launching your Thunder...'
-        description=
-          {'Depending om the amount of data, fetching it can take a while or two.' +
+        preloadIcon={<img src={ThunderIcon} alt="preloader-icon" width={150} />}
+        title="Launching your Thunder..."
+        description={
+          'Depending om the amount of data, fetching it can take a while or two.' +
           '\n Good time to make yourself a cup of something'
-          }
+        }
       />
     );
   }
@@ -106,12 +97,7 @@ class MainGraph extends React.Component {
           <div className={bemClasses('navigate-icons', 'self-icon')}>
             <ButtonToolbar>
               <DropdownButton
-                title={
-                  <FontAwesomeIcon
-                    icon={faEllipsisV}
-                    className={bemClasses('navigate-icons', 'size')}
-                  />
-                }
+                title={<FontAwesomeIcon icon={faEllipsisV} className={bemClasses('navigate-icons', 'size')} />}
                 pullRight
                 id="button-pulL-right"
                 className={bemClasses('navigate-icons', 'more-info-btn')}
@@ -130,16 +116,25 @@ class MainGraph extends React.Component {
   renderGraphLayout() {
     return (
       <div className={bemClasses(null, 'padding')}>
-        <GraphLayout
-          data={this.props.chartData}
-          className={bemClasses('graph-layout', 'align')}
-        />
+        <GraphLayout data={this.props.chartData} zoom={this.state.zoom} />
 
         {this.props.isRefresh && this.renderRefreshingPreloader()}
 
         <div className={bemClasses('zoom')}>
-          <FontAwesomeIcon icon={faPlus} className={bemClasses('zoom', 'color')} />
-          <FontAwesomeIcon icon={faMinus} className={bemClasses('zoom', 'color')} />
+          <FontAwesomeIcon
+            icon={faPlus}
+            className={bemClasses('zoom', 'color')}
+            onClick={() => {
+              this.setState({ zoom: this.state.zoom >= 2 ? this.state.zoom : this.state.zoom + 0.1 });
+            }}
+          />
+          <FontAwesomeIcon
+            icon={faMinus}
+            className={bemClasses('zoom', 'color')}
+            onClick={() => {
+              this.setState({ zoom: this.state.zoom <= 1 ? this.state.zoom : this.state.zoom - 0.1 });
+            }}
+          />
         </div>
       </div>
     );
@@ -153,22 +148,12 @@ class MainGraph extends React.Component {
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-
-          {(tags && bubbles && categories) ?
-            <div>
-              {this.renderGraphLayout()}
-              <DateInfo />
-            </div> :
-            this.renderLaunchingPreloader()
-          }
+          <div className="graph-layout-wrapper">
+            {tags && bubbles && categories ? this.renderGraphLayout() : this.renderLaunchingPreloader()}
+          </div>
         </div>
 
-        {this.props.newInsights.length > 0 &&
-        <Notification
-          thunderIco={ThunderIconSmall}
-          numberInsights={4}
-        />
-        }
+        {this.props.newInsights.length > 0 && <Notification thunderIco={ThunderIconSmall} numberInsights={4} />}
       </div>
     );
   }

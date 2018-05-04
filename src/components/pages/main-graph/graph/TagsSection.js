@@ -6,14 +6,13 @@ import 'assets/styles/tags-sections.css';
 const tags = 'tags-sections';
 const bemClasses = getBEMClasses([tags]);
 
-const TagSection = ({ tags }) => (
+const TagSection = ({ tags, size }) => (
   <div className={bemClasses()}>
-    {tags &&
-      tags.map(tag => (
-        <div className={bemClasses('item')} key={tag.name}>
-          {tag.name}
-        </div>
-      ))}
+    {tags.map(tag => (
+      <div className={bemClasses('item')} key={tag.name} style={{ minWidth: size }}>
+        {tag.name}
+      </div>
+    ))}
   </div>
 );
 
@@ -23,6 +22,7 @@ TagSection.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default TagSection;

@@ -1,15 +1,14 @@
 .tags-sections {
   display: flex;
-  margin-left: 34px;
+  margin-left: 35px;
+  min-height: 35px;
 }
 
 .tags-sections__item {
   background-color: #f0f0f0;
   display: flex;
-  min-width: 200px;
   align-items: center;
   justify-content: center;
   height: 35px;
-  width: 200px;
   border-right: 2px solid #fff;
 }

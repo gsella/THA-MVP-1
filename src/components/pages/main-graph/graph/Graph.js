@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
-import {getBEMClasses} from 'helper/BEMHelper';
+import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/graph.css';
 
 const graphClass = 'graph';
@@ -42,11 +42,15 @@ class Graph extends React.Component {
         tag: PropTypes.string.isRequired,
       }),
     ).isRequired,
+    size: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
     classModifiers: [],
-  }
+  };
 
   getTooltipContent = key => {
     const bemClasses = getBEMClasses([graphClass, this.props.classModifiers]);
@@ -70,11 +74,10 @@ class Graph extends React.Component {
 	</div>`;
   };
 
-  drawChart = (customClass, items, radiuses) => {
-    const {id} = this.props;
-    const bemClasses = getBEMClasses([graphClass, customClass]);
-    const diameter = 200;
+  drawChart = (customClass, items, radiuses, size) => {
 
+    const { id } = this.props;
+    const bemClasses = getBEMClasses([graphClass, customClass]);
     const tooltip = d3
       .select('body')
       .append('div')
@@ -89,18 +92,18 @@ class Graph extends React.Component {
     const bubble = d3
       .pack()
       .radius(d => radiuses[d.value])
-      .size([diameter, diameter])
+      .size([size.width, size.height])
       .padding(5);
 
     const svg = d3
       .select(`.${customClass}__graph-container--${id}`)
       .append('svg')
-      .attr('width', diameter)
-      .attr('height', diameter)
+      .attr('width', size.width)
+      .attr('height', size.height)
       .attr('class', bemClasses('svg', this.props.classModifiers));
 
     const root = d3
-      .hierarchy({children: items})
+      .hierarchy({ children: items })
       .sum(d => d.size)
       .sort((a, b) => b.size - a.size);
 
@@ -125,7 +128,7 @@ class Graph extends React.Component {
         })
         .on('mousemove', () =>
           tooltip.style('top', d3.event.pageY - 130 + 'px').style('left', d3.event.pageX - 100 + 'px'),
-      )
+        )
         .on('mouseout', () => tooltip.style('visibility', 'hidden'));
 
       node
@@ -135,35 +138,40 @@ class Graph extends React.Component {
         .style('stroke', '#fff')
         .style('stroke-width', 0.7)
         .style('text-anchor', 'middle')
-        .text(d => d.data.label.substring(0, d.r / 3))
+        .text(d => (d.r < 10 ? '' : d.data.label))
         .on('mouseover', d => {
           tooltip.html(this.getTooltipContent(d.data.label));
           tooltip.style('visibility', 'visible');
         })
         .on('mousemove', () =>
           tooltip.style('top', d3.event.pageY - 130 + 'px').style('left', d3.event.pageX - 100 + 'px'),
-      )
+        )
         .on('mouseout', () => tooltip.style('visibility', 'hidden'));
     }
 
-    d3.select(window.frameElement).style('height', diameter + 'px');
+    d3.select(window.frameElement).style('height', size.height + 'px');
   };
 
   componentWillReceiveProps(newProps) {
-    const {customClass, items, radiuses} = newProps;
-    this.drawChart(customClass, items, radiuses);
+    const { customClass, items, radiuses, size } = newProps;
+    this.drawChart(customClass, items, radiuses, size);
   }
 
   componentDidMount() {
-    const {customClass, items, radiuses} = this.props;
-    this.drawChart(customClass, items, radiuses);
+    const { customClass, items, radiuses, size } = this.props;
+    this.drawChart(customClass, items, radiuses, size);
   }
 
   render() {
-    const {customClass, classModifiers} = this.props;
+    const { customClass, classModifiers, size } = this.props;
     const bemClasses = getBEMClasses([graphClass, customClass]);
 
-    return <div className={`${bemClasses('graph-container', classModifiers)}`} />;
+    return (
+      <div
+        className={`${bemClasses('graph-container', classModifiers)}`}
+        style={{ height: size.height, width: size.width }}
+      />
+    );
   }
 }
 

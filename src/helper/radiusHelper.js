@@ -1,7 +1,7 @@
 import IMPACTS from 'constants/impactConstants';
 import * as d3 from 'd3';
 
-export function radiusHelper(tags, bubbles, categories) {
+export function radiusHelper(tags, bubbles, categories, size) {
   const maxСongestion = {
     items: [],
     size: 0,
@@ -37,10 +37,10 @@ export function radiusHelper(tags, bubbles, categories) {
     });
   });
 
-  return getRadiuses(maxСongestion);
+  return getRadiuses(maxСongestion, size);
 }
 
-function getRadiuses(maxСongestion) {
+function getRadiuses(maxСongestion, size) {
   const radiuses = {
     '1': 0,
     '2': 0,
@@ -64,11 +64,9 @@ function getRadiuses(maxСongestion) {
     }
   });
 
-  const diameter = 200;
-
   const bubble = d3
     .pack()
-    .size([diameter, diameter])
+    .size([size.width, size.height])
     .padding(5);
 
   const root = d3
