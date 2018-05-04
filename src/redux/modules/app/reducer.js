@@ -13,8 +13,6 @@ export default function(state = defaultState, { type, payload }) {
   switch (type) {
     case ACTION_CONSTANTS.GET_CHART_DATA:
       return handleGetChartData(state, payload);
-    case ACTION_CONSTANTS.GET_MATCHING_DATA:
-      return handleGetMatchingData(state, payload);
     case ACTION_CONSTANTS.GET_NEW_INSIGHTS:
       return handleGetNewInsights(state, payload);
     case ACTION_CONSTANTS.UPDATE_CHART_DATA:
@@ -45,22 +43,6 @@ function handleGetChartData(state, chartData) {
 
 function handleToggleVisibleInsight(state, hiddenInsights) {
   return { ...state, hiddenInsights };
-}
-
-function handleGetMatchingData(state, querry) {
-  querry = querry.trim();
-
-  if (querry.length > 0) {
-    const matchingData = state.chartData.bubbles.filter(item => {
-      if (item.insight.toLowerCase().indexOf(querry.toLowerCase()) > -1) return true
-      else if (item.description.toLowerCase().indexOf(querry.toLowerCase()) > -1) return true
-      else return false;
-    });
-
-    const matchingIds = matchingData.map(item => item.id);
-
-    return { ...state, matchingData: matchingIds, showSearchResults: true };
-  } else return {...state, matchingData: [], showSearchResults: false};
 }
 
 function handleUpdateChartData(state, updatedInsight) {

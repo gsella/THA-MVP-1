@@ -32,12 +32,9 @@ class SearchForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
-
     return (
       <div>
         <form
-          onSubmit={handleSubmit}
           className={bemClasses('form')}
         >
           <Field

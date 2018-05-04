@@ -19,8 +19,12 @@ const insightsArrayToObject = (array) => {
 const mapStateToProps = (state) => {
   return {
     chartData: state.app.chartData,
-    matchingData: state.app.matchingData,
-    showSearchResults: state.app.showSearchResults,
+    insightsFormData: (state.form.insightsTable) ?
+      state.form.insightsTable.values : {},
+    //matchingData: state.app.matchingData,
+    //showSearchResults: state.app.showSearchResults,
+    searchQuerry: ('values' in state.form.searchForm) ? 
+      state.form.searchForm.values.searchForm.trim() : '',
     initialValues: state.app.chartData && state.app.chartData.bubbles ?
       insightsArrayToObject(state.app.chartData.bubbles) : {}
   }

@@ -19,7 +19,6 @@ class InsightsTools extends React.Component {
     };
 
     this.handleGroupInsights = this.handleGroupInsights.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleGroupInsights(name, eventKey) {
@@ -32,20 +31,12 @@ class InsightsTools extends React.Component {
     }
   }
 
-  handleSearch(querry) {
-    if ('searchForm' in querry) {
-      if (querry.searchForm.trim().length > 0) {
-        this.props.getMatchingData(querry.searchForm);
-      }
-    }
-  }
-
   render() {
     return (
       <ConfigurationPageWrapper>
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
-            <SearchForm onSubmit={this.handleSearch} />
+            <SearchForm />
             <CustomDropdown
               id='group-same'
               title='Group Same'

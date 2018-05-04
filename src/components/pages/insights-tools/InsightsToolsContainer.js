@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getChartData: actions.getChartData,
-  getMatchingData: actions.getMatchingData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsightsTools);

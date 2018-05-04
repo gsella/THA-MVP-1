@@ -82,13 +82,6 @@ export const getChartData = () => dispatch => {
     }), 3000);
 };
 
-export const getMatchingData = (query) => dispatch => {
-  dispatch({
-    type: ACTION_CONSTANTS.GET_MATCHING_DATA,
-    payload: query,
-  });
-};
-
 export const getNewInsights = () => dispatch => {
   //TODO: request to server
   setTimeout(() =>

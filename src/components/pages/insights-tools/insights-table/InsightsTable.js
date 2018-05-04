@@ -27,17 +27,16 @@ class InsightsTable extends React.Component {
   renderTableContent() {
     const tags = this.props.chartData.tags;
     const categories = this.props.chartData.categories;
-    let matchingData = [];
-    if (!this.props.showSearchResults) {
-      matchingData = this.props.chartData.bubbles;
-    } else {
-      matchingData = this.props.chartData.bubbles.filter(item => {
-        const matchingId = this.props.matchingData.filter(id => (item.id === id));
+    const querry = this.props.searchQuerry;
+    const insightsFormData = this.props.insightsFormData;
+    let matchingData = this.props.chartData.bubbles;
 
-        return (matchingId.length > 0);
-      });
+    if (querry.length > 0) {
+      matchingData = matchingData.filter(item => 
+        insightsFormData[`insight-${item.id}`].toLowerCase().indexOf(querry.toLowerCase()) > -1
+      );
     }
-
+    
     if (!this.props.isGrouped) {
       const amount = matchingData.length;
 
