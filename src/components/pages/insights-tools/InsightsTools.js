@@ -31,6 +31,14 @@ class InsightsTools extends React.Component {
     }
   }
 
+  handleSearch(querry) {
+    if ('searchForm' in querry) {
+      if (querry.searchForm.trim().length > 0) {
+        this.props.getMatchingData(querry.searchForm);
+      }
+    }
+  }
+
   render() {
     return (
       <ConfigurationPageWrapper>

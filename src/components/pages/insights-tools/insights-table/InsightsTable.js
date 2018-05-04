@@ -48,7 +48,8 @@ class InsightsTable extends React.Component {
           allTags={tags}
           isNew={('isNew' in item) ? item.isNew : false}
           {...this.props}
-          disable={(key === 0) ? 'moveUp' : (key === amount - 1) ? 'moveDown' : 'none'}
+          disableMoveUp={(key === 0)}
+          disableMoveDown={(key === amount - 1)}  
         />
       );
     } else {
@@ -90,7 +91,8 @@ class InsightsTable extends React.Component {
           allTags={tags}
           isNew={('isNew' in item) ? item.isNew : false}
           {...this.props}
-          disable={(key === 0) ? 'moveUp' : (key === amount - 1) ? 'moveDown' : 'none'}
+          disableMoveUp={(key === 0)}
+          disableMoveDown={(key === amount - 1)}  
         />
       );
 
@@ -134,7 +136,9 @@ class InsightsTable extends React.Component {
         allTags={this.props.chartData.tags}
         isNew={true}
         {...this.props}
-        disable="none"
+        disableMoveUp={true}
+        disableMoveDown={true}
+
       />
     )
   }
@@ -157,6 +161,7 @@ class InsightsTable extends React.Component {
 
 InsightsTable.propTypes = {
   chartData: PropTypes.object.isRequired,
+  changeFormValue: PropTypes.func.isRequired,
 };
 
 export default InsightsTable; 

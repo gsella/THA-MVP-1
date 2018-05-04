@@ -64,7 +64,8 @@ class TableGroup extends React.Component {
         allTags={this.props.allTags}
         isNew={('isNew' in item) ? item.isNew : false}
         {...this.props}
-        disable={(key === 0) ? 'moveUp' : (key === amount - 1) ? 'moveDown' : 'none'}
+        disableMoveUp={(key === 0)}
+        disableMoveDown={(key === amount - 1)}
       />
     );
   }

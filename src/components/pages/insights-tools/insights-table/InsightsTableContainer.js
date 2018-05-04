@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {reduxForm} from 'redux-form';
+import {reduxForm, change} from 'redux-form';
 import * as actions from 'redux/modules/app/actions';
 import InsightsTable from './InsightsTable';
 
@@ -21,9 +21,7 @@ const mapStateToProps = (state) => {
     chartData: state.app.chartData,
     insightsFormData: (state.form.insightsTable) ?
       state.form.insightsTable.values : {},
-    //matchingData: state.app.matchingData,
-    //showSearchResults: state.app.showSearchResults,
-    searchQuerry: ('values' in state.form.searchForm) ? 
+    searchQuerry: ('values' in state.form.searchForm) ?
       state.form.searchForm.values.searchForm.trim() : '',
     initialValues: state.app.chartData && state.app.chartData.bubbles ?
       insightsArrayToObject(state.app.chartData.bubbles) : {}
@@ -36,6 +34,7 @@ const mapDispatchToProps = {
   moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
   deleteInsight: actions.deleteInsight,
+  changeFormValue: change,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTable);
