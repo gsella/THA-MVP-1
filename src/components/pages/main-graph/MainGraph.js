@@ -148,9 +148,15 @@ class MainGraph extends React.Component {
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-          <div className="graph-layout-wrapper">
-            {tags && bubbles && categories ? this.renderGraphLayout() : this.renderLaunchingPreloader()}
-          </div>
+          {(tags && bubbles && categories) ?
+            <div>
+              <div className="graph-layout-wrapper">
+                {this.renderGraphLayout()}
+              </div>
+              <DateInfo {...this.props} />
+            </div> :
+            this.renderLaunchingPreloader()
+          }
         </div>
 
         {this.props.newInsights.length > 0 && <Notification thunderIco={ThunderIconSmall} numberInsights={4} />}

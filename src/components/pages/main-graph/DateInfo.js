@@ -9,13 +9,9 @@ class DateInfo extends React.Component {
   }
 
   handleDataChange(newDate) {
-    const date = {};
-
     if ('selectedDate' in newDate) {
-      date.selectedDate = newDate.selectedDate;
+      this.props.refreshThunder().then(() => this.props.getNewInsights());
     }
-
-    this.setState(date);
   }
 
   render() {
