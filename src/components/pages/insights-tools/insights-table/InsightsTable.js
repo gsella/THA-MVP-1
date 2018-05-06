@@ -4,6 +4,7 @@ import TableRow from './table-row/TableRow';
 import TableGroup from './table-group/TableGroup';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../propTypes/categoryType';
+import { insightsType } from '../../../../propTypes/insightType';
 
 import 'assets/styles/data-table.css';
 
@@ -19,7 +20,7 @@ class InsightsTable extends React.Component {
   static propTypes = {
     tags: PropTypes.object.isRequired,
     categories: categoriesType,
-    chartData: PropTypes.object.isRequired,
+    insights: insightsType.isRequired,
     changeFormValue: PropTypes.func.isRequired,
     getInsights: PropTypes.func.isRequired,
   };
@@ -29,17 +30,16 @@ class InsightsTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.chartData.bubbles && nextProps.chartData.bubbles) {
+    if (!this.props.insights.length && nextProps.insights.length) {
       this.props.initialize(nextProps.initialValues);
     }
   }
 
   renderTableContent() {
-    const { tags, categories } = this.props;
-    const { bubbles } = this.props.chartData;
+    const { tags, categories, insights } = this.props;
     const querry = this.props.searchQuerry;
     const insightsFormData = this.props.insightsFormData;
-    let matchingData = bubbles;
+    let matchingData = insights;
 
     if (querry.length > 0) {
       matchingData = matchingData.filter(
@@ -71,12 +71,12 @@ class InsightsTable extends React.Component {
       let filterField = '';
 
       if (this.props.groupedBy === 'tags') {
-        Object.keys(tags).forEach(function(key) {
+        Object.keys(tags).forEach(key => {
           options[key] = { name: tags[key].name };
         });
         filterField = 'tagId';
       } else {
-        Object.keys(categories).forEach(function(key) {
+        Object.keys(categories).forEach(key => {
           options[key] = {
             name: `${categories[key].name[0]} - ${categories[key].name}`,
             color: categories[key].color,
@@ -122,12 +122,11 @@ class InsightsTable extends React.Component {
   }
 
   renderEmptyRow() {
-    const { tags, categories } = this.props;
-    const { bubbles } = this.props.chartData;
+    const { tags, categories, insights } = this.props;
     let newId = 0;
 
-    if (bubbles) {
-      bubbles.forEach(element => {
+    if (insights.length) {
+      insights.forEach(element => {
         if (newId < element.id) newId = element.id;
       });
 
@@ -161,15 +160,15 @@ class InsightsTable extends React.Component {
   }
 
   render() {
-    const { bubbles } = this.props.chartData;
+    const { insights } = this.props;
 
     return (
       <div className={bemClasses()}>
         <form>
           <table className={bemClasses('content')}>
             <tbody>
-              {bubbles && this.renderTableContent()}
-              {/*bubbles && this.renderEmptyRow()*/}
+              {insights && this.renderTableContent()}
+              {/*insights && this.renderEmptyRow()*/}
             </tbody>
           </table>
         </form>

@@ -137,9 +137,11 @@ class MainGraph extends React.Component {
   }
 
   renderGraphLayout() {
+    const { insights } = this.props;
+
     return (
       <div className={bemClasses(null, 'padding')}>
-        <GraphLayout data={this.props.chartData} zoom={this.state.zoom} />
+        <GraphLayout data={insights} zoom={this.state.zoom} />
 
         {this.props.isRefresh && this.renderRefreshingPreloader()}
 
@@ -174,14 +176,14 @@ class MainGraph extends React.Component {
   }
 
   render() {
-    const { bubbles } = this.props.chartData;
+    const { insights } = this.props;
 
     return (
       <div className={bemClasses()}>
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-          {bubbles ? (
+          {insights ? (
             <div
               style={{
                 overflow: 'hidden',

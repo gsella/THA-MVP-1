@@ -4,7 +4,7 @@ import { getInsights } from '../../../../redux/modules/insights/insightsActions'
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
-  chartData: state.app.chartData,
+  insights: state.insights.insights,
   hiddenInsights: state.app.hiddenInsights,
 });
 

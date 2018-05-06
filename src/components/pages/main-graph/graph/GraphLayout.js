@@ -28,7 +28,7 @@ class GraphLayout extends React.Component {
     this.state = {};
   }
 
-  static propTyp = {
+  static propTypes = {
     tags: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
   };
@@ -47,20 +47,19 @@ class GraphLayout extends React.Component {
   }
 
   renderGraphs = (impact, radiuses, graphSize) => {
-    const { tags, categories } = this.props;
-    const { bubbles } = this.props.chartData;
+    const { tags, categories, insights } = this.props;
 
-    if (bubbles && radiuses && graphSize) {
+    if (insights && radiuses && graphSize) {
       const tagsArray = Object.values(tags);
 
-      const filledBubbles = bubbles.map(bubble => {
+      const filledBubbles = insights.map(bubble => {
         bubble.category = categories[bubble.categoryId];
         bubble.tag = tags[bubble.tagId].name;
         return bubble;
       });
 
       const graphs = tagsArray.map((tag, i) => {
-        const currentBubbles = bubbles.filter(
+        const currentBubbles = insights.filter(
           bubble =>
             bubble.tag === tag.name &&
             bubble.popularity === impact &&
@@ -104,8 +103,7 @@ class GraphLayout extends React.Component {
   }
 
   render() {
-    const { tags, categories } = this.props;
-    const { bubbles } = this.props.chartData;
+    const { tags, categories, insights } = this.props;
 
     const graphSize = graphSizeHelper(
       tags,
@@ -113,8 +111,8 @@ class GraphLayout extends React.Component {
       this.props.zoom
     );
 
-    const radiuses = bubbles
-      ? radiusHelper(tags, bubbles, categories, graphSize)
+    const radiuses = insights
+      ? radiusHelper(tags, insights, categories, graphSize)
       : undefined;
 
     let nodes = document.getElementsByClassName('graph__graph-container');
@@ -164,7 +162,7 @@ class GraphLayout extends React.Component {
 const mapStateToProps = state => ({
   tags: state.tags.tags,
   categories: state.categories.categories,
-  chartData: state.app.chartData,
+  insights: state.insights.insights,
   hiddenInsights: state.app.hiddenInsights,
 });
 

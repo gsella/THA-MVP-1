@@ -4,7 +4,7 @@ import MainGraph from './MainGraph';
 import { getInsights } from '../../../redux/modules/insights/insightsActions';
 
 const mapStateToProps = state => ({
-  chartData: state.app.chartData,
+  insights: state.insights.insights,
   newInsights: state.app.newInsights,
   isRefresh: state.app.isRefresh,
 });

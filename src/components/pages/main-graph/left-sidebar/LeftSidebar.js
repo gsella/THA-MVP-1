@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ThunderLogo from 'assets/images/logo-thunder.png';
 import Category from 'components/pages/main-graph/left-sidebar/Categories/Category';
 import { getBEMClasses } from 'helper/BEMHelper';
+import { insightsType } from '../../../../propTypes/insightType';
 import ThunderIcon from 'assets/images/thunder-icon-small.svg';
 import 'assets/styles/left-sidebar.css';
 
@@ -17,7 +18,7 @@ class LeftSidebar extends React.Component {
 
   static propTypes = {
     categories: PropTypes.object.isRequired,
-    chartData: PropTypes.object.isRequired,
+    insights: insightsType.isRequired,
     getInsights: PropTypes.func.isRequired,
   };
 
@@ -26,10 +27,10 @@ class LeftSidebar extends React.Component {
   }
 
   getChartData() {
-    const { categories } = this.props;
+    const { categories, insights } = this.props;
 
-    if (this.props.chartData && this.props.chartData.bubbles) {
-      const chartData = this.props.chartData.bubbles.reduce((res, item) => {
+    if (insights.length) {
+      const insightsObj = insights.reduce((res, item) => {
         const category = categories[item.categoryId];
         res[category.name] = res[category.name] || {
           data: [],
@@ -41,15 +42,17 @@ class LeftSidebar extends React.Component {
         return res;
       }, {});
 
-      return Object.keys(chartData).map(key => ({
+      return Object.keys(insightsObj).map(key => ({
         category: key,
-        color: chartData[key].color,
-        data: chartData[key].data,
+        color: insightsObj[key].color,
+        data: insightsObj[key].data,
       }));
     }
   }
 
   render() {
+    const { insights } = this.props;
+
     return (
       <div className={bemClasses()}>
         <div className={bemClasses('logo')}>
@@ -62,13 +65,12 @@ class LeftSidebar extends React.Component {
           <div>Gogoro 2 Series</div>
         </div>
         <div>
-          {this.props.chartData &&
-            this.props.chartData.bubbles && (
-              <Category
-                categories={this.getChartData()}
-                hiddenInsights={this.props.hiddenInsights}
-              />
-            )}
+          {insights.length && (
+            <Category
+              categories={this.getChartData()}
+              hiddenInsights={this.props.hiddenInsights}
+            />
+          )}
         </div>
       </div>
     );
