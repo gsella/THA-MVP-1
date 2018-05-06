@@ -6,15 +6,16 @@ export const getInsights2 = (thunderkey = 4) => async dispatch => {
   const response = await insightsApi.getInsights(thunderkey);
 
   if (response.status === 200) {
+    window.data = response.data; // TODO: remove
     dispatch({
       type: GET_INSIGHTS,
-      payload: response.data.list,
+      payload: response.data,
     });
   }
 };
 
 export const getInsights = () => dispatch => {
-  dispatch(getInsights2);
+  dispatch(getInsights2());
 
   const data = {
     bubbles: chartData.bubbles.map(bubble => {
