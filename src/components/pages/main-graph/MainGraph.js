@@ -182,7 +182,13 @@ class MainGraph extends React.Component {
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
           {bubbles ? (
-            <div>
+            <div
+              style={{
+                overflow: 'hidden',
+                width: '100%',
+                minHeight: '500px',
+                height: '100%',
+              }}>
               <div className="graph-layout-wrapper">
                 {this.renderGraphLayout()}
               </div>
