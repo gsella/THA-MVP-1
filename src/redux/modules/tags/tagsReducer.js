@@ -1,7 +1,24 @@
-import tags from '../../../staticData/tags';
-
 const defaultState = {
-  tags
+  tags: {
+    1: {
+      name: 'PM',
+    },
+    2: {
+      name: 'Challenges',
+    },
+    3: {
+      name: 'Other Players',
+    },
+    4: {
+      name: 'Marketing',
+    },
+    5: {
+      name: 'Other Tag',
+    },
+    6: {
+      name: 'Other',
+    },
+  },
 };
 
 export default function(state = defaultState, { type, payload }) {

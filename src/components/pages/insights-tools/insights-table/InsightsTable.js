@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import TableRow from './table-row/TableRow';
 import TableGroup from './table-group/TableGroup';
 import { getBEMClasses } from 'helper/BEMHelper';
+import { categoriesType } from '../../../../propTypes/categoryType';
+
 import 'assets/styles/data-table.css';
 
 const dataTable = 'data-table';
@@ -16,7 +18,7 @@ class InsightsTable extends React.Component {
 
   static propTypes = {
     tags: PropTypes.object.isRequired,
-    categories: PropTypes.object.isRequired,
+    categories: categoriesType,
     chartData: PropTypes.object.isRequired,
     changeFormValue: PropTypes.func.isRequired,
     getInsights: PropTypes.func.isRequired,
@@ -55,7 +57,7 @@ class InsightsTable extends React.Component {
         <TableRow
           key={item.id}
           item={item}
-          allCategories={categories}
+          categories={categories}
           allTags={tags}
           isNew={'isNew' in item ? item.isNew : false}
           {...this.props}
@@ -89,7 +91,7 @@ class InsightsTable extends React.Component {
           groupName={item.name}
           color={'color' in item ? item.color : null}
           content={data.filter(item => item[filterField] === key)}
-          allCategories={categories}
+          categories={categories}
           allTags={tags}
           {...this.props}
         />
@@ -101,7 +103,7 @@ class InsightsTable extends React.Component {
         <TableRow
           key={item.id}
           item={item}
-          allCategories={categories}
+          categories={categories}
           allTags={tags}
           isNew={'isNew' in item ? item.isNew : false}
           {...this.props}
@@ -148,7 +150,7 @@ class InsightsTable extends React.Component {
       <TableRow
         key={newInsight.id}
         item={newInsight}
-        allCategories={categories}
+        categories={categories}
         allTags={tags}
         isNew={true}
         {...this.props}

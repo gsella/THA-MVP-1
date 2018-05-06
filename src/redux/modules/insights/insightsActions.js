@@ -1,4 +1,5 @@
 import * as insightsApi from '../../../api/insightsApi';
+import { mapInsightFromApi } from '../../../helper/apiDataMapper';
 import { GET_INSIGHTS } from './insightsActionConstants';
 import ACTION_CONSTANTS from '../app/constants';
 
@@ -6,10 +7,9 @@ export const getInsights2 = (thunderkey = 4) => async dispatch => {
   const response = await insightsApi.getInsights(thunderkey);
 
   if (response.status === 200) {
-    window.data = response.data; // TODO: remove
     dispatch({
       type: GET_INSIGHTS,
-      payload: response.data,
+      payload: response.data.map(mapInsightFromApi),
     });
   }
 };

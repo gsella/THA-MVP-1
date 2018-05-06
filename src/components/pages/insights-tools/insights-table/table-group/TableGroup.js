@@ -20,33 +20,34 @@ class TableGroup extends React.Component {
     this.handleCollapseGroup = this.handleCollapseGroup.bind(this);
   }
 
-  handleCollapseGroup(){
+  handleCollapseGroup() {
     const newIsGrouped = !this.state.isGrouped;
 
-    this.setState({isGrouped: newIsGrouped});
+    this.setState({ isGrouped: newIsGrouped });
   }
 
   renderGroupRow() {
-    const cellColorClass = (this.props.color) ? 'for-color-cell' : '';
+    const cellColorClass = this.props.color ? 'for-color-cell' : '';
 
     return (
       <tr className={bemClasses()}>
-        <td className={bemClasses('cell', 'for-icons')}>
-        </td>
+        <td className={bemClasses('cell', 'for-icons')} />
         <td
           className={bemClasses('cell', `${cellColorClass}`)}
           style={{ backgroundColor: this.props.color }}
-          colSpan="6"
-        >
-        <Button
-          onClick={this.handleCollapseGroup}
-          className={bemClasses('group-cell')}
-        >
-          {this.props.groupName}
-          {(this.state.isGrouped) ? ` (${this.props.content.length} Insights collapsed)` : ''}
-          <span className={bemClasses('caret-icon')}>
-            <FontAwesomeIcon icon={(this.state.isGrouped) ? faCaretDown : faCaretUp} />
-          </span>
+          colSpan="6">
+          <Button
+            onClick={this.handleCollapseGroup}
+            className={bemClasses('group-cell')}>
+            {this.props.groupName}
+            {this.state.isGrouped
+              ? ` (${this.props.content.length} Insights collapsed)`
+              : ''}
+            <span className={bemClasses('caret-icon')}>
+              <FontAwesomeIcon
+                icon={this.state.isGrouped ? faCaretDown : faCaretUp}
+              />
+            </span>
           </Button>
         </td>
       </tr>
@@ -56,18 +57,18 @@ class TableGroup extends React.Component {
   renderContent() {
     const amount = this.props.content.length;
 
-    return this.props.content.map((item, key) => 
-      <TableRow 
+    return this.props.content.map((item, key) => (
+      <TableRow
         key={item.id}
         item={item}
-        allCategories={this.props.allCategories}
+        categories={this.props.categories}
         allTags={this.props.allTags}
-        isNew={('isNew' in item) ? item.isNew : false}
+        isNew={'isNew' in item ? item.isNew : false}
         {...this.props}
-        disableMoveUp={(key === 0)}
-        disableMoveDown={(key === amount - 1)}
+        disableMoveUp={key === 0}
+        disableMoveDown={key === amount - 1}
       />
-    );
+    ));
   }
 
   render() {
@@ -75,9 +76,9 @@ class TableGroup extends React.Component {
       return (
         <React.Fragment>
           {this.renderGroupRow()}
-          {(!this.state.isGrouped) ? this.renderContent() : null}
+          {!this.state.isGrouped ? this.renderContent() : null}
         </React.Fragment>
-      )
+      );
     } else {
       return null;
     }
