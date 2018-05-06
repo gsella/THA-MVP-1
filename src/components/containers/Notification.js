@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import FontAesomeIcon from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/fontawesome-free-regular';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/dist/react-notifications.css';
 import 'assets/styles/notification.css'
@@ -21,12 +23,29 @@ class Notification extends React.Component {
       type: 'info',
       message: (
         <div>
-          <img src={this.props.thunderIco} alt="thunder-icon" width={20} height={20} /> &nbsp;
-          <span>{this.props.numberInsights} new insights found</span>
+          <FontAesomeIcon
+            onClick={this.removeNotification}
+            icon={faTimesCircle}
+            style={{
+              position: 'absolute',
+              right: 5,
+              top: 5,
+            }}
+          />
+          <div>
+            <img src={this.props.thunderIco} alt="thunder-icon" width={20} height={20} /> &nbsp;
+            <span>{this.props.numberInsights} new insights found</span>
+          </div>
         </div>
       ),
       timeOut: 0,
     });
+  };
+
+  removeNotification = (e) => {
+    e.preventDefault();
+
+    return () => NotificationManager.remove({ id: 1 });
   };
 
   render() {
