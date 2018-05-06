@@ -1,22 +1,27 @@
 import ACTION_CONSTANTS from './constants';
 
-export const updateChartData = (updatedInsight) => dispatch => {
-  if (updatedInsight.tagId === 0 &&
+export const updateChartData = updatedInsight => dispatch => {
+  if (
+    updatedInsight.tagId === 0 &&
     updatedInsight.categoryId === 0 &&
     updatedInsight.insight.trim().length === 0 &&
     updatedInsight.description.trim().length === 0
   ) {
     dispatch({
       type: ACTION_CONSTANTS.DELETE_INSIGHT,
-      payload: updatedInsight.id,
+      payload: updatedInsight.id
     });
   } else {
-    if (updatedInsight.tagId > 0 && updatedInsight.categoryId > 0 && updatedInsight.insight.trim().length > 0) {
+    if (
+      updatedInsight.tagId > 0 &&
+      updatedInsight.categoryId > 0 &&
+      updatedInsight.insight.trim().length > 0
+    ) {
       updatedInsight.isNew = false;
     }
     dispatch({
       type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
-      payload: updatedInsight,
+      payload: updatedInsight
     });
   }
 };
@@ -33,92 +38,82 @@ export const hidingInsight = key => (dispatch, getState) => {
 
   dispatch({
     type: ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT,
-    payload: hiddenInsights,
+    payload: hiddenInsights
   });
 };
 
 export const addNewInsight = () => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.ADD_NEW_INSIGHT,
-    payload: newInsight,
+    payload: newInsight
   });
 };
 
 export const deleteInsight = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.DELETE_INSIGHT,
-    payload: id,
+    payload: id
   });
 };
 
 export const moveInsightUp = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
-    payload: id,
+    payload: id
   });
 };
 
 export const moveInsightDown = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
-    payload: id,
+    payload: id
   });
-};
-
-export const getChartData = () => dispatch => {
-  // TODO: get data from server
-  const data = {
-    ...chartData,
-    bubbles: chartData.bubbles.map(bubble => {
-      bubble.isVisible = true;
-      return bubble;
-    }),
-  };
-
-  setTimeout(() =>
-    dispatch({
-      type: ACTION_CONSTANTS.GET_CHART_DATA,
-      payload: data,
-    }), 3000);
 };
 
 export const getNewInsights = () => dispatch => {
   //TODO: request to server
-  setTimeout(() =>
-    dispatch({
-      type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-      payload: [{}],
-    }), 4000);
+  setTimeout(
+    () =>
+      dispatch({
+        type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
+        payload: [{}]
+      }),
+    4000
+  );
 };
 
-export const refreshThunder = (bubble) => (dispatch, getState) => {
+export const refreshThunder = bubble => (dispatch, getState) => {
   const isRefresh = { ...getState().app }.isRefresh;
   //TODO: request to server
   //TODO: create middleware
 
-  return new Promise((resolve, reject) => (
+  return new Promise((resolve, reject) =>
     resolve(
       dispatch({
         type: ACTION_CONSTANTS.REFRESH_THUNDER,
-        payload: chartData,
+        payload: chartData
       }),
 
       dispatch({
         type: ACTION_CONSTANTS.PRELOADER,
-        payload: !isRefresh,
+        payload: !isRefresh
       }),
 
       dispatch({
         type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-        payload: [],
+        payload: []
       }),
 
-      setTimeout(() =>
-        dispatch({
-          type: ACTION_CONSTANTS.PRELOADER,
-          payload: isRefresh,
-        }), 1000)
-    )));
+      setTimeout(
+        () =>
+          dispatch({
+            type: ACTION_CONSTANTS.PRELOADER,
+            payload: isRefresh
+          }),
+        1000
+      )
+    )
+  );
 };
 
 const newInsight = {
@@ -129,43 +124,23 @@ const newInsight = {
   popularity: 0,
   instances: 0,
   description: '',
-  isNew: true,
+  isNew: true
 };
 
 const chartData = {
-  tags: {
-    1: {
-      name: 'PM',
-    },
-    2: {
-      name: 'Challenges',
-    },
-    3: {
-      name: 'Other Players',
-    },
-    4: {
-      name: 'Marketing',
-    },
-    5: {
-      name: 'Other Tag',
-    },
-    6: {
-      name: 'Other',
-    },
-  },
   categories: {
     1: {
       name: 'KYC',
-      color: '#22bae6',
+      color: '#22bae6'
     },
     2: {
       name: 'Features',
-      color: '#d92be5',
+      color: '#d92be5'
     },
     3: {
       name: 'Competition',
-      color: '#0fb54a',
-    },
+      color: '#0fb54a'
+    }
   },
   bubbles: [
     {
@@ -176,7 +151,7 @@ const chartData = {
       insight: 'Home Use',
       popularity: 1,
       instances: 5,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 2,
@@ -186,7 +161,7 @@ const chartData = {
       insight: 'Music Use',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 3,
@@ -196,7 +171,7 @@ const chartData = {
       insight: 'Office Use',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 4,
@@ -206,7 +181,7 @@ const chartData = {
       insight: 'Kids Use',
       popularity: 1,
       instances: 3,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 5,
@@ -216,7 +191,7 @@ const chartData = {
       insight: 'Speakers',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 6,
@@ -226,7 +201,7 @@ const chartData = {
       insight: 'Phone',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 7,
@@ -236,7 +211,7 @@ const chartData = {
       insight: 'Calendar',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 8,
@@ -246,7 +221,7 @@ const chartData = {
       insight: 'Siri',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.',
+      description: 'Lorem ipsum dolor sit amet.'
     },
     {
       id: 9,
@@ -256,7 +231,7 @@ const chartData = {
       insight: 'Google Home',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.',
-    },
-  ],
+      description: 'Lorem ipsum dolor sit amet.'
+    }
+  ]
 };

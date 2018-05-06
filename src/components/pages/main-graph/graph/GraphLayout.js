@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { radiusHelper } from 'helper/radiusHelper';
@@ -18,7 +19,7 @@ const bemClasses = getBEMClasses([graph]);
 const impactsClasses = {
   '1': 'pos',
   '0': 'zero',
-  '-1': 'neg',
+  '-1': 'neg'
 };
 
 class GraphLayout extends React.Component {
@@ -26,6 +27,10 @@ class GraphLayout extends React.Component {
     super(props);
     this.state = {};
   }
+
+  static propTyp = {
+    tags: PropTypes.object.isRequired
+  };
 
   renderLaunchingPreloader() {
     return (
@@ -41,9 +46,10 @@ class GraphLayout extends React.Component {
   }
 
   renderGraphs = (impact, radiuses, graphSize) => {
-    const { tags, bubbles, categories } = this.props.chartData;
+    const { tags } = this.props;
+    const { bubbles, categories } = this.props.chartData;
 
-    if (tags && bubbles && categories && radiuses && graphSize) {
+    if (bubbles && categories && radiuses && graphSize) {
       const tagsArray = Object.values(tags);
 
       const filledBubbles = bubbles.map(bubble => {
@@ -57,13 +63,13 @@ class GraphLayout extends React.Component {
           bubble =>
             bubble.tag === tag.name &&
             bubble.popularity === impact &&
-            !this.props.hiddenInsights.some(a => a === bubble.categoryKey),
+            !this.props.hiddenInsights.some(a => a === bubble.categoryKey)
         );
 
         const items = currentBubbles.map(bubble => ({
           label: bubble.categoryKey,
           color: bubble.category.color,
-          size: bubble.instances,
+          size: bubble.instances
         }));
 
         const key = `graph-${impactsClasses[impact]}-${i}`;
@@ -97,11 +103,19 @@ class GraphLayout extends React.Component {
   }
 
   render() {
-    const { tags, bubbles, categories } = this.props.chartData;
+    const { tags } = this.props;
+    const { bubbles, categories } = this.props.chartData;
 
-    const graphSize = graphSizeHelper(tags, { minWidth: 150, minHeigth: 150 }, this.props.zoom);
+    const graphSize = graphSizeHelper(
+      tags,
+      { minWidth: 150, minHeigth: 150 },
+      this.props.zoom
+    );
 
-    const radiuses = tags && bubbles && categories ? radiusHelper(tags, bubbles, categories, graphSize) : undefined;
+    const radiuses =
+      tags && bubbles && categories
+        ? radiusHelper(tags, bubbles, categories, graphSize)
+        : undefined;
 
     let nodes = document.getElementsByClassName('graph__graph-container');
     nodes = Array.prototype.slice.call(nodes);
@@ -111,21 +125,32 @@ class GraphLayout extends React.Component {
 
     return (
       <div className={bemClasses()}>
-        {<TagsSection tags={tags ? Object.values(tags) : []} size={graphSize.width} />}
+        {
+          <TagsSection
+            tags={tags ? Object.values(tags) : []}
+            size={graphSize.width}
+          />
+        }
 
-        <div className={bemClasses('impact-block')} style={{ minHeight: graphSize.height }}>
+        <div
+          className={bemClasses('impact-block')}
+          style={{ minHeight: graphSize.height }}>
           <div className={bemClasses('impact-icon')}>
             <FontAwesomeIcon icon={faThumbsUp} />
           </div>
           {this.renderGraphs(IMPACTS.POS, radiuses, graphSize)}
         </div>
 
-        <div className={bemClasses('impact-block')} style={{ minHeight: graphSize.height }}>
+        <div
+          className={bemClasses('impact-block')}
+          style={{ minHeight: graphSize.height }}>
           <div className={bemClasses('impact-icon')}>0</div>
           {this.renderGraphs(IMPACTS.ZERO, radiuses, graphSize)}
         </div>
 
-        <div className={bemClasses('impact-block')} style={{ minHeight: graphSize.height }}>
+        <div
+          className={bemClasses('impact-block')}
+          style={{ minHeight: graphSize.height }}>
           <div className={bemClasses('impact-icon')}>
             <FontAwesomeIcon icon={faThumbsDown} />
           </div>
@@ -137,8 +162,9 @@ class GraphLayout extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  tags: state.tags.tags,
   chartData: state.app.chartData,
-  hiddenInsights: state.app.hiddenInsights,
+  hiddenInsights: state.app.hiddenInsights
 });
 
 export default connect(mapStateToProps, null)(GraphLayout);

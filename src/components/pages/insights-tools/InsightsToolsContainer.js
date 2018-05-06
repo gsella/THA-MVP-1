@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
-import * as actions from 'redux/modules/app/actions';
 import InsightsTools from './InsightsTools';
+import { getInsights } from '../../../redux/modules/insights/insightsActions';
 
-const mapStateToProps = (state) => ({
-  chartData: state.app.chartData,
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
-  getChartData: actions.getChartData,
+  getInsights
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsightsTools);

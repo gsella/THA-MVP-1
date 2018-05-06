@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
-import * as actions from 'redux/modules/app/actions';
 import LeftSidebar from './LeftSidebar';
+import { getInsights } from '../../../../redux/modules/insights/insightsActions';
 
 const mapStateToProps = state => ({
   chartData: state.app.chartData,
-  hiddenInsights: state.app.hiddenInsights,
+  hiddenInsights: state.app.hiddenInsights
 });
 
 const mapDispatchToProps = {
-  getChartData: actions.getChartData,
+  getInsights
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftSidebar);

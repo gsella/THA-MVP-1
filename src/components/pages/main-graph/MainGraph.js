@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ThunderIconSmall from 'assets/images/thunder-icon-small.svg';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { MenuItem, ButtonToolbar, DropdownButton } from 'react-bootstrap';
-import { faEllipsisV, faRedoAlt, faPlus, faMinus, faExpand } from '@fortawesome/fontawesome-free-solid';
+import {
+  faEllipsisV,
+  faRedoAlt,
+  faPlus,
+  faMinus,
+  faExpand
+} from '@fortawesome/fontawesome-free-solid';
 import ThunderIcon from 'assets/images/thunder-background.svg';
 import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
 import GraphLayout from './graph/GraphLayout';
@@ -20,9 +27,13 @@ class MainGraph extends React.Component {
     super(props);
     this.state = {
       isFullScreen: false,
-      zoom: 1,
+      zoom: 1
     };
   }
+
+  static propTypes = {
+    getInsights: PropTypes.func.isRequired
+  };
 
   static getDerivedStateFromProps(newProps) {
     let bubble = document.querySelectorAll('.graph-layout__graph-container');
@@ -38,7 +49,7 @@ class MainGraph extends React.Component {
 
   componentDidMount() {
     this.props.getNewInsights();
-    this.props.getChartData();
+    this.props.getInsights();
   }
 
   toggleFullScreenGraph() {
@@ -52,7 +63,15 @@ class MainGraph extends React.Component {
   renderRefreshingPreloader() {
     return (
       <Preloader
-        preloadIcon={<FontAwesomeIcon icon={faRedoAlt} size="10x" rotation={270} spin style={{ color: '#0070c0' }} />}
+        preloadIcon={
+          <FontAwesomeIcon
+            icon={faRedoAlt}
+            size="10x"
+            rotation={270}
+            spin
+            style={{ color: '#0070c0' }}
+          />
+        }
         title="Refreshing your Thunder..."
         description={
           'Depending om the amount of data, fetching it can take a while or two.' +
@@ -97,11 +116,15 @@ class MainGraph extends React.Component {
           <div className={bemClasses('navigate-icons', 'self-icon')}>
             <ButtonToolbar>
               <DropdownButton
-                title={<FontAwesomeIcon icon={faEllipsisV} className={bemClasses('navigate-icons', 'size')} />}
+                title={
+                  <FontAwesomeIcon
+                    icon={faEllipsisV}
+                    className={bemClasses('navigate-icons', 'size')}
+                  />
+                }
                 pullRight
                 id="button-pulL-right"
-                className={bemClasses('navigate-icons', 'more-info-btn')}
-              >
+                className={bemClasses('navigate-icons', 'more-info-btn')}>
                 <MenuItem eventKey="1">Edit Diagram</MenuItem>
                 <MenuItem eventKey="2">Email Diagram</MenuItem>
                 <MenuItem eventKey="3">Print Diagram</MenuItem>
@@ -125,14 +148,20 @@ class MainGraph extends React.Component {
             icon={faPlus}
             className={bemClasses('zoom', 'color')}
             onClick={() => {
-              this.setState({ zoom: this.state.zoom >= 2 ? this.state.zoom : this.state.zoom + 0.1 });
+              this.setState({
+                zoom:
+                  this.state.zoom >= 2 ? this.state.zoom : this.state.zoom + 0.1
+              });
             }}
           />
           <FontAwesomeIcon
             icon={faMinus}
             className={bemClasses('zoom', 'color')}
             onClick={() => {
-              this.setState({ zoom: this.state.zoom <= 1 ? this.state.zoom : this.state.zoom - 0.1 });
+              this.setState({
+                zoom:
+                  this.state.zoom <= 1 ? this.state.zoom : this.state.zoom - 0.1
+              });
             }}
           />
         </div>
@@ -141,25 +170,29 @@ class MainGraph extends React.Component {
   }
 
   render() {
-    const { tags, bubbles, categories } = this.props.chartData;
+    const { tags } = this.props;
+    const { bubbles, categories } = this.props.chartData;
 
     return (
       <div className={bemClasses()}>
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-          {(tags && bubbles && categories) ?
+          {tags && bubbles && categories ? (
             <div>
               <div className="graph-layout-wrapper">
                 {this.renderGraphLayout()}
               </div>
               <DateInfo {...this.props} />
-            </div> :
+            </div>
+          ) : (
             this.renderLaunchingPreloader()
-          }
+          )}
         </div>
 
-        {this.props.newInsights.length > 0 && <Notification thunderIco={ThunderIconSmall} numberInsights={4} />}
+        {this.props.newInsights.length > 0 && (
+          <Notification thunderIco={ThunderIconSmall} numberInsights={4} />
+        )}
       </div>
     );
   }

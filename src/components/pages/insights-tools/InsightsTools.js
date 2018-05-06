@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SearchForm from './search-form/SearchForm';
 import CustomDropdown from 'components/common/dropdown/CustomDropdown';
 import InsightsTable from './insights-table/InsightsTableContainer';
@@ -15,19 +16,21 @@ class InsightsTools extends React.Component {
     super(props);
     this.state = {
       isGrouped: false,
-      groupedBy: 'categories',
+      groupedBy: 'categories'
     };
 
     this.handleGroupInsights = this.handleGroupInsights.bind(this);
   }
 
+  static propTypes = {};
+
   handleGroupInsights(name, eventKey) {
     if (eventKey === 1) {
-      this.setState({isGrouped: true, groupedBy: 'categories'});
+      this.setState({ isGrouped: true, groupedBy: 'categories' });
     } else if (eventKey === 2) {
-      this.setState({isGrouped: true, groupedBy: 'tags'});
+      this.setState({ isGrouped: true, groupedBy: 'tags' });
     } else {
-      this.setState({isGrouped: false});
+      this.setState({ isGrouped: false });
     }
   }
 
@@ -46,9 +49,13 @@ class InsightsTools extends React.Component {
           <div className={bemClasses('search-panel')}>
             <SearchForm />
             <CustomDropdown
-              id='group-same'
-              title='Group Same'
-              options={[{ eventKey: 0, name: `Don't group` }, { eventKey: 1, name: 'Category' }, { eventKey: 2, name: 'Tag' }]}
+              id="group-same"
+              title="Group Same"
+              options={[
+                { eventKey: 0, name: `Don't group` },
+                { eventKey: 1, name: 'Category' },
+                { eventKey: 2, name: 'Tag' }
+              ]}
               handleChange={this.handleGroupInsights}
               bemClasses={dropdownStyles}
             />

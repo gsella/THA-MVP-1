@@ -15,8 +15,13 @@ class LeftSidebar extends React.Component {
     this.state = {};
   }
 
+  static propTypes = {
+    chartData: PropTypes.object.isRequired,
+    getInsights: PropTypes.func.isRequired
+  };
+
   componentDidMount() {
-    this.props.getChartData();
+    this.props.getInsights();
   }
 
   getChartData() {
@@ -25,7 +30,7 @@ class LeftSidebar extends React.Component {
         const category = this.props.chartData.categories[item.categoryId];
         res[category.name] = res[category.name] || {
           data: [],
-          color: this.props.chartData.categories[item.categoryId].color,
+          color: this.props.chartData.categories[item.categoryId].color
         };
 
         res[category.name].data.push(item);
@@ -36,7 +41,7 @@ class LeftSidebar extends React.Component {
       return Object.keys(chartData).map(key => ({
         category: key,
         color: chartData[key].color,
-        data: chartData[key].data,
+        data: chartData[key].data
       }));
     }
   }
@@ -56,16 +61,15 @@ class LeftSidebar extends React.Component {
         <div>
           {this.props.chartData &&
             this.props.chartData.bubbles && (
-              <Category categories={this.getChartData()} hiddenInsights={this.props.hiddenInsights} />
+              <Category
+                categories={this.getChartData()}
+                hiddenInsights={this.props.hiddenInsights}
+              />
             )}
         </div>
       </div>
     );
   }
 }
-
-LeftSidebar.propTypes = {
-  chartData: PropTypes.object.isRequired,
-};
 
 export default LeftSidebar;

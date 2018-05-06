@@ -15,7 +15,7 @@ class InsightsTable extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getChartData();
+    this.props.getInsights();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,15 +25,18 @@ class InsightsTable extends React.Component {
   }
 
   renderTableContent() {
-    const tags = this.props.chartData.tags;
-    const categories = this.props.chartData.categories;
+    const { tags } = this.props;
+    const { categories, bubbles } = this.props.chartData;
     const querry = this.props.searchQuerry;
     const insightsFormData = this.props.insightsFormData;
-    let matchingData = this.props.chartData.bubbles;
+    let matchingData = bubbles;
 
     if (querry.length > 0) {
       matchingData = matchingData.filter(
-        item => insightsFormData[`insight-${item.id}`].toLowerCase().indexOf(querry.toLowerCase()) > -1,
+        item =>
+          insightsFormData[`insight-${item.id}`]
+            .toLowerCase()
+            .indexOf(querry.toLowerCase()) > -1
       );
     }
 
@@ -64,7 +67,10 @@ class InsightsTable extends React.Component {
         filterField = 'tagId';
       } else {
         Object.keys(categories).forEach(function(key) {
-          options[key] = { name: `${categories[key].name[0]} - ${categories[key].name}`, color: categories[key].color };
+          options[key] = {
+            name: `${categories[key].name[0]} - ${categories[key].name}`,
+            color: categories[key].color
+          };
         });
         filterField = 'categoryId';
       }
@@ -106,10 +112,12 @@ class InsightsTable extends React.Component {
   }
 
   renderEmptyRow() {
+    const { tags } = this.props;
+    const { bubbles, categories } = this.props.chartData;
     let newId = 0;
 
-    if (this.props.chartData.bubbles) {
-      this.props.chartData.bubbles.forEach(element => {
+    if (bubbles) {
+      bubbles.forEach(element => {
         if (newId < element.id) newId = element.id;
       });
 
@@ -125,15 +133,15 @@ class InsightsTable extends React.Component {
       popularity: 0,
       instances: 0,
       description: '',
-      isNew: true,
+      isNew: true
     };
 
     return (
       <TableRow
         key={newInsight.id}
         item={newInsight}
-        allCategories={this.props.chartData.categories}
-        allTags={this.props.chartData.tags}
+        allCategories={categories}
+        allTags={tags}
         isNew={true}
         {...this.props}
         disableMoveUp={true}
@@ -143,13 +151,15 @@ class InsightsTable extends React.Component {
   }
 
   render() {
+    const { bubbles } = this.props.chartData;
+
     return (
       <div className={bemClasses()}>
         <form>
           <table className={bemClasses('content')}>
             <tbody>
-              {this.props.chartData.bubbles && this.renderTableContent()}
-              {/*this.props.chartData.bubbles && this.renderEmptyRow()*/}
+              {bubbles && this.renderTableContent()}
+              {/*bubbles && this.renderEmptyRow()*/}
             </tbody>
           </table>
         </form>
@@ -159,8 +169,10 @@ class InsightsTable extends React.Component {
 }
 
 InsightsTable.propTypes = {
+  tags: PropTypes.object.isRequired,
   chartData: PropTypes.object.isRequired,
   changeFormValue: PropTypes.func.isRequired,
+  getInsights: PropTypes.func.isRequired
 };
 
 export default InsightsTable;
