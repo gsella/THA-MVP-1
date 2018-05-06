@@ -8,7 +8,7 @@ export const getInsights2 = (thunderkey = 4) => async dispatch => {
   if (response.status === 200) {
     dispatch({
       type: GET_INSIGHTS,
-      payload: response.data.list
+      payload: response.data.list,
     });
   }
 };
@@ -17,37 +17,22 @@ export const getInsights = () => dispatch => {
   dispatch(getInsights2);
 
   const data = {
-    categories,
     bubbles: chartData.bubbles.map(bubble => {
       bubble.isVisible = true;
       return bubble;
-    })
+    }),
   };
 
   setTimeout(
     () =>
       dispatch({
         type: ACTION_CONSTANTS.GET_CHART_DATA,
-        payload: data
+        payload: data,
       }),
     3000
   );
 };
 
-const categories = {
-  1: {
-    name: 'KYC',
-    color: '#22bae6'
-  },
-  2: {
-    name: 'Features',
-    color: '#d92be5'
-  },
-  3: {
-    name: 'Competition',
-    color: '#0fb54a'
-  }
-};
 const chartData = {
   bubbles: [
     {
@@ -58,7 +43,7 @@ const chartData = {
       insight: 'Home Use',
       popularity: 1,
       instances: 5,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 2,
@@ -68,7 +53,7 @@ const chartData = {
       insight: 'Music Use',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 3,
@@ -78,7 +63,7 @@ const chartData = {
       insight: 'Office Use',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 4,
@@ -88,7 +73,7 @@ const chartData = {
       insight: 'Kids Use',
       popularity: 1,
       instances: 3,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 5,
@@ -98,7 +83,7 @@ const chartData = {
       insight: 'Speakers',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 6,
@@ -108,7 +93,7 @@ const chartData = {
       insight: 'Phone',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 7,
@@ -118,7 +103,7 @@ const chartData = {
       insight: 'Calendar',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 8,
@@ -128,7 +113,7 @@ const chartData = {
       insight: 'Siri',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 9,
@@ -138,7 +123,7 @@ const chartData = {
       insight: 'Google Home',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
-    }
-  ]
+      description: 'Lorem ipsum dolor sit amet.',
+    },
+  ],
 };

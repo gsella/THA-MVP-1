@@ -16,8 +16,9 @@ class LeftSidebar extends React.Component {
   }
 
   static propTypes = {
+    categories: PropTypes.object.isRequired,
     chartData: PropTypes.object.isRequired,
-    getInsights: PropTypes.func.isRequired
+    getInsights: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -25,12 +26,14 @@ class LeftSidebar extends React.Component {
   }
 
   getChartData() {
+    const { categories } = this.props;
+
     if (this.props.chartData && this.props.chartData.bubbles) {
       const chartData = this.props.chartData.bubbles.reduce((res, item) => {
-        const category = this.props.chartData.categories[item.categoryId];
+        const category = categories[item.categoryId];
         res[category.name] = res[category.name] || {
           data: [],
-          color: this.props.chartData.categories[item.categoryId].color
+          color: categories[item.categoryId].color,
         };
 
         res[category.name].data.push(item);
@@ -41,7 +44,7 @@ class LeftSidebar extends React.Component {
       return Object.keys(chartData).map(key => ({
         category: key,
         color: chartData[key].color,
-        data: chartData[key].data
+        data: chartData[key].data,
       }));
     }
   }

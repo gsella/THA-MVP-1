@@ -8,7 +8,7 @@ import {
   faRedoAlt,
   faPlus,
   faMinus,
-  faExpand
+  faExpand,
 } from '@fortawesome/fontawesome-free-solid';
 import ThunderIcon from 'assets/images/thunder-background.svg';
 import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
@@ -27,12 +27,12 @@ class MainGraph extends React.Component {
     super(props);
     this.state = {
       isFullScreen: false,
-      zoom: 1
+      zoom: 1,
     };
   }
 
   static propTypes = {
-    getInsights: PropTypes.func.isRequired
+    getInsights: PropTypes.func.isRequired,
   };
 
   static getDerivedStateFromProps(newProps) {
@@ -150,7 +150,9 @@ class MainGraph extends React.Component {
             onClick={() => {
               this.setState({
                 zoom:
-                  this.state.zoom >= 2 ? this.state.zoom : this.state.zoom + 0.1
+                  this.state.zoom >= 2
+                    ? this.state.zoom
+                    : this.state.zoom + 0.1,
               });
             }}
           />
@@ -160,7 +162,9 @@ class MainGraph extends React.Component {
             onClick={() => {
               this.setState({
                 zoom:
-                  this.state.zoom <= 1 ? this.state.zoom : this.state.zoom - 0.1
+                  this.state.zoom <= 1
+                    ? this.state.zoom
+                    : this.state.zoom - 0.1,
               });
             }}
           />
@@ -170,15 +174,14 @@ class MainGraph extends React.Component {
   }
 
   render() {
-    const { tags } = this.props;
-    const { bubbles, categories } = this.props.chartData;
+    const { bubbles } = this.props.chartData;
 
     return (
       <div className={bemClasses()}>
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-          {tags && bubbles && categories ? (
+          {bubbles ? (
             <div>
               <div className="graph-layout-wrapper">
                 {this.renderGraphLayout()}

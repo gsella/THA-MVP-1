@@ -14,6 +14,14 @@ class InsightsTable extends React.Component {
     this.state = {};
   }
 
+  static propTypes = {
+    tags: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
+    chartData: PropTypes.object.isRequired,
+    changeFormValue: PropTypes.func.isRequired,
+    getInsights: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
     this.props.getInsights();
   }
@@ -25,8 +33,8 @@ class InsightsTable extends React.Component {
   }
 
   renderTableContent() {
-    const { tags } = this.props;
-    const { categories, bubbles } = this.props.chartData;
+    const { tags, categories } = this.props;
+    const { bubbles } = this.props.chartData;
     const querry = this.props.searchQuerry;
     const insightsFormData = this.props.insightsFormData;
     let matchingData = bubbles;
@@ -69,7 +77,7 @@ class InsightsTable extends React.Component {
         Object.keys(categories).forEach(function(key) {
           options[key] = {
             name: `${categories[key].name[0]} - ${categories[key].name}`,
-            color: categories[key].color
+            color: categories[key].color,
           };
         });
         filterField = 'categoryId';
@@ -112,8 +120,8 @@ class InsightsTable extends React.Component {
   }
 
   renderEmptyRow() {
-    const { tags } = this.props;
-    const { bubbles, categories } = this.props.chartData;
+    const { tags, categories } = this.props;
+    const { bubbles } = this.props.chartData;
     let newId = 0;
 
     if (bubbles) {
@@ -133,7 +141,7 @@ class InsightsTable extends React.Component {
       popularity: 0,
       instances: 0,
       description: '',
-      isNew: true
+      isNew: true,
     };
 
     return (
@@ -167,12 +175,5 @@ class InsightsTable extends React.Component {
     );
   }
 }
-
-InsightsTable.propTypes = {
-  tags: PropTypes.object.isRequired,
-  chartData: PropTypes.object.isRequired,
-  changeFormValue: PropTypes.func.isRequired,
-  getInsights: PropTypes.func.isRequired
-};
 
 export default InsightsTable;

@@ -20,6 +20,7 @@ const insightsArrayToObject = array => {
 const mapStateToProps = state => {
   return {
     tags: state.tags.tags,
+    categories: state.categories.categories,
     chartData: state.app.chartData,
     insightsFormData: state.form.insightsTable
       ? state.form.insightsTable.values
@@ -31,7 +32,7 @@ const mapStateToProps = state => {
     initialValues:
       state.app.chartData && state.app.chartData.bubbles
         ? insightsArrayToObject(state.app.chartData.bubbles)
-        : {}
+        : {},
   };
 };
 
@@ -41,12 +42,12 @@ const mapDispatchToProps = {
   moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
   deleteInsight: actions.deleteInsight,
-  changeFormValue: change
+  changeFormValue: change,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTable);
 
 export default reduxForm({
   form: 'insightsTable',
-  enableReinitialize: true
+  enableReinitialize: true,
 })(Container);

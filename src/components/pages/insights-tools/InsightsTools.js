@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import SearchForm from './search-form/SearchForm';
 import CustomDropdown from 'components/common/dropdown/CustomDropdown';
 import InsightsTable from './insights-table/InsightsTableContainer';
@@ -16,7 +15,7 @@ class InsightsTools extends React.Component {
     super(props);
     this.state = {
       isGrouped: false,
-      groupedBy: 'categories'
+      groupedBy: 'categories',
     };
 
     this.handleGroupInsights = this.handleGroupInsights.bind(this);
@@ -54,7 +53,7 @@ class InsightsTools extends React.Component {
               options={[
                 { eventKey: 0, name: `Don't group` },
                 { eventKey: 1, name: 'Category' },
-                { eventKey: 2, name: 'Tag' }
+                { eventKey: 2, name: 'Tag' },
               ]}
               handleChange={this.handleGroupInsights}
               bemClasses={dropdownStyles}

@@ -9,7 +9,7 @@ export const updateChartData = updatedInsight => dispatch => {
   ) {
     dispatch({
       type: ACTION_CONSTANTS.DELETE_INSIGHT,
-      payload: updatedInsight.id
+      payload: updatedInsight.id,
     });
   } else {
     if (
@@ -21,7 +21,7 @@ export const updateChartData = updatedInsight => dispatch => {
     }
     dispatch({
       type: ACTION_CONSTANTS.UPDATE_CHART_DATA,
-      payload: updatedInsight
+      payload: updatedInsight,
     });
   }
 };
@@ -38,35 +38,35 @@ export const hidingInsight = key => (dispatch, getState) => {
 
   dispatch({
     type: ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT,
-    payload: hiddenInsights
+    payload: hiddenInsights,
   });
 };
 
 export const addNewInsight = () => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.ADD_NEW_INSIGHT,
-    payload: newInsight
+    payload: newInsight,
   });
 };
 
 export const deleteInsight = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.DELETE_INSIGHT,
-    payload: id
+    payload: id,
   });
 };
 
 export const moveInsightUp = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
-    payload: id
+    payload: id,
   });
 };
 
 export const moveInsightDown = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
-    payload: id
+    payload: id,
   });
 };
 
@@ -76,7 +76,7 @@ export const getNewInsights = () => dispatch => {
     () =>
       dispatch({
         type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-        payload: [{}]
+        payload: [{}],
       }),
     4000
   );
@@ -91,24 +91,24 @@ export const refreshThunder = bubble => (dispatch, getState) => {
     resolve(
       dispatch({
         type: ACTION_CONSTANTS.REFRESH_THUNDER,
-        payload: chartData
+        payload: chartData,
       }),
 
       dispatch({
         type: ACTION_CONSTANTS.PRELOADER,
-        payload: !isRefresh
+        payload: !isRefresh,
       }),
 
       dispatch({
         type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-        payload: []
+        payload: [],
       }),
 
       setTimeout(
         () =>
           dispatch({
             type: ACTION_CONSTANTS.PRELOADER,
-            payload: isRefresh
+            payload: isRefresh,
           }),
         1000
       )
@@ -124,24 +124,10 @@ const newInsight = {
   popularity: 0,
   instances: 0,
   description: '',
-  isNew: true
+  isNew: true,
 };
 
 const chartData = {
-  categories: {
-    1: {
-      name: 'KYC',
-      color: '#22bae6'
-    },
-    2: {
-      name: 'Features',
-      color: '#d92be5'
-    },
-    3: {
-      name: 'Competition',
-      color: '#0fb54a'
-    }
-  },
   bubbles: [
     {
       id: 1,
@@ -151,7 +137,7 @@ const chartData = {
       insight: 'Home Use',
       popularity: 1,
       instances: 5,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 2,
@@ -161,7 +147,7 @@ const chartData = {
       insight: 'Music Use',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 3,
@@ -171,7 +157,7 @@ const chartData = {
       insight: 'Office Use',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 4,
@@ -181,7 +167,7 @@ const chartData = {
       insight: 'Kids Use',
       popularity: 1,
       instances: 3,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 5,
@@ -191,7 +177,7 @@ const chartData = {
       insight: 'Speakers',
       popularity: 0,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 6,
@@ -201,7 +187,7 @@ const chartData = {
       insight: 'Phone',
       popularity: -1,
       instances: 2,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 7,
@@ -211,7 +197,7 @@ const chartData = {
       insight: 'Calendar',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 8,
@@ -221,7 +207,7 @@ const chartData = {
       insight: 'Siri',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
+      description: 'Lorem ipsum dolor sit amet.',
     },
     {
       id: 9,
@@ -231,7 +217,7 @@ const chartData = {
       insight: 'Google Home',
       popularity: 0,
       instances: 4,
-      description: 'Lorem ipsum dolor sit amet.'
-    }
-  ]
+      description: 'Lorem ipsum dolor sit amet.',
+    },
+  ],
 };
