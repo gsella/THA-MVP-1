@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import { reduxForm, change } from 'redux-form';
+import { createSelector } from 'reselect';
 import * as actions from 'redux/modules/app/actions';
 import InsightsTable from './InsightsTable';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
 
 const insightsArrayToObject = array => {
-  const arr = array.reduce((obj, item) => {
+  if (!array.length) return {};
+  const result = array.reduce((obj, item) => {
     obj[`categoryId-${item.id}`] = item.categoryId;
     obj[`tagId-${item.id}`] = item.tagId;
     obj[`insight-${item.id}`] = item.insight;
@@ -14,8 +16,13 @@ const insightsArrayToObject = array => {
     return obj;
   }, {});
 
-  return arr;
+  return result;
 };
+
+const initialValuesSelector = createSelector(
+  state => state.insights.insights,
+  insightsArrayToObject
+);
 
 const mapStateToProps = state => {
   const { insights } = state.insights;
@@ -24,14 +31,11 @@ const mapStateToProps = state => {
     tags: state.tags.tags,
     categories: state.categories.categories,
     insights,
-    insightsFormData: state.form.insightsTable
-      ? state.form.insightsTable.values
-      : {},
-    searchQuerry:
+    searchQuery:
       'values' in state.form.searchForm
         ? state.form.searchForm.values.searchForm.trim()
         : '',
-    initialValues: insights.length ? insightsArrayToObject(insights) : {},
+    initialValues: initialValuesSelector(state),
   };
 };
 

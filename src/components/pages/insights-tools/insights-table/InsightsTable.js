@@ -36,17 +36,13 @@ class InsightsTable extends React.Component {
   }
 
   renderTableContent() {
-    const { tags, categories, insights } = this.props;
-    const querry = this.props.searchQuerry;
-    const insightsFormData = this.props.insightsFormData;
+    const { tags, categories, insights, searchQuery } = this.props;
     let matchingData = insights;
 
-    if (querry.length > 0) {
-      matchingData = matchingData.filter(
-        item =>
-          insightsFormData[`insight-${item.id}`]
-            .toLowerCase()
-            .indexOf(querry.toLowerCase()) > -1
+    if (searchQuery.length > 0) {
+      const queryRegexp = new RegExp(searchQuery, 'i');
+      matchingData = matchingData.filter(item =>
+        item.insight.match(queryRegexp)
       );
     }
 
