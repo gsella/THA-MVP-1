@@ -69,6 +69,7 @@ class MainGraph extends React.Component {
   renderRefreshingPreloader() {
     return (
       <Preloader
+        isFullScreen={this.state.isFullScreen}
         preloadIcon={
           <FontAwesomeIcon
             icon={faRedoAlt}
