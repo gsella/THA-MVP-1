@@ -14,7 +14,7 @@ class DatePicker extends React.Component {
   // TODO: choose supported formats
   static formats = {
     american: 'MM/DD/YYYY',
-    international: 'DD/MM/YYYY'
+    international: 'DD/MM/YYYY',
   };
 
   static propTypes = {
@@ -27,11 +27,11 @@ class DatePicker extends React.Component {
     info: PropTypes.string,
     meta: PropTypes.shape({
       touched: PropTypes.bool,
-      error: PropTypes.string
+      error: PropTypes.string,
     }),
     disabled: PropTypes.bool,
     required: PropTypes.bool,
-    initialOptions: PropTypes.object
+    initialOptions: PropTypes.object,
   };
 
   static defaultProps = {
@@ -43,7 +43,7 @@ class DatePicker extends React.Component {
     required: false,
     initialOptions: {},
     customFormat: format,
-    customParse: parse
+    customParse: parse,
   };
 
   constructor(props) {
@@ -62,7 +62,9 @@ class DatePicker extends React.Component {
       toString: customFormat,
       parse: customParse,
       onSelect: input.onChange,
-      ...this.props.initialOptions
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      ...this.props.initialOptions,
     });
 
     this.addClassNames();

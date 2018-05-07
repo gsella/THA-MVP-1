@@ -208,7 +208,7 @@ class MainGraph extends React.Component {
         </div>
 
         {this.props.newInsights.length > 0 && (
-          <Notification thunderIco={ThunderIconSmall} numberInsights={4} />
+          <Notification thunderIcon={ThunderIconSmall} numberInsights={4} />
         )}
       </div>
     );

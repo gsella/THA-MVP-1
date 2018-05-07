@@ -51,8 +51,13 @@ class LeftSidebar extends React.Component {
 
     return (
       <div className={bemClasses()}>
-        <div className={bemClasses('logo')}>
-          <img src={ThunderLogo} alt="thunder-logo" width={240} />
+        <div className={bemClasses('logo', 'border')}>
+          <img
+            className={bemClasses('logo', 'align')}
+            src={ThunderLogo}
+            alt="thunder-logo"
+            width={240}
+          />
         </div>
         <div className={bemClasses('insight-title')}>
           <div className={bemClasses('thunder-icon')}>

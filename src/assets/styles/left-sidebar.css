@@ -1,13 +1,18 @@
 .left-sidebar {
   background-color: #f0f0f0;
   min-width: 255px;
+  width: 255px;
   height: 100vh;
   overflow: auto;
 }
 
-.left-sidebar__logo {
+.left-sidebar__logo--border {
   border-bottom: 3px solid #ffffff;
   text-align: center;
+}
+
+.left-sidebar__logo--align {
+  padding: 15px;
 }
 
 .left-sidebar__thunder-icon {
@@ -24,7 +29,8 @@
   padding: 20px 10px;
 }
 
-.left-sidebar__category, .left-sidebar__insight {
+.left-sidebar__category,
+.left-sidebar__insight {
   color: #222;
 }
 
@@ -49,7 +55,8 @@
   padding-left: 40px;
 }
 
-.left-sidebar__category--id, .left-sidebar__insight--id {
+.left-sidebar__category--id,
+.left-sidebar__insight--id {
   font-weight: 900;
 }
 
