@@ -32,7 +32,13 @@ class MainGraph extends React.Component {
   }
 
   static propTypes = {
+    isDataLoading: PropTypes.bool.isRequired,
+    isRefresh: PropTypes.bool.isRequired,
+    insights: PropTypes.array.isRequired,
+    newInsights: PropTypes.array.isRequired,
     getInsights: PropTypes.func.isRequired,
+    getNewInsights: PropTypes.func.isRequired,
+    refreshThunder: PropTypes.func.isRequired,
   };
 
   static getDerivedStateFromProps(newProps) {
@@ -180,29 +186,25 @@ class MainGraph extends React.Component {
   }
 
   render() {
-    const { insights } = this.props;
+    const { isDataLoading } = this.props;
 
     return (
       <div className={bemClasses()}>
         {!this.state.isFullScreen && <LeftSidebarContainer />}
         <div className={bemClasses('graph-layout')}>
           {this.renderNavigationIcons()}
-          {insights ? (
-            <div
-              style={{
-                overflow: 'hidden',
-                width: '100%',
-                minHeight: '500px',
-                height: '100%',
-              }}>
-              <div className="graph-layout-wrapper">
-                {this.renderGraphLayout()}
-              </div>
-              <DateInfo {...this.props} />
-            </div>
-          ) : (
-            this.renderLaunchingPreloader()
-          )}
+          <div className={bemClasses('graph-layout-container')}>
+            {!isDataLoading ? (
+              <React.Fragment>
+                <div className={bemClasses('graph-layout-wrapper')}>
+                  {this.renderGraphLayout()}
+                </div>
+                <DateInfo {...this.props} />
+              </React.Fragment>
+            ) : (
+              this.renderLaunchingPreloader()
+            )}
+          </div>
         </div>
 
         {this.props.newInsights.length > 0 && (

@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   insights: state.insights.insights,
   newInsights: state.app.newInsights,
   isRefresh: state.app.isRefresh,
+  isDataLoading: state.insights.isDataLoading,
 });
 
 const mapDispatchToProps = {

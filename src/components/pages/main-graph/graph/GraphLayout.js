@@ -31,7 +31,7 @@ class GraphLayout extends React.Component {
   static propTypes = {
     tags: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
-    insights: PropTypes.object.isRequired,
+    insights: PropTypes.array.isRequired,
     fullScreen: PropTypes.bool.isRequired,
   };
 
@@ -116,7 +116,8 @@ class GraphLayout extends React.Component {
     const graphSize = graphSizeHelper(
       tags,
       { minWidth: 150, minHeigth: 150 },
-      this.props.zoom
+      this.props.zoom,
+      'main-graph__graph-layout-container'
     );
 
     const radiuses = insights
