@@ -96,6 +96,13 @@ class GraphLayout extends React.Component {
 
   resizeHandler = () => this.forceUpdate();
 
+  clearTooltips() {
+    const tooltips = document.getElementsByClassName('tooltips')[0];
+    if (tooltips) {
+      tooltips.innerHTML = '';
+    }
+  }
+
   componentDidMount() {
     window.addEventListener('resize', this.resizeHandler);
   }
@@ -123,6 +130,8 @@ class GraphLayout extends React.Component {
     const radiuses = insights
       ? radiusHelper(tags, insights, categories, graphSize)
       : undefined;
+
+    this.clearTooltips();
 
     let nodes = document.getElementsByClassName('graph__graph-container');
     nodes = Array.prototype.slice.call(nodes);

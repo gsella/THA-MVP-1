@@ -15,7 +15,7 @@ class Graph extends React.Component {
       PropTypes.shape({
         label: PropTypes.string.isRequired,
         size: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired
+        color: PropTypes.string.isRequired,
       })
     ).isRequired,
     radiuses: PropTypes.shape({
@@ -23,7 +23,7 @@ class Graph extends React.Component {
       '2': PropTypes.number,
       '3': PropTypes.number,
       '4': PropTypes.number,
-      '5': PropTypes.number
+      '5': PropTypes.number,
     }),
     bubbles: PropTypes.arrayOf(
       PropTypes.shape({
@@ -37,19 +37,19 @@ class Graph extends React.Component {
         description: PropTypes.string.isRequired,
         category: PropTypes.shape({
           name: PropTypes.string.isRequired,
-          color: PropTypes.string.isRequired
+          color: PropTypes.string.isRequired,
         }).isRequired,
-        tag: PropTypes.string.isRequired
+        tag: PropTypes.string.isRequired,
       })
     ).isRequired,
     size: PropTypes.shape({
       width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired
-    }).isRequired
+      height: PropTypes.number.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
-    classModifiers: []
+    classModifiers: [],
   };
 
   getTooltipContent = key => {
@@ -77,8 +77,9 @@ class Graph extends React.Component {
   drawChart = (customClass, items, radiuses, size) => {
     const { id } = this.props;
     const bemClasses = getBEMClasses([graphClass, customClass]);
+
     const tooltip = d3
-      .select('body')
+      .select('.tooltips')
       .append('div')
       .style('position', 'absolute')
       .style('z-index', '10')
