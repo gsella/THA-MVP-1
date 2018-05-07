@@ -211,6 +211,7 @@ class MainGraph extends React.Component {
         {this.props.newInsights.length > 0 && (
           <Notification thunderIcon={ThunderIconSmall} numberInsights={4} />
         )}
+        <div className="tooltips" />
       </div>
     );
   }
