@@ -141,7 +141,11 @@ class MainGraph extends React.Component {
 
     return (
       <div className={bemClasses(null, 'padding')}>
-        <GraphLayout data={insights} zoom={this.state.zoom} />
+        <GraphLayout
+          data={insights}
+          zoom={this.state.zoom}
+          fullScreen={this.state.isFullScreen}
+        />
 
         {this.props.isRefresh && this.renderRefreshingPreloader()}
 

@@ -22,10 +22,6 @@ class LeftSidebar extends React.Component {
     getInsights: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
-    this.props.getInsights();
-  }
-
   getChartData() {
     const { categories, insights } = this.props;
 

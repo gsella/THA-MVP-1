@@ -31,6 +31,8 @@ class GraphLayout extends React.Component {
   static propTypes = {
     tags: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
+    insights: PropTypes.object.isRequired,
+    fullScreen: PropTypes.bool.isRequired,
   };
 
   renderLaunchingPreloader() {
@@ -100,6 +102,12 @@ class GraphLayout extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeHandler);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.fullScreen !== prevProps.fullScreen) {
+      this.resizeHandler();
+    }
   }
 
   render() {
