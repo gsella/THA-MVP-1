@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import TableRow from '../table-row/TableRowContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/fontawesome-free-solid';
@@ -54,40 +53,19 @@ class TableGroup extends React.Component {
     );
   }
 
-  renderContent() {
-    const amount = this.props.content.length;
-
-    return this.props.content.map((item, key) => (
-      <TableRow
-        key={item.id}
-        item={item}
-        categories={this.props.categories}
-        allTags={this.props.allTags}
-        isNew={'isNew' in item ? item.isNew : false}
-        {...this.props}
-        disableMoveUp={key === 0}
-        disableMoveDown={key === amount - 1}
-      />
-    ));
-  }
-
   render() {
-    if (this.props.content.length > 0) {
-      return (
-        <React.Fragment>
-          {this.renderGroupRow()}
-          {!this.state.isGrouped ? this.renderContent() : null}
-        </React.Fragment>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <React.Fragment>
+        {this.renderGroupRow()}
+        {!this.state.isGrouped ? this.props.content : null}
+      </React.Fragment>
+    );
   }
 }
 
 TableGroup.propTypes = {
   groupName: PropTypes.string.isRequired,
-  content: PropTypes.arrayOf(PropTypes.object),
+  content: PropTypes.element.isRequired,
   color: PropTypes.string,
 };
 

@@ -8,16 +8,16 @@ import { getInsights } from '../../../../redux/modules/insights/insightsActions'
 const insightsArrayToObject = array => {
   if (!array.length) return {};
 
-  const result = array.reduce((obj, item) => {
-    obj[`categoryId-${item.id}`] = item.categoryId;
-    obj[`tagId-${item.id}`] = item.tagId;
-    obj[`insight-${item.id}`] = item.insight;
-    obj[`description-${item.id}`] = item.description;
-    obj[`impact-${item.id}`] = 0;
-    return obj;
-  }, {});
-
-  return result;
+  return {
+    insights: array.map(item => ({
+      id: item.id,
+      categoryId: item.categoryId,
+      tagId: item.tagId,
+      insight: item.insight,
+      description: item.description,
+      impact: 0,
+    })),
+  };
 };
 
 const initialValuesSelector = createSelector(

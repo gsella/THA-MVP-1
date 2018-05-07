@@ -41,11 +41,16 @@ class TableRow extends React.Component {
   }
 
   static propTypes = {
+    namePrefix: PropTypes.string.isRequired,
     item: PropTypes.object.isRequired,
     isNew: PropTypes.bool,
     categories: categoriesType.isRequired,
     allTags: PropTypes.object.isRequired,
     changeFormValue: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    namePrefix: '',
   };
 
   handleChangeValue(e) {
@@ -98,24 +103,18 @@ class TableRow extends React.Component {
   }
 
   renderImpact() {
-    const { item } = this.props;
+    const { namePrefix } = this.props;
     const options = [
       { value: 1, label: <ThumbsUp /> },
       { value: 0, label: 'Impact' },
       { value: -1, label: <ThumbsDown /> },
     ];
 
-    return <Select items={options} name={`impact-${item.id}`} />;
-  }
-
-  renderCurrentImpact() {
-    if (this.state.impact === 1) return <ThumbsUp />;
-    if (this.state.impact === -1) return <ThumbsDown />;
-    else return 'Impact';
+    return <Select items={options} name={`${namePrefix}.impact`} />;
   }
 
   renderCategory() {
-    const { categories, item } = this.props;
+    const { namePrefix, categories } = this.props;
 
     const options = Object.keys(categories).map(key => {
       return { value: key, label: categories[key].name };
@@ -124,14 +123,14 @@ class TableRow extends React.Component {
     return (
       <Select
         items={options}
-        name={`categoryId-${item.id}`}
+        name={`${namePrefix}.categoryId`}
         customClass="table-row-category-select"
       />
     );
   }
 
   renderTag() {
-    const { item, allTags } = this.props;
+    const { namePrefix, allTags } = this.props;
 
     const options = Object.keys(allTags).map(key => {
       return { value: key, label: allTags[key].name };
@@ -140,7 +139,7 @@ class TableRow extends React.Component {
     return (
       <Select
         items={options}
-        name={`tagId-${item.id}`}
+        name={`${namePrefix}.tagId`}
         customClass="table-row-tag-select"
       />
     );
@@ -193,14 +192,15 @@ class TableRow extends React.Component {
   }
 
   render() {
-    const textColorModifier = this.props.isNew ? { modifiers: 'is-new' } : {};
+    const { isNew, item, namePrefix } = this.props;
+    const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
 
     return (
       <tr
         className={bemClasses(textColorModifier)}
-        id={`editable-row-${this.props.item.id}`}>
+        id={`editable-row-${item.id}`}>
         <td className={bemClasses('cell', 'for-icons')}>
-          {this.props.isNew ? (
+          {isNew ? (
             <img
               className={bemClasses('insight-icon')}
               alt="new insight"
@@ -212,39 +212,37 @@ class TableRow extends React.Component {
         <td
           className={bemClasses('cell', ['id', 'for-text'])}
           style={{ backgroundColor: this.state.color }}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
-            {this.props.item.categoryKey !== ''
-              ? this.props.item.categoryKey
-              : 'ID'}
+          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
+            {item.categoryKey !== '' ? item.categoryKey : 'ID'}
           </ContextMenuTrigger>
         </td>
         <td
           className={bemClasses('cell', ['category'])}
           style={{ backgroundColor: this.state.color }}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
+          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
             {this.renderCategory()}
           </ContextMenuTrigger>
         </td>
         <td className={bemClasses('cell', 'for-input')}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
+          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
             <Input
               placeholder="Key words"
-              name={`insight-${this.props.item.id}`}
+              name={`${namePrefix}.insight`}
               customClass={inputClass}
             />
           </ContextMenuTrigger>
         </td>
         <td className={bemClasses('cell', 'for-input')}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
+          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
             <Input
               placeholder="Description"
-              name={`description-${this.props.item.id}`}
+              name={`${namePrefix}.description`}
               customClass={inputClass}
             />
           </ContextMenuTrigger>
         </td>
         <td className={bemClasses('cell', ['tag'])}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
+          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
             {this.renderTag()}
           </ContextMenuTrigger>
         </td>

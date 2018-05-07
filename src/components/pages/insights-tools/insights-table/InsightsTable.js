@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FieldArray } from 'redux-form';
 import TableRow from './table-row/TableRowContainer';
 import TableGroup from './table-group/TableGroup';
 import { getBEMClasses } from 'helper/BEMHelper';
@@ -9,6 +10,7 @@ import { insightsType } from '../../../../propTypes/insightType';
 import 'assets/styles/data-table.css';
 
 const dataTable = 'data-table';
+const formName = 'insights';
 const bemClasses = getBEMClasses([dataTable]);
 
 class InsightsTable extends React.Component {
@@ -48,23 +50,9 @@ class InsightsTable extends React.Component {
     }
 
     if (!this.props.isGrouped) {
-      const amount = matchingData.length;
-
-      return matchingData.map((item, key) => (
-        <TableRow
-          key={item.id}
-          item={item}
-          categories={categories}
-          allTags={tags}
-          isNew={'isNew' in item ? item.isNew : false}
-          {...this.props}
-          disableMoveUp={key === 0}
-          disableMoveDown={key === amount - 1}
-        />
-      ));
+      return this.renderForm(this.renderUngrouped);
     } else {
       const options = [];
-      const data = matchingData;
       let filterField = '';
 
       if (this.props.groupedBy === 'tags') {
@@ -82,78 +70,80 @@ class InsightsTable extends React.Component {
         filterField = 'categoryId';
       }
 
-      const groups = options.map((item, key) => (
-        <TableGroup
-          key={`${this.state.groupedBy}-${key}`}
-          groupName={item.name}
-          color={'color' in item ? item.color : null}
-          content={data.filter(item => item[filterField] === key)}
-          categories={categories}
-          allTags={tags}
-          {...this.props}
-        />
-      ));
-      let ungrouped = data.filter(item => item[filterField] === 0);
-      const amount = ungrouped.length;
+      const groups = options.map((item, key) => {
+        const group = matchingData.filter(item => item[filterField] === key);
 
-      ungrouped = ungrouped.map((item, key) => (
-        <TableRow
-          key={item.id}
-          item={item}
-          categories={categories}
-          allTags={tags}
-          isNew={'isNew' in item ? item.isNew : false}
-          {...this.props}
-          disableMoveUp={key === 0}
-          disableMoveDown={key === amount - 1}
-        />
-      ));
+        return (
+          <TableGroup
+            key={`${this.state.groupedBy}-${key}`}
+            groupName={item.name}
+            color={'color' in item ? item.color : null}
+            content={this.renderForm(
+              this.getRenderContentFunctionForGroup(group)
+            )}
+            categories={categories}
+            allTags={tags}
+            {...this.props}
+          />
+        );
+      });
+
+      // TODO: make sure this is working (no, its not working) after adding new insight feature
+      // let ungrouped = matchingData.filter(item => item[filterField] === 0);
+      // const amount = ungrouped.length;
+      //
+      // const ungroupedComponents = ungrouped.map((item, key) => (
+      //   <TableRow
+      //     key={item.id}
+      //     item={item}
+      //     categories={categories}
+      //     allTags={tags}
+      //     isNew={'isNew' in item ? item.isNew : false}
+      //     {...this.props}
+      //     disableMoveUp={key === 0}
+      //     disableMoveDown={key === amount - 1}
+      //   />
+      // ));
 
       return (
         <React.Fragment>
           {groups}
-          {ungrouped}
+          {/*{ungroupedComponents}*/}
         </React.Fragment>
       );
     }
   }
 
-  renderEmptyRow() {
-    const { tags, categories, insights } = this.props;
-    let newId = 0;
+  renderUngrouped = ({ fields }) => {
+    const { insights, categories, tags, ...otherProps } = this.props;
 
-    if (insights.length) {
-      insights.forEach(element => {
-        if (newId < element.id) newId = element.id;
-      });
+    return fields.map((insight, index) => {
+      return (
+        <TableRow
+          namePrefix={insight}
+          key={index}
+          item={insights[index]}
+          categories={categories}
+          allTags={tags}
+          isNew={false}
+          {...otherProps}
+          disableMoveUp={index === 0}
+          disableMoveDown={index === insights.length - 1}
+        />
+      );
+    });
+  };
 
-      newId += 1;
-    }
-
-    const newInsight = {
-      id: newId,
-      categoryId: 0,
-      tagId: 0,
-      categoryKey: '',
-      insight: '',
-      popularity: 0,
-      instances: 0,
-      description: '',
-      isNew: true,
+  getRenderContentFunctionForGroup = group => {
+    return props => {
+      return this.renderUngrouped(props).filter(insightItem =>
+        group.some(i => i.id === insightItem.props.item.id)
+      );
     };
+  };
 
-    return (
-      <TableRow
-        key={newInsight.id}
-        item={newInsight}
-        categories={categories}
-        allTags={tags}
-        isNew={true}
-        {...this.props}
-        disableMoveUp={true}
-        disableMoveDown={true}
-      />
-    );
+  renderForm(component) {
+    return <FieldArray name={formName} component={component} />;
   }
 
   render() {
@@ -163,10 +153,7 @@ class InsightsTable extends React.Component {
       <div className={bemClasses()}>
         <form>
           <table className={bemClasses('content')}>
-            <tbody>
-              {insights && this.renderTableContent()}
-              {/*insights && this.renderEmptyRow()*/}
-            </tbody>
+            <tbody>{insights && this.renderTableContent()}</tbody>
           </table>
         </form>
       </div>
