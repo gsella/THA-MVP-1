@@ -11,5 +11,4 @@ export const insightType = PropTypes.shape({
   description: PropTypes.string.isRequired,
 });
 
-// TODO: add normal validation
 export const insightsType = PropTypes.arrayOf(insightType);

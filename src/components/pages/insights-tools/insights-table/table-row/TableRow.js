@@ -6,7 +6,7 @@ import {
   ContextMenuTrigger,
   SubMenu,
 } from 'react-contextmenu';
-import CustomDropdown from 'components/common/dropdown/CustomDropdown';
+import Select from 'components/common/select/Select';
 import Input from 'components/common/input/InputField';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
@@ -19,7 +19,6 @@ import 'assets/styles/right-click-dropdown.css';
 
 const tableRow = 'data-table-row';
 const bemClasses = getBEMClasses([tableRow]);
-const dropdownBemClasses = getBEMClasses(['data-table-dropdown']);
 const inputClass = 'data-table-input';
 
 class TableRow extends React.Component {
@@ -99,21 +98,14 @@ class TableRow extends React.Component {
   }
 
   renderImpact() {
+    const { item } = this.props;
     const options = [
-      { eventKey: 1, name: <ThumbsUp /> },
-      { eventKey: 0, name: 'Impact' },
-      { eventKey: -1, name: <ThumbsDown /> },
+      { value: 1, label: <ThumbsUp /> },
+      { value: 0, label: 'Impact' },
+      { value: -1, label: <ThumbsDown /> },
     ];
 
-    return (
-      <CustomDropdown
-        id="impact"
-        title={this.renderCurrentImpact()}
-        options={options}
-        handleChange={this.handleDropdownSelect}
-        bemClasses={dropdownBemClasses}
-      />
-    );
+    return <Select items={options} name={`impact-${item.id}`} />;
   }
 
   renderCurrentImpact() {
@@ -123,47 +115,33 @@ class TableRow extends React.Component {
   }
 
   renderCategory() {
-    const options = [];
-    const categories = this.props.categories;
-    const categoryName =
-      this.state.categoryId > 0
-        ? this.props.categories[this.state.categoryId].name
-        : '';
-    const title =
-      categoryName !== '' ? `${categoryName[0]} - ${categoryName}` : 'Category';
+    const { categories, item } = this.props;
 
-    Object.keys(categories).forEach(function(key) {
-      options.push({ eventKey: key, name: categories[key].name });
+    const options = Object.keys(categories).map(key => {
+      return { value: key, label: categories[key].name };
     });
 
     return (
-      <CustomDropdown
-        id="category"
-        title={title}
-        options={options}
-        handleChange={this.handleDropdownSelect}
-        bemClasses={dropdownBemClasses}
+      <Select
+        items={options}
+        name={`categoryId-${item.id}`}
+        customClass="table-row-category-select"
       />
     );
   }
 
   renderTag() {
-    const options = [];
-    const tags = this.props.allTags;
-    const tagName =
-      this.state.tagId > 0 ? this.props.allTags[this.state.tagId].name : 'Tag';
+    const { item, allTags } = this.props;
 
-    Object.keys(tags).forEach(function(key) {
-      options.push({ eventKey: key, name: tags[key].name });
+    const options = Object.keys(allTags).map(key => {
+      return { value: key, label: allTags[key].name };
     });
 
     return (
-      <CustomDropdown
-        id="tag"
-        title={tagName}
-        options={options}
-        handleChange={this.handleDropdownSelect}
-        bemClasses={dropdownBemClasses}
+      <Select
+        items={options}
+        name={`tagId-${item.id}`}
+        customClass="table-row-tag-select"
       />
     );
   }
@@ -215,7 +193,6 @@ class TableRow extends React.Component {
   }
 
   render() {
-    const cellColorClass = this.state.color ? 'for-color-cell' : '';
     const textColorModifier = this.props.isNew ? { modifiers: 'is-new' } : {};
 
     return (
@@ -233,7 +210,7 @@ class TableRow extends React.Component {
           {this.renderDropdown()}
         </td>
         <td
-          className={bemClasses('cell', `${cellColorClass} for-id for-text`)}
+          className={bemClasses('cell', ['id', 'for-text'])}
           style={{ backgroundColor: this.state.color }}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             {this.props.item.categoryKey !== ''
@@ -242,7 +219,7 @@ class TableRow extends React.Component {
           </ContextMenuTrigger>
         </td>
         <td
-          className={bemClasses('cell', `${cellColorClass}`)}
+          className={bemClasses('cell', ['category'])}
           style={{ backgroundColor: this.state.color }}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             {this.renderCategory()}
@@ -266,16 +243,12 @@ class TableRow extends React.Component {
             />
           </ContextMenuTrigger>
         </td>
-        <td className={bemClasses('cell')}>
+        <td className={bemClasses('cell', ['tag'])}>
           <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
             {this.renderTag()}
           </ContextMenuTrigger>
         </td>
-        <td className={bemClasses('cell')}>
-          <ContextMenuTrigger id={`row-dropdown-${this.props.item.id}`}>
-            {this.renderImpact()}
-          </ContextMenuTrigger>
-        </td>
+        <td className={bemClasses('cell')}>{this.renderImpact()}</td>
       </tr>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from './search-form/SearchForm';
-import CustomDropdown from 'components/common/dropdown/CustomDropdown';
+import MenuButton from 'components/common/menu/MenuButton';
 import InsightsTable from './insights-table/InsightsTableContainer';
 import ConfigurationPageWrapper from 'components/common/configuration-page-wrapper/ConfigurationPageWrapper';
 import { getBEMClasses } from 'helper/BEMHelper';
@@ -47,7 +47,7 @@ class InsightsTools extends React.Component {
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
             <SearchForm />
-            <CustomDropdown
+            <MenuButton
               id="group-same"
               title="Group Same"
               options={[

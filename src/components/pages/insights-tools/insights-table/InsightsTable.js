@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableRow from './table-row/TableRow';
+import TableRow from './table-row/TableRowContainer';
 import TableGroup from './table-group/TableGroup';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../propTypes/categoryType';

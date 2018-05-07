@@ -7,6 +7,7 @@ import { getInsights } from '../../../../redux/modules/insights/insightsActions'
 
 const insightsArrayToObject = array => {
   if (!array.length) return {};
+
   const result = array.reduce((obj, item) => {
     obj[`categoryId-${item.id}`] = item.categoryId;
     obj[`tagId-${item.id}`] = item.tagId;

@@ -6,7 +6,7 @@ import { faCaretDown } from '@fortawesome/fontawesome-free-solid';
 import 'assets/styles/dropdown.css';
 import 'assets/styles/data-table-dropdown.css';
 
-class CustomDropdown extends React.Component {
+class MenuButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -24,8 +24,7 @@ class CustomDropdown extends React.Component {
         key={item.eventKey}
         className={this.props.bemClasses('menu-item')}
         eventKey={item.eventKey}
-        onSelect={this.handleOptionClick}
-      >
+        onSelect={this.handleOptionClick}>
         {item.name}
       </MenuItem>
     ));
@@ -36,8 +35,7 @@ class CustomDropdown extends React.Component {
       <Dropdown id="dropdown-custom" className={this.props.bemClasses()}>
         <Dropdown.Toggle
           id="dropdown-size-medium"
-          className={this.props.bemClasses('button', 'default')}
-        > 
+          className={this.props.bemClasses('button', 'default')}>
           {this.props.title}
           <span className={this.props.bemClasses('caret-icon')}>
             <FontAwesomeIcon icon={faCaretDown} />
@@ -51,11 +49,11 @@ class CustomDropdown extends React.Component {
   }
 }
 
-CustomDropdown.propTypes = {
+MenuButton.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   options: PropTypes.array.isRequired,
   handleChange: PropTypes.func,
   bemClasses: PropTypes.func,
 };
 
-export default CustomDropdown;
+export default MenuButton;

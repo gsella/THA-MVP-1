@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import TableRow from '../table-row/TableRow';
+import TableRow from '../table-row/TableRowContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/fontawesome-free-solid';

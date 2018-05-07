@@ -1,0 +1,73 @@
+.Select {
+}
+
+.Select-placeholder,
+.Select--single > .Select-control .Select-value {
+  padding-left: 0px;
+}
+
+.Select-value-label {
+  width: calc(100% - 10px);
+  display: block;
+
+  padding: 12px 14px 0 5px;
+}
+
+.Select-control {
+  height: 60px;
+  padding: 6px 12px;
+  border: 0px;
+}
+
+.Select-clear-zone {
+  display: none;
+}
+
+.Select-arrow-zone {
+  position: relative;
+  right: -8px;
+  padding-right: 0 !important;
+}
+
+.Select-arrow {
+  border-color: black transparent transparent;
+}
+
+.Select.has-value.is-clearable.Select--single > .Select-control .Select-value {
+  padding-right: 10px;
+}
+
+.Select-menu {
+  max-height: 248px;
+}
+.Select-menu-outer {
+  max-height: 250px;
+}
+
+.Select-option:hover {
+  background: #eeecec;
+}
+
+.Select-option.is-selected {
+  background-color: #eeecec;
+}
+
+.Select--multi.is-disabled .Select-value-icon:hover,
+.Select--multi.is-disabled .Select-value-icon:focus,
+.Select--multi.is-disabled .Select-value-icon:active {
+  background-color: #fcfcfc;
+}
+
+.Select-control .Select-input:focus,
+.Select.is-focused > .Select-control,
+.Select.is-focused:not(.is-open) > .Select-control {
+  background: inherit;
+}
+
+.Select-control,
+.Select-multi-value-wrapper,
+.Select-value,
+.Select.is-focused > .Select-control,
+.Select-input {
+  background-color: inherit;
+}
