@@ -53,9 +53,9 @@ class MainGraph extends React.Component {
     return null;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.getInsights();
     this.props.getNewInsights();
-    this.props.getInsights();
   }
 
   toggleFullScreenGraph() {
@@ -209,7 +209,10 @@ class MainGraph extends React.Component {
         </div>
 
         {this.props.newInsights.length > 0 && (
-          <Notification thunderIcon={ThunderIconSmall} numberInsights={4} />
+          <Notification
+            thunderIcon={ThunderIconSmall}
+            numberInsights={this.props.newInsights.length}
+          />
         )}
         <div className="tooltips" />
       </div>

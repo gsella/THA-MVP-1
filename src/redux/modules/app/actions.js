@@ -72,18 +72,6 @@ export const moveInsightDown = id => dispatch => {
   });
 };
 
-export const getNewInsights = () => dispatch => {
-  //TODO: request to server
-  setTimeout(
-    () =>
-      dispatch({
-        type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-        payload: [{}],
-      }),
-    4000
-  );
-};
-
 export const refreshThunder = (thunderkey = 4) => async (
   dispatch,
   getState

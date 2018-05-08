@@ -10,8 +10,6 @@ const defaultState = {
 
 export default function(state = defaultState, { type, payload }) {
   switch (type) {
-    case ACTION_CONSTANTS.GET_NEW_INSIGHTS:
-      return handleGetNewInsights(state, payload);
     case ACTION_CONSTANTS.UPDATE_CHART_DATA:
       return handleUpdateChartData(state, payload);
     case ACTION_CONSTANTS.ADD_NEW_INSIGHT:
@@ -160,10 +158,6 @@ function updateCategoryKey(arr, categories) {
     }
     return item;
   });
-}
-
-function handleGetNewInsights(state, newInsights) {
-  return { ...state, newInsights };
 }
 
 function handleRefreshThunder(state, chartData) {
