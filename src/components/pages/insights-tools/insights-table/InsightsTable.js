@@ -27,6 +27,7 @@ class InsightsTable extends React.Component {
 
   componentDidMount() {
     this.props.getInsights();
+    this.props.initialize(this.props.initialValues);
   }
 
   componentWillReceiveProps(nextProps) {
