@@ -51,13 +51,6 @@ export const addNewInsight = () => dispatch => {
   });
 };
 
-export const deleteInsight = id => dispatch => {
-  dispatch({
-    type: ACTION_CONSTANTS.DELETE_INSIGHT,
-    payload: id,
-  });
-};
-
 export const moveInsightUp = id => dispatch => {
   dispatch({
     type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,

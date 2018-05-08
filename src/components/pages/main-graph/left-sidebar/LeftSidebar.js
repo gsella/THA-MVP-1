@@ -4,7 +4,7 @@ import ThunderLogo from 'assets/images/logo-thunder.png';
 import Category from 'components/pages/main-graph/left-sidebar/Categories/Category';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { insightsType } from '../../../../propTypes/insightType';
-import ThunderIcon from 'assets/images/thunder-icon-small.svg';
+import ThunderIcon from 'assets/images/lightning-icon-small.svg';
 import 'assets/styles/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';

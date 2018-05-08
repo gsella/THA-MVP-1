@@ -8,7 +8,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { graphSizeHelper } from 'helper/graphSizeHelper';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
 import Preloader from 'components/common/preloader/Preloader';
-import ThunderIcon from 'assets/images/thunder-background.svg';
+import ThunderIcon from 'assets/images/lightning-blue-background.svg';
 
 import 'assets/styles/graph-layout.css';
 import Graph from './Graph';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ThunderIconSmall from 'assets/images/thunder-icon-small.svg';
+import ThunderIconSmall from 'assets/images/lightning-icon-small.svg';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { MenuItem, ButtonToolbar, DropdownButton } from 'react-bootstrap';
 import {
@@ -10,7 +10,7 @@ import {
   faMinus,
   faExpand,
 } from '@fortawesome/fontawesome-free-solid';
-import ThunderIcon from 'assets/images/thunder-background.svg';
+import ThunderIcon from 'assets/images/lightning-blue-background.svg';
 import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
 import GraphLayout from './graph/GraphLayoutContainer';
 import Notification from 'components/containers/Notification';

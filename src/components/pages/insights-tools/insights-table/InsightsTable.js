@@ -40,7 +40,7 @@ class InsightsTable extends React.Component {
   }
 
   renderTableContent() {
-    const { tags, categories, insights, searchQuery, formValues } = this.props;
+    const { tags, categories, searchQuery, formValues } = this.props;
 
     if (!formValues) {
       return null;
@@ -124,20 +124,21 @@ class InsightsTable extends React.Component {
     const { categories, tags, formValues, ...otherProps } = this.props;
 
     return fields.map((insight, index) => {
-      return (
-        <TableRow
-          namePrefix={insight}
-          key={index}
-          item={formValues[index]}
-          categories={categories}
-          allTags={tags}
-          isNew={false}
-          {...otherProps}
-          disableMoveUp={index === 0}
-          disableMoveDown={index === formValues.length - 1}
-          moveInsightUp={() => fields.swap(index, index - 1)}
-        />
-      );
+      if (formValues[index].isActive)
+        return (
+          <TableRow
+            namePrefix={insight}
+            key={index}
+            item={formValues[index]}
+            categories={categories}
+            allTags={tags}
+            isNew={false}
+            {...otherProps}
+            disableMoveUp={index === 0}
+            disableMoveDown={index === formValues.length - 1}
+            moveInsightUp={() => fields.swap(index, index - 1)}
+          />
+        );
     });
   };
 

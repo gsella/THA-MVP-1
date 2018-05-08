@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faAlignLeft } from '@fortawesome/fontawesome-free-solid';
@@ -14,7 +15,13 @@ class ConfigurationPageWrapper extends React.Component {
     //TODO: call action to return data of user
   }
 
+  static propTypes = {
+    updateInsights: PropTypes.func.isRequired,
+  };
+
   render() {
+    const { updateInsights } = this.props;
+
     return (
       <div className={bemClasses()}>
         <div className={bemClasses('header')}>
@@ -27,9 +34,13 @@ class ConfigurationPageWrapper extends React.Component {
         </div>
         {this.props.children}
         <div className={bemClasses('footer')}>
-          <Button buttonStyle='default' label='Preview' />
+          <Button buttonStyle="default" label="Preview" />
           <Link to="/main-graph">
-            <Button buttonStyle='primary' label='Launch' />
+            <Button
+              buttonStyle="primary"
+              label="Launch"
+              onClickFunction={updateInsights}
+            />
           </Link>
         </div>
       </div>

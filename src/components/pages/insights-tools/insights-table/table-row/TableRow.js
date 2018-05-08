@@ -10,7 +10,7 @@ import Select from 'components/common/select/Select';
 import Input from 'components/common/input/InputField';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
-import ThunderIcon from 'assets/images/thunder-icon.svg';
+import LightningIcon from 'assets/images/lightning-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../../propTypes/categoryType';
 
@@ -34,6 +34,7 @@ class TableRow extends React.Component {
     categories: categoriesType.isRequired,
     allTags: PropTypes.object.isRequired,
     changeFormValue: PropTypes.func.isRequired,
+    deleteInsight: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -44,7 +45,8 @@ class TableRow extends React.Component {
     if (data.action === 'move up') this.props.moveInsightUp();
     if (data.action === 'move down')
       this.props.moveInsightDown(this.props.item.id);
-    if (data.action === 'delete') this.props.deleteInsight(this.props.item.id);
+    if (data.action === 'delete')
+      this.props.deleteInsight(this.props.namePrefix);
     /// TODO: handle all menu functions depends on data.action
   };
 
@@ -163,7 +165,7 @@ class TableRow extends React.Component {
             <img
               className={bemClasses('insight-icon')}
               alt="new insight"
-              src={ThunderIcon}
+              src={LightningIcon}
             />
           ) : null}
           {this.renderDropdown()}

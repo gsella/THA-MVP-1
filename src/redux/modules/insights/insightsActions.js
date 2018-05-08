@@ -39,3 +39,21 @@ export const getNewInsights = () => dispatch => {
     2000
   );
 };
+
+export const updateInsights = () => (dispatch, getState) => {
+  const insights = { ...getState().form.insightsTable };
+  const changedInsightsArray = [];
+
+  if (insights.fields) {
+    const changedInsights = insights.fields.insights;
+
+    Object.keys(changedInsights).map(key => {
+      if (changedInsights[key]) {
+        changedInsightsArray.push(insights.values.insights[key]);
+      }
+      return changedInsights;
+    });
+  }
+
+  console.log(changedInsightsArray);
+};

@@ -6,12 +6,12 @@ import 'assets/styles/button.css';
 const button = 'button';
 const bemClasses = getBEMClasses([button]);
 
-const customButton = (props) => (
+const customButton = props => (
   <ButtonToolbar>
     <Button
       bsSize="large"
       className={bemClasses('btn', props.buttonStyle)}
-    >
+      onClick={props.onClickFunction}>
       {props.label}
     </Button>
   </ButtonToolbar>

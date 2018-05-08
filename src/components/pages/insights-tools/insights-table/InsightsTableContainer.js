@@ -16,6 +16,7 @@ const insightsArrayToObject = array => {
       insight: item.insight,
       description: item.description,
       impact: 0,
+      isActive: true,
     })),
   };
 };
@@ -47,7 +48,6 @@ const mapDispatchToProps = {
   updateChartData: actions.updateChartData,
   //moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
-  deleteInsight: actions.deleteInsight,
   changeFormValue: change,
 };
 

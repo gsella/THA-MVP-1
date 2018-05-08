@@ -18,8 +18,6 @@ export default function(state = defaultState, { type, payload }) {
       return handleMoveInsightUp(state, payload);
     case ACTION_CONSTANTS.MOVE_INSIGHT_DOWN:
       return handleMoveInsightDown(state, payload);
-    case ACTION_CONSTANTS.DELETE_INSIGHT:
-      return handleDeleteInsight(state, payload);
     case ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT:
       return handleToggleVisibleInsight(state, payload);
     case ACTION_CONSTANTS.REFRESH_THUNDER:
@@ -119,24 +117,6 @@ function handleMoveInsightDown(state, id) {
     };
   }
   return state;
-}
-
-function handleDeleteInsight(state, id) {
-  const newBubblesData = [].concat(state.chartData.bubbles);
-  let itemKey = 0;
-
-  newBubblesData.forEach((item, key) => {
-    if (item.id === id) itemKey = key;
-  });
-  newBubblesData.splice(itemKey, 1);
-
-  return {
-    ...state,
-    chartData: {
-      ...state.chartData,
-      bubbles: updateCategoryKey(newBubblesData, state.chartData.categories),
-    },
-  };
 }
 
 function updateCategoryKey(arr, categories) {

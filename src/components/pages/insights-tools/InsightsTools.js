@@ -2,7 +2,7 @@ import React from 'react';
 import SearchForm from './search-form/SearchForm';
 import MenuButton from 'components/common/menu/MenuButton';
 import InsightsTable from './insights-table/InsightsTableContainer';
-import ConfigurationPageWrapper from 'components/common/configuration-page-wrapper/ConfigurationPageWrapper';
+import ConfigurationPageWrapperContainer from 'components/common/configuration-page-wrapper/ConfigurationPageWrapperContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/insights-tools.css';
 
@@ -43,7 +43,7 @@ class InsightsTools extends React.Component {
 
   render() {
     return (
-      <ConfigurationPageWrapper>
+      <ConfigurationPageWrapperContainer>
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
             <SearchForm />
@@ -64,7 +64,7 @@ class InsightsTools extends React.Component {
             groupedBy={this.state.groupedBy}
           />
         </div>
-      </ConfigurationPageWrapper>
+      </ConfigurationPageWrapperContainer>
     );
   }
 }
