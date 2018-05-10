@@ -19,11 +19,11 @@ class Graph extends React.Component {
       })
     ).isRequired,
     radiuses: PropTypes.shape({
-      '1': PropTypes.number,
-      '2': PropTypes.number,
-      '3': PropTypes.number,
-      '4': PropTypes.number,
-      '5': PropTypes.number,
+      '1': PropTypes.number.isRequired,
+      '2': PropTypes.number.isRequired,
+      '3': PropTypes.number.isRequired,
+      '4': PropTypes.number.isRequired,
+      '5': PropTypes.number.isRequired,
     }),
     bubbles: PropTypes.arrayOf(
       PropTypes.shape({

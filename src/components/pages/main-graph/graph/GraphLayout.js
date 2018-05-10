@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { radiusHelper } from 'helper/radiusHelper';
 import TagsSection from './TagsSection';
@@ -23,11 +22,6 @@ const impactsClasses = {
 };
 
 class GraphLayout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   static propTypes = {
     tags: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
@@ -103,6 +97,14 @@ class GraphLayout extends React.Component {
     }
   }
 
+  clearBubbles() {
+    let nodes = document.getElementsByClassName('graph__graph-container');
+    nodes = Array.prototype.slice.call(nodes);
+    nodes.forEach(node => {
+      node.innerHTML = '';
+    });
+  }
+
   componentDidMount() {
     window.addEventListener('resize', this.resizeHandler);
   }
@@ -133,20 +135,14 @@ class GraphLayout extends React.Component {
 
     this.clearTooltips();
 
-    let nodes = document.getElementsByClassName('graph__graph-container');
-    nodes = Array.prototype.slice.call(nodes);
-    nodes.forEach(node => {
-      node.innerHTML = '';
-    });
+    this.clearBubbles();
 
     return (
       <div className={bemClasses()}>
-        {
-          <TagsSection
-            tags={tags ? Object.values(tags) : []}
-            size={graphSize.width}
-          />
-        }
+        <TagsSection
+          tags={tags ? Object.values(tags) : []}
+          size={graphSize.width}
+        />
 
         <div
           className={bemClasses('impact-block')}
@@ -177,11 +173,4 @@ class GraphLayout extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  tags: state.tags.tags,
-  categories: state.categories.categories,
-  insights: state.insights.insights,
-  hiddenInsights: state.app.hiddenInsights,
-});
-
-export default connect(mapStateToProps, null)(GraphLayout);
+export default GraphLayout;

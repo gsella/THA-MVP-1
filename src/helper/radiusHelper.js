@@ -2,11 +2,6 @@ import IMPACTS from 'constants/impactConstants';
 import * as d3 from 'd3';
 
 export function radiusHelper(tags, bubbles, categories, size) {
-  const maxСongestion = {
-    items: [],
-    size: 0,
-  };
-
   const tagsArray = Object.values(tags);
   const impactsArray = Object.values(IMPACTS);
 
@@ -16,9 +11,26 @@ export function radiusHelper(tags, bubbles, categories, size) {
     return bubble;
   });
 
-  impactsArray.forEach(impact => {
-    tagsArray.forEach(tag => {
-      const currentBubbles = filledBubbles.filter(bubble => bubble.tag === tag.name && bubble.popularity === impact);
+  const maxСongestion = getMaxСongestion(
+    tagsArray,
+    impactsArray,
+    filledBubbles
+  );
+
+  return getRadiuses(maxСongestion, size);
+}
+
+function getMaxСongestion(tags, impacts, bubbles) {
+  const maxСongestion = {
+    items: [],
+    size: 0,
+  };
+
+  impacts.forEach(impact => {
+    tags.forEach(tag => {
+      const currentBubbles = bubbles.filter(
+        bubble => bubble.tag === tag.name && bubble.popularity === impact
+      );
       const items = currentBubbles.map(bubble => ({
         label: bubble.categoryKey,
         color: bubble.category.color,
@@ -37,7 +49,7 @@ export function radiusHelper(tags, bubbles, categories, size) {
     });
   });
 
-  return getRadiuses(maxСongestion, size);
+  return maxСongestion;
 }
 
 function getRadiuses(maxСongestion, size) {
