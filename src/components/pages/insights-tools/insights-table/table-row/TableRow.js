@@ -24,20 +24,7 @@ const inputClass = 'data-table-input';
 class TableRow extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      categoryId: props.item.categoryId,
-      description: props.item.description,
-      tagId: props.item.tagId,
-      impact: 0,
-      insight: props.item.insight,
-      color: props.categories[props.item.categoryId].color || null,
-    };
-
-    this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.handleDropdownSelect = this.handleDropdownSelect.bind(this);
-    this.updateData = this.updateData.bind(this);
-    this.handleRightClickDropdown = this.handleRightClickDropdown.bind(this);
+    this.state = {};
   }
 
   static propTypes = {
@@ -53,54 +40,13 @@ class TableRow extends React.Component {
     namePrefix: '',
   };
 
-  handleChangeValue(e) {
-    e.preventDefault();
-
-    this.setState({ [e.target.name]: e.target.value }, () => this.updateData());
-  }
-
-  handleDropdownSelect(name, eventKey) {
-    if (name === 'category') {
-      this.setState(
-        {
-          categoryId: Number(eventKey),
-          color: this.props.categories[eventKey].color,
-        },
-        () => this.updateData()
-      );
-    } else if (name === 'tag') {
-      this.setState({ tagId: Number(eventKey) }, () => this.updateData());
-    } else {
-      this.setState({ impact: Number(eventKey) }, () => this.updateData());
-      this.props.changeFormValue(
-        'insightsTable',
-        `${name}-${this.props.item.id}`,
-        eventKey
-      );
-    }
-  }
-
-  updateData() {
-    const { categoryId, description, tagId, impact, insight } = this.state;
-    const item = {
-      ...this.props.item,
-      categoryId,
-      description,
-      tagId,
-      impact,
-      insight,
-    };
-
-    this.props.updateChartData(item);
-  }
-
-  handleRightClickDropdown(e, data, target) {
-    if (data.action === 'move up') this.props.moveInsightUp(this.props.item.id);
+  handleRightClickDropdown = (e, data, target) => {
+    if (data.action === 'move up') this.props.moveInsightUp();
     if (data.action === 'move down')
       this.props.moveInsightDown(this.props.item.id);
     if (data.action === 'delete') this.props.deleteInsight(this.props.item.id);
     /// TODO: handle all menu functions depends on data.action
-  }
+  };
 
   renderImpact() {
     const { namePrefix } = this.props;
@@ -191,9 +137,22 @@ class TableRow extends React.Component {
     );
   }
 
+  addDropdownTrigger(item, component) {
+    if ('id' in item) {
+      return (
+        <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
+          {component}
+        </ContextMenuTrigger>
+      );
+    } else {
+      return component;
+    }
+  }
+
   render() {
-    const { isNew, item, namePrefix } = this.props;
+    const { isNew, item, namePrefix, categories } = this.props;
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
+    const color = categories[item.categoryId].color;
 
     return (
       <tr
@@ -211,40 +170,39 @@ class TableRow extends React.Component {
         </td>
         <td
           className={bemClasses('cell', ['id', 'for-text'])}
-          style={{ backgroundColor: this.state.color }}>
-          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
-            {item.categoryKey !== '' ? item.categoryKey : 'ID'}
-          </ContextMenuTrigger>
+          style={{ backgroundColor: color }}>
+          {this.addDropdownTrigger(
+            item,
+            item.categoryKey ? item.categoryKey : 'ID'
+          )}
         </td>
         <td
           className={bemClasses('cell', ['category'])}
-          style={{ backgroundColor: this.state.color }}>
-          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
-            {this.renderCategory()}
-          </ContextMenuTrigger>
+          style={{ backgroundColor: color }}>
+          {this.addDropdownTrigger(item, this.renderCategory())}
         </td>
         <td className={bemClasses('cell', 'for-input')}>
-          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
+          {this.addDropdownTrigger(
+            item,
             <Input
               placeholder="Key words"
               name={`${namePrefix}.insight`}
               customClass={inputClass}
             />
-          </ContextMenuTrigger>
+          )}
         </td>
         <td className={bemClasses('cell', 'for-input')}>
-          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
+          {this.addDropdownTrigger(
+            item,
             <Input
               placeholder="Description"
               name={`${namePrefix}.description`}
               customClass={inputClass}
             />
-          </ContextMenuTrigger>
+          )}
         </td>
         <td className={bemClasses('cell', ['tag'])}>
-          <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
-            {this.renderTag()}
-          </ContextMenuTrigger>
+          {this.addDropdownTrigger(item, this.renderTag())}
         </td>
         <td className={bemClasses('cell')}>{this.renderImpact()}</td>
       </tr>

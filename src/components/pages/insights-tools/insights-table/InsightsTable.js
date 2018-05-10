@@ -23,6 +23,7 @@ class InsightsTable extends React.Component {
     tags: PropTypes.object.isRequired,
     categories: categoriesType,
     insights: insightsType.isRequired,
+    formValues: PropTypes.array,
     changeFormValue: PropTypes.func.isRequired,
     getInsights: PropTypes.func.isRequired,
   };
@@ -39,8 +40,13 @@ class InsightsTable extends React.Component {
   }
 
   renderTableContent() {
-    const { tags, categories, insights, searchQuery } = this.props;
-    let matchingData = insights;
+    const { tags, categories, insights, searchQuery, formValues } = this.props;
+
+    if (!formValues) {
+      return null;
+    }
+
+    let matchingData = formValues;
 
     if (searchQuery.length > 0) {
       const queryRegexp = new RegExp(searchQuery, 'i');
@@ -115,20 +121,21 @@ class InsightsTable extends React.Component {
   }
 
   renderUngrouped = ({ fields }) => {
-    const { insights, categories, tags, ...otherProps } = this.props;
+    const { categories, tags, formValues, ...otherProps } = this.props;
 
     return fields.map((insight, index) => {
       return (
         <TableRow
           namePrefix={insight}
           key={index}
-          item={insights[index]}
+          item={formValues[index]}
           categories={categories}
           allTags={tags}
           isNew={false}
           {...otherProps}
           disableMoveUp={index === 0}
-          disableMoveDown={index === insights.length - 1}
+          disableMoveDown={index === formValues.length - 1}
+          moveInsightUp={() => fields.swap(index, index - 1)}
         />
       );
     });

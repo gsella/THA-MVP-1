@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduxForm, change } from 'redux-form';
+import { reduxForm, change, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 import * as actions from 'redux/modules/app/actions';
 import InsightsTable from './InsightsTable';
@@ -27,6 +27,7 @@ const initialValuesSelector = createSelector(
 
 const mapStateToProps = state => {
   const { insights } = state.insights;
+  const insightTableSelector = formValueSelector('insightsTable');
 
   return {
     tags: state.tags.tags,
@@ -37,13 +38,14 @@ const mapStateToProps = state => {
         ? state.form.searchForm.values.searchForm.trim()
         : '',
     initialValues: initialValuesSelector(state),
+    formValues: insightTableSelector(state, 'insights'),
   };
 };
 
 const mapDispatchToProps = {
   getInsights,
   updateChartData: actions.updateChartData,
-  moveInsightUp: actions.moveInsightUp,
+  //moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
   deleteInsight: actions.deleteInsight,
   changeFormValue: change,
