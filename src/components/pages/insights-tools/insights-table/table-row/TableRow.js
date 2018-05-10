@@ -33,21 +33,16 @@ class TableRow extends React.Component {
     isNew: PropTypes.bool,
     categories: categoriesType.isRequired,
     allTags: PropTypes.object.isRequired,
+    disableMoveUp: PropTypes.bool.isRequired,
+    disableMoveDown: PropTypes.bool.isRequired,
     changeFormValue: PropTypes.func.isRequired,
     deleteInsight: PropTypes.func.isRequired,
+    moveInsightUp: PropTypes.func.isRequired,
+    moveInsightDown: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     namePrefix: '',
-  };
-
-  handleRightClickDropdown = (e, data, target) => {
-    if (data.action === 'move up') this.props.moveInsightUp();
-    if (data.action === 'move down')
-      this.props.moveInsightDown(this.props.item.id);
-    if (data.action === 'delete')
-      this.props.deleteInsight(this.props.namePrefix);
-    /// TODO: handle all menu functions depends on data.action
   };
 
   renderImpact() {
@@ -98,40 +93,32 @@ class TableRow extends React.Component {
       <ContextMenu id={`row-dropdown-${this.props.item.id}`}>
         <MenuItem
           disabled={this.props.disableMoveUp}
-          onClick={this.handleRightClickDropdown}
+          onClick={() => this.props.moveInsightUp()}
           data={{ action: 'move up' }}>
           Move Insight Up
         </MenuItem>
         <MenuItem
           disabled={this.props.disableMoveDown}
-          onClick={this.handleRightClickDropdown}
+          onClick={() => this.props.moveInsightDown()}
           data={{ action: 'move down' }}>
           Move Insight Down
         </MenuItem>
         <MenuItem
-          onClick={this.handleRightClickDropdown}
+          onClick={() => this.props.deleteInsight(this.props.namePrefix)}
           data={{ action: 'delete' }}>
           Delete Selected Insight(s)
         </MenuItem>
         <SubMenu title="Mute Selected Insight(s)..">
-          <MenuItem
-            onClick={this.handleRightClickDropdown}
-            data={{ action: 'mute till tomorrow' }}>
+          <MenuItem onClick={() => {}} data={{ action: 'mute till tomorrow' }}>
             Mute till Tomorrow
           </MenuItem>
-          <MenuItem
-            onClick={this.handleRightClickDropdown}
-            data={{ action: 'mute for a week' }}>
+          <MenuItem onClick={() => {}} data={{ action: 'mute for a week' }}>
             Mute for a Week
           </MenuItem>
-          <MenuItem
-            onClick={this.handleRightClickDropdown}
-            data={{ action: 'mute for a month' }}>
+          <MenuItem onClick={() => {}} data={{ action: 'mute for a month' }}>
             Mute for a Month
           </MenuItem>
-          <MenuItem
-            onClick={this.handleRightClickDropdown}
-            data={{ action: 'mute forever' }}>
+          <MenuItem onClick={() => {}} data={{ action: 'mute forever' }}>
             Mute Forever
           </MenuItem>
         </SubMenu>
@@ -154,7 +141,8 @@ class TableRow extends React.Component {
   render() {
     const { isNew, item, namePrefix, categories } = this.props;
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
-    const color = categories[item.categoryId].color;
+    const selectedCategory = categories[item.categoryId];
+    const { color } = selectedCategory;
 
     return (
       <tr

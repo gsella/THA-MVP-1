@@ -10,13 +10,10 @@ const insightsArrayToObject = array => {
 
   return {
     insights: array.map(item => ({
-      id: item.id,
-      categoryId: item.categoryId,
-      tagId: item.tagId,
-      insight: item.insight,
-      description: item.description,
+      ...item,
       impact: 0,
       isActive: true,
+      isUpdated: false,
     })),
   };
 };
@@ -45,7 +42,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getInsights,
-  updateChartData: actions.updateChartData,
   //moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
   changeFormValue: change,

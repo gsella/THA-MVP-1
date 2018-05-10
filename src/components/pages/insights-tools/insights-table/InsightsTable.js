@@ -123,8 +123,8 @@ class InsightsTable extends React.Component {
   renderUngrouped = ({ fields }) => {
     const { categories, tags, formValues, ...otherProps } = this.props;
 
-    return fields.map((insight, index) => {
-      if (formValues[index].isActive)
+    return fields
+      .map((insight, index) => {
         return (
           <TableRow
             namePrefix={insight}
@@ -137,9 +137,11 @@ class InsightsTable extends React.Component {
             disableMoveUp={index === 0}
             disableMoveDown={index === formValues.length - 1}
             moveInsightUp={() => fields.swap(index, index - 1)}
+            moveInsightDown={() => fields.swap(index, index + 1)}
           />
         );
-    });
+      })
+      .filter(item => item.props.item.isActive);
   };
 
   getRenderContentFunctionForGroup = group => {

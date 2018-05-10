@@ -14,10 +14,6 @@ export default function(state = defaultState, { type, payload }) {
       return handleUpdateChartData(state, payload);
     case ACTION_CONSTANTS.ADD_NEW_INSIGHT:
       return handleAddNewInsight(state, payload);
-    case ACTION_CONSTANTS.MOVE_INSIGHT_UP:
-      return handleMoveInsightUp(state, payload);
-    case ACTION_CONSTANTS.MOVE_INSIGHT_DOWN:
-      return handleMoveInsightDown(state, payload);
     case ACTION_CONSTANTS.TOGGLE_VISIBLE_INSIGHT:
       return handleToggleVisibleInsight(state, payload);
     case ACTION_CONSTANTS.REFRESH_THUNDER:
@@ -67,56 +63,6 @@ function handleAddNewInsight(state, newInsight) {
     ...state,
     chartData: { ...state.chartData, bubbles: newBubblesData },
   };
-}
-
-function handleMoveInsightUp(state, id) {
-  const newBubblesData = [].concat(state.chartData.bubbles);
-  let itemKey = 0;
-
-  newBubblesData.forEach((item, key) => {
-    if (item.id === id) itemKey = key;
-  });
-
-  if (itemKey > 0) {
-    const item = newBubblesData[itemKey];
-
-    newBubblesData.splice(itemKey, 1);
-    newBubblesData.splice(itemKey - 1, 0, item);
-
-    return {
-      ...state,
-      chartData: {
-        ...state.chartData,
-        bubbles: updateCategoryKey(newBubblesData, state.chartData.categories),
-      },
-    };
-  }
-  return state;
-}
-
-function handleMoveInsightDown(state, id) {
-  const newBubblesData = [].concat(state.chartData.bubbles);
-  let itemKey = 0;
-
-  newBubblesData.forEach((item, key) => {
-    if (item.id === id) itemKey = key;
-  });
-
-  if (itemKey < newBubblesData.length - 1) {
-    const item = newBubblesData[itemKey];
-
-    newBubblesData.splice(itemKey, 1);
-    newBubblesData.splice(itemKey + 1, 0, item);
-
-    return {
-      ...state,
-      chartData: {
-        ...state.chartData,
-        bubbles: updateCategoryKey(newBubblesData, state.chartData.categories),
-      },
-    };
-  }
-  return state;
 }
 
 function updateCategoryKey(arr, categories) {
