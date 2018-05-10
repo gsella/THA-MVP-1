@@ -1,5 +1,6 @@
 import ACTION_CONSTANTS from './constants';
 import * as insightsApi from '../../../api/insightsApi';
+import { GET_NEW_INSIGHTS } from '../insights/insightsActionConstants';
 import { mapInsightFromApi } from '../../../helper/apiDataMapper';
 
 export const hidingInsight = key => (dispatch, getState) => {
@@ -47,26 +48,22 @@ export const refreshThunder = (thunderkey = 4) => async (
     });
   }
 
-  return new Promise((resolve, reject) =>
-    resolve(
+  dispatch({
+    type: ACTION_CONSTANTS.PRELOADER,
+    payload: !isRefresh,
+  });
+
+  dispatch({
+    type: GET_NEW_INSIGHTS,
+    payload: [],
+  });
+
+  setTimeout(
+    () =>
       dispatch({
         type: ACTION_CONSTANTS.PRELOADER,
-        payload: !isRefresh,
+        payload: isRefresh,
       }),
-
-      dispatch({
-        type: ACTION_CONSTANTS.GET_NEW_INSIGHTS,
-        payload: [],
-      }),
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: ACTION_CONSTANTS.PRELOADER,
-            payload: isRefresh,
-          }),
-        1000
-      )
-    )
+    1000
   );
 };

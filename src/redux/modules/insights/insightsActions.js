@@ -7,7 +7,7 @@ import {
 } from './insightsActionConstants';
 import history from 'components/containers/history';
 
-export const getInsights = (thunderkey = 4) => async dispatch => {
+export const getInsights = (thunderkey = 4, date) => async dispatch => {
   dispatch({ type: GET_INSIGHTS_PENDING, payload: true });
 
   const response = await insightsApi.getInsights(thunderkey);
@@ -25,7 +25,7 @@ export const getInsights = (thunderkey = 4) => async dispatch => {
   }
 };
 
-export const getNewInsights = () => dispatch => {
+export const getNewInsights = date => dispatch => {
   // TODO: get new insights from server
   const newInsights = [
     { id: 1, instances: 1, insight: 'Lever' },

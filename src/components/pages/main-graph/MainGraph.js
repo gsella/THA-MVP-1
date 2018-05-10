@@ -62,8 +62,13 @@ class MainGraph extends React.Component {
     this.setState({ isFullScreen: !this.state.isFullScreen });
   }
 
-  refreshThunder() {
-    this.props.refreshThunder().then(() => this.props.getNewInsights());
+  handleDateChange = async date => {
+    //TODO: handle date
+    await this.props.refreshThunder();
+  };
+
+  async refreshThunder() {
+    await this.props.refreshThunder();
   }
 
   renderRefreshingPreloader() {
@@ -200,7 +205,7 @@ class MainGraph extends React.Component {
                 <div className={bemClasses('graph-layout-wrapper')}>
                   {this.renderGraphLayout()}
                 </div>
-                <DateInfo {...this.props} />
+                <DateInfo handleDateChange={this.handleDateChange} />
               </React.Fragment>
             ) : (
               this.renderLaunchingPreloader()
