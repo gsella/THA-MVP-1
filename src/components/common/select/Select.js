@@ -7,13 +7,14 @@ import 'react-select/dist/react-select.css';
 import './Select.css';
 
 const SelectComponent = props => {
-  const { customClass, items, input, meta, ...otherProps } = props;
+  const { customClass, items, input, meta, placeholder, ...otherProps } = props;
 
   return (
     <Select
       className={customClass}
       {...input}
       {...otherProps}
+      placeholder={placeholder}
       options={items}
       onChange={item => {
         meta.dispatch(change(meta.form, input.name, item.value));

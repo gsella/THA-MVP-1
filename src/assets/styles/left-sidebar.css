@@ -77,12 +77,11 @@
   padding: 2px 0 2px 60px;
 }
 
-.left-sidebar__insight--align {
-  display: flex;
+.left-sidebar__insight--eye-icon {
+  display: inline-flex;
+  vertical-align: text-top;
 }
 
-.left-sidebar__insight--eye-icon {
-  display: flex;
-  align-items: center;
-  padding-left: 5px;
+.left-sidebar__insight--description {
+  padding-right: 14px;
 }

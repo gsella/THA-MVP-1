@@ -10,7 +10,7 @@ const customButton = props => (
   <ButtonToolbar>
     <Button
       bsSize="large"
-      className={bemClasses('btn', props.buttonStyle)}
+      className={bemClasses('btn', props.buttonColor)}
       onClick={props.onClickFunction}>
       {props.label}
     </Button>

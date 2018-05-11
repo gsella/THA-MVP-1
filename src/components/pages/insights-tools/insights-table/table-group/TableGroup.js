@@ -11,7 +11,6 @@ const bemClasses = getBEMClasses([tableRow]);
 class TableGroup extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isGrouped: true,
     };

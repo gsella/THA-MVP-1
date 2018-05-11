@@ -8,7 +8,7 @@ import 'assets/styles/data-table-input.css';
 
 const baseClass = 'input-component';
 
-export const InputComponent = (props) => {
+export const InputComponent = props => {
   const classes = getBEMClasses([baseClass, props.customClass]);
   const { input } = props;
 
@@ -21,9 +21,9 @@ export const InputComponent = (props) => {
   );
 };
 
-const Input = (props) => {
-  return <Field name={props.name} component={InputComponent} {...props}/>
-}
+const Input = props => {
+  return <Field name={props.name} component={InputComponent} {...props} />;
+};
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,

@@ -40,8 +40,10 @@
 .Select-menu {
   max-height: 248px;
 }
+
 .Select-menu-outer {
   max-height: 250px;
+  text-align: center;
 }
 
 .Select-option:hover {
@@ -62,6 +64,8 @@
 .Select.is-focused > .Select-control,
 .Select.is-focused:not(.is-open) > .Select-control {
   background: inherit;
+  border: none;
+  box-shadow: none;
 }
 
 .Select-control,
@@ -70,4 +74,12 @@
 .Select.is-focused > .Select-control,
 .Select-input {
   background-color: inherit;
+}
+
+.Select-placeholder {
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 46px;
+  text-align: center;
 }

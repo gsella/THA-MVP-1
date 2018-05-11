@@ -5,6 +5,7 @@ import {
   GET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
 } from './insightsActionConstants';
+import history from 'components/containers/history';
 
 export const getInsights = (thunderkey = 4) => async dispatch => {
   dispatch({ type: GET_INSIGHTS_PENDING, payload: true });
@@ -41,19 +42,10 @@ export const getNewInsights = () => dispatch => {
 };
 
 export const updateInsights = () => (dispatch, getState) => {
-  const insights = { ...getState().form.insightsTable };
-  const changedInsightsArray = [];
+  history.push('/main-graph');
 
-  if (insights.fields) {
-    const changedInsights = insights.fields.insights;
+  const insights = [...getState().form.insightsTable.values.insights];
+  const updatedInsights = insights.filter(item => item.isUpdated);
 
-    Object.keys(changedInsights).map(key => {
-      if (changedInsights[key]) {
-        changedInsightsArray.push(insights.values.insights[key]);
-      }
-      return changedInsights;
-    });
-  }
-
-  console.log(changedInsightsArray);
+  console.log(updatedInsights);
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchForm from './search-form/SearchForm';
-import MenuButton from 'components/common/menu/MenuButton';
+import PropTypes from 'prop-types';
+import Select from 'components/common/select/Select';
 import InsightsTable from './insights-table/InsightsTableContainer';
 import ConfigurationPageWrapperContainer from 'components/common/configuration-page-wrapper/ConfigurationPageWrapperContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
@@ -8,7 +9,6 @@ import 'assets/styles/insights-tools.css';
 
 const insightsTools = 'insights-tools';
 const bemClasses = getBEMClasses([insightsTools]);
-const dropdownStyles = getBEMClasses(['dropdown']);
 
 class InsightsTools extends React.Component {
   constructor(props) {
@@ -17,20 +17,27 @@ class InsightsTools extends React.Component {
       isGrouped: false,
       groupedBy: 'categories',
     };
-
-    this.handleGroupInsights = this.handleGroupInsights.bind(this);
   }
 
-  static propTypes = {};
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    dropdownValues: PropTypes.object,
+  };
 
-  handleGroupInsights(name, eventKey) {
-    if (eventKey === 1) {
-      this.setState({ isGrouped: true, groupedBy: 'categories' });
-    } else if (eventKey === 2) {
-      this.setState({ isGrouped: true, groupedBy: 'tags' });
-    } else {
-      this.setState({ isGrouped: false });
+  static getDerivedStateFromProps(nextProps, prevProps) {
+    const dropdownValues = nextProps.dropdownValues;
+    if (dropdownValues) {
+      const eventKey = dropdownValues.eventKey;
+
+      if (eventKey === 1) {
+        return { isGrouped: true, groupedBy: 'categories' };
+      } else if (eventKey === 2) {
+        return { isGrouped: true, groupedBy: 'tags' };
+      } else {
+        return { isGrouped: false };
+      }
     }
+    return null;
   }
 
   handleSearch(querry) {
@@ -42,21 +49,18 @@ class InsightsTools extends React.Component {
   }
 
   render() {
+    const { items } = this.props;
+
     return (
       <ConfigurationPageWrapperContainer>
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
             <SearchForm />
-            <MenuButton
-              id="group-same"
-              title="Group Same"
-              options={[
-                { eventKey: 0, name: `Don't group` },
-                { eventKey: 1, name: 'Category' },
-                { eventKey: 2, name: 'Tag' },
-              ]}
-              handleChange={this.handleGroupInsights}
-              bemClasses={dropdownStyles}
+            <Select
+              items={items}
+              name={`dropdown.eventKey`}
+              placeholder={'Group Same'}
+              customClass="table-row-dropdown-select"
             />
           </div>
           <InsightsTable

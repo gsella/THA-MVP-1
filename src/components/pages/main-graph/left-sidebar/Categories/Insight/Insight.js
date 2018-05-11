@@ -23,17 +23,23 @@ class Insight extends React.Component {
           <span className={bemClasses('insight', 'id')}>
             {this.props.categoryKey}
           </span>
-          <span> &#8210; {this.props.insight}</span>
+          <span className={bemClasses('insight', 'description')}>
+            &#8210; {this.props.insight}
+          </span>
           <span className={bemClasses('insight', 'eye-icon')}>
             {!this.props.hiddenInsights.some(
               insight => insight === this.props.categoryKey
             ) ? (
               <Eye
+                size={14}
                 onClick={() => this.toggleVisibleCategory()}
                 className={bemClasses('insight', 'visible-icon')}
               />
             ) : (
-              <EyeSlash onClick={() => this.toggleVisibleCategory()} />
+              <EyeSlash
+                size={14}
+                onClick={() => this.toggleVisibleCategory()}
+              />
             )}
           </span>
         </span>
