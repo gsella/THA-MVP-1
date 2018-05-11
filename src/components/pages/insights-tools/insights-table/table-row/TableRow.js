@@ -36,7 +36,6 @@ class TableRow extends React.Component {
     allTags: PropTypes.object.isRequired,
     disableMoveUp: PropTypes.bool.isRequired,
     disableMoveDown: PropTypes.bool.isRequired,
-    changeFormValue: PropTypes.func.isRequired,
     deleteInsight: PropTypes.func.isRequired,
     moveInsightUp: PropTypes.func.isRequired,
     moveInsightDown: PropTypes.func.isRequired,
@@ -144,6 +143,8 @@ class TableRow extends React.Component {
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
     const selectedCategory = categories[item.categoryId];
     const { color } = selectedCategory;
+
+    if (!this.props.item.isActive) return null;
 
     return (
       <tr

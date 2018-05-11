@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduxForm, change, formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 import * as actions from 'redux/modules/app/actions';
 import InsightsTable from './InsightsTable';
@@ -44,7 +44,6 @@ const mapDispatchToProps = {
   getInsights,
   //moveInsightUp: actions.moveInsightUp,
   moveInsightDown: actions.moveInsightDown,
-  changeFormValue: change,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTable);

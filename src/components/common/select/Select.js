@@ -17,7 +17,7 @@ const SelectComponent = props => {
       placeholder={placeholder}
       options={items}
       onChange={item => {
-        meta.dispatch(change(meta.form, input.name, item.value));
+        meta.dispatch(change(meta.form, input.name, +item.value));
       }}
       onBlur={() => {}}
       searchable={false}
