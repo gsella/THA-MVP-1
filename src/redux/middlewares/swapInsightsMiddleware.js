@@ -16,15 +16,15 @@ export default store => next => action => {
     store.dispatch(
       change(
         'insightsTable',
-        `insights[${action.meta.indexA}].categoryKey`,
-        itemB.categoryKey
+        `insights[${action.meta.indexA}].order`,
+        itemB.order
       )
     );
     store.dispatch(
       change(
         'insightsTable',
-        `insights[${action.meta.indexB}].categoryKey`,
-        itemA.categoryKey
+        `insights[${action.meta.indexB}].order`,
+        itemA.order
       )
     );
   }

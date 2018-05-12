@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import * as actions from 'redux/modules/app/actions';
 import InsightsTable from './InsightsTable';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
+import { insightsKeySelector } from '../../../../redux/selectors/insightsKeySelector';
 
 const insightsArrayToObject = array => {
   if (!array.length) return {};
@@ -36,7 +37,7 @@ const mapStateToProps = state => {
         ? state.form.searchForm.values.searchForm.trim()
         : '',
     initialValues: initialValuesSelector(state),
-    formValues: insightTableSelector(state, 'insights'),
+    formValues: insightsKeySelector(insightTableSelector(state, 'insights')),
   };
 };
 

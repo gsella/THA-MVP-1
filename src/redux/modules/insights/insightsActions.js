@@ -16,7 +16,9 @@ export const getInsights = (thunderkey = 4) => async dispatch => {
     dispatch({
       type: GET_INSIGHTS,
       payload: {
-        insights: response.data.map(mapInsightFromApi),
+        insights: response.data
+          .map(mapInsightFromApi)
+          .sort((a, b) => a.order - b.order),
         isDataLoading: false,
       },
     });
