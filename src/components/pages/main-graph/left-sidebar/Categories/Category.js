@@ -29,7 +29,7 @@ class Category extends React.Component {
           ])}>
           <Panel.Title toggle className={bemClasses('category', 'underline')}>
             <span className={bemClasses('category', 'id')}>
-              {item.category.slice(0, 1)}
+              {item.abbreviation}
             </span>
             <span> &#8210; {item.category}</span>
           </Panel.Title>

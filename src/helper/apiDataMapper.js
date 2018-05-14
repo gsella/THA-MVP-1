@@ -1,4 +1,4 @@
-export const mapInsightFromApi = (insight, i) => {
+export const mapInsightFromApi = insight => {
   return {
     id: insight.InsightKey,
     categoryId: insight.Categorykey,
@@ -8,6 +8,6 @@ export const mapInsightFromApi = (insight, i) => {
     popularity: insight.InsightPopularity,
     instances: insight.InsightSize,
     description: insight.InsightDescription,
-    order: i,
+    order: insight.InsightOrder,
   };
 };

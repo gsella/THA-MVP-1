@@ -6,9 +6,14 @@ import {
   GET_NEW_INSIGHTS,
 } from './insightsActionConstants';
 import history from 'components/containers/history';
+import { sortInsightsByCategoryAndOrder } from '../../../helper/apiDataSorter';
 
-export const getInsights = (thunderkey = 4, date) => async dispatch => {
+export const getInsights = (thunderkey = 4, date) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: GET_INSIGHTS_PENDING, payload: true });
+  const { categories } = getState();
 
   const response = await insightsApi.getInsights(thunderkey);
 
@@ -18,7 +23,7 @@ export const getInsights = (thunderkey = 4, date) => async dispatch => {
       payload: {
         insights: response.data
           .map(mapInsightFromApi)
-          .sort((a, b) => a.order - b.order),
+          .sort(sortInsightsByCategoryAndOrder(categories)),
         isDataLoading: false,
       },
     });

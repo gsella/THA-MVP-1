@@ -37,7 +37,10 @@ const mapStateToProps = state => {
         ? state.form.searchForm.values.searchForm.trim()
         : '',
     initialValues: initialValuesSelector(state),
-    formValues: insightsKeySelector(insightTableSelector(state, 'insights')),
+    formValues: insightsKeySelector(
+      insightTableSelector(state, 'insights'),
+      state.categories.categories
+    ),
   };
 };
 

@@ -5,9 +5,13 @@ import {
   getInsights,
   getNewInsights,
 } from '../../../redux/modules/insights/insightsActions';
+import { insightsKeySelector } from '../../../redux/selectors/insightsKeySelector';
 
 const mapStateToProps = state => ({
-  insights: state.insights.insights,
+  insights: insightsKeySelector(
+    state.insights.insights,
+    state.categories.categories
+  ),
   newInsights: state.insights.newInsights,
   isRefresh: state.app.isRefresh,
   isDataLoading: state.insights.isDataLoading,

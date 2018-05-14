@@ -64,6 +64,7 @@
   align-self: center;
   flex-direction: column;
   padding-left: 20px;
+  user-select: none;
 }
 
 .main-graph__zoom .main-graph__zoom--color {

@@ -31,6 +31,7 @@ class LeftSidebar extends React.Component {
         res[category.name] = res[category.name] || {
           data: [],
           color: categories[item.categoryId].color,
+          abbreviation: categories[item.categoryId].abbreviation,
         };
 
         res[category.name].data.push(item);
@@ -42,6 +43,7 @@ class LeftSidebar extends React.Component {
         category: key,
         color: insightsObj[key].color,
         data: insightsObj[key].data,
+        abbreviation: insightsObj[key].abbreviation,
       }));
     }
   }

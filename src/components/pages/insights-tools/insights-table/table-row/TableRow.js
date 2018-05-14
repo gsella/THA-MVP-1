@@ -165,9 +165,7 @@ class TableRow extends React.Component {
           style={{ backgroundColor: color }}>
           {this.addDropdownTrigger(
             item,
-            item.categoryKey
-              ? `${categories[item.categoryId].abbreviation}${item.categoryKey}`
-              : 'ID'
+            item.categoryKey ? item.categoryKey : 'ID'
           )}
         </td>
         <td
