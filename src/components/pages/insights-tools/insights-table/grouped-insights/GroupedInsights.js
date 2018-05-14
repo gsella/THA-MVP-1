@@ -3,14 +3,26 @@ import PropTypes from 'prop-types';
 import TableRow from '../table-row/TableRowContainer';
 import TableGroup from '../table-group/TableGroup';
 
+const mapGroupIdToProperty = {
+  1: 'categories',
+  2: 'tags',
+};
+
 const GroupedByCategoryInsights = props => {
   const options = [];
   const formName = 'insights';
   let filterField = '';
-  const { categories, tags, formValues, fields, ...otherProps } = props;
+  const {
+    categories,
+    tags,
+    formValues,
+    fields,
+    groupId,
+    searchQuery,
+    ...otherProps
+  } = props;
 
-  //TODO: Need to pass groupedBy into this component through global state as for now it's undefined and category is chosen as filter.
-  if (props.groupedBy === 'tags') {
+  if (mapGroupIdToProperty[groupId] === 'tags') {
     Object.keys(tags).forEach(key => {
       options[key] = { name: tags[key].name };
     });
@@ -25,6 +37,13 @@ const GroupedByCategoryInsights = props => {
     filterField = 'categoryId';
   }
 
+  let matchingData = formValues;
+
+  if (searchQuery.length > 0) {
+    const queryRegexp = new RegExp(searchQuery, 'i');
+    matchingData = matchingData.filter(item => item.insight.match(queryRegexp));
+  }
+
   const groups = options.map((item, key) => {
     const group = formValues.filter(item => item[filterField] === key);
     return (
@@ -34,7 +53,11 @@ const GroupedByCategoryInsights = props => {
         color={'color' in item ? item.color : null}
         content={formValues
           .map((field, index) => {
-            if (group.some(i => i.id === field.id) && field.isActive)
+            if (
+              group.some(i => i.id === field.id) &&
+              field.isActive &&
+              matchingData.includes(field)
+            )
               return (
                 <TableRow
                   namePrefix={`${formName}[${index}]`}
@@ -47,6 +70,7 @@ const GroupedByCategoryInsights = props => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === formValues.length - 1}
                   moveInsightUp={() => fields.swap(index, index - 1)}
+                  moveInsightDown={() => fields.swap(index, index + 1)}
                 />
               );
             return null;
@@ -89,6 +113,8 @@ GroupedByCategoryInsights.propTypes = {
   tags: PropTypes.object.isRequired,
   formValues: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
+  groupedBy: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default GroupedByCategoryInsights;

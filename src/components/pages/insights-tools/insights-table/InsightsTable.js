@@ -45,16 +45,6 @@ class InsightsTable extends React.Component {
       return null;
     }
 
-    //TODO: fix filters
-    // let matchingData = formValues;
-
-    // if (searchQuery.length > 0) {
-    //   const queryRegexp = new RegExp(searchQuery, 'i');
-    //   matchingData = matchingData.filter(item =>
-    //     item.insight.match(queryRegexp)
-    //   );
-    // }
-
     if (!this.props.isGrouped) {
       return this.renderForm(UngroupedInsights);
     } else {

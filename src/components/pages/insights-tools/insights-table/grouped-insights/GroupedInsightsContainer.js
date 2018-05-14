@@ -9,6 +9,11 @@ const mapStateToProps = state => {
     formValues: insightsTableSelector(state, 'insights'),
     tags: state.tags.tags,
     categories: state.categories.categories,
+    groupId: state.form.dropdownByGroup.values.groupId,
+    searchQuery:
+      'values' in state.form.searchForm
+        ? state.form.searchForm.values.searchForm.trim()
+        : '',
   };
 };
 

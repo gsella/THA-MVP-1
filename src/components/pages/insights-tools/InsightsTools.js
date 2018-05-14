@@ -15,29 +15,31 @@ class InsightsTools extends React.Component {
     super(props);
     this.state = {
       isGrouped: false,
-      groupedBy: 'categories',
     };
   }
 
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    dropdownValues: PropTypes.object,
+    groupId: PropTypes.number,
   };
 
-  static getDerivedStateFromProps(nextProps, prevProps) {
-    const dropdownValues = nextProps.dropdownValues;
-    if (dropdownValues) {
-      const eventKey = dropdownValues.eventKey;
-
-      if (eventKey === 1) {
-        return { isGrouped: true, groupedBy: 'categories' };
-      } else if (eventKey === 2) {
-        return { isGrouped: true, groupedBy: 'tags' };
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const groupId = nextProps.groupId;
+    if (groupId !== undefined) {
+      if (prevState.isGrouped) {
+        if (groupId !== 0) {
+          return null;
+        } else {
+          return { isGrouped: false };
+        }
       } else {
-        return { isGrouped: false };
+        if (groupId !== 0) {
+          return { isGrouped: true };
+        } else {
+          return null;
+        }
       }
     }
-    return null;
   }
 
   handleSearch(querry) {
@@ -58,15 +60,12 @@ class InsightsTools extends React.Component {
             <SearchForm />
             <Select
               items={items}
-              name={`dropdown.eventKey`}
+              name={`groupId`}
               placeholder={'Group Same'}
               customClass="table-row-dropdown-select"
             />
           </div>
-          <InsightsTable
-            isGrouped={this.state.isGrouped}
-            groupedBy={this.state.groupedBy}
-          />
+          <InsightsTable isGrouped={this.state.isGrouped} />
         </div>
       </ConfigurationPageWrapperContainer>
     );

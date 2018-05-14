@@ -32,10 +32,6 @@ const mapStateToProps = state => {
     tags: state.tags.tags,
     categories: state.categories.categories,
     insights,
-    searchQuery:
-      'values' in state.form.searchForm
-        ? state.form.searchForm.values.searchForm.trim()
-        : '',
     initialValues: initialValuesSelector(state),
     formValues: insightsKeySelector(
       insightTableSelector(state, 'insights'),

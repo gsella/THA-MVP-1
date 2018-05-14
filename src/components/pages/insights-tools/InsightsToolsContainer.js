@@ -8,7 +8,7 @@ const mapStateToProps = state => {
   const insightTableSelector = formValueSelector('dropdownByGroup');
 
   return {
-    dropdownValues: insightTableSelector(state, 'dropdown'),
+    groupId: insightTableSelector(state, 'groupId'),
     items: categoryFroupConstants,
   };
 };
