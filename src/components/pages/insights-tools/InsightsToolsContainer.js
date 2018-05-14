@@ -5,10 +5,10 @@ import categoryFroupConstants from 'constants/categoryGroupConstants';
 import { getInsights } from '../../../redux/modules/insights/insightsActions';
 
 const mapStateToProps = state => {
-  const insightTableSelector = formValueSelector('dropdownByGroup');
+  const groupingDropdownSelector = formValueSelector('dropdownByGroup');
 
   return {
-    groupId: insightTableSelector(state, 'groupId'),
+    groupId: groupingDropdownSelector(state, 'groupId'),
     items: categoryFroupConstants,
   };
 };
