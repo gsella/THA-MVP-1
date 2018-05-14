@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
 import Insight from './Insight/InsightContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/left-sidebar.css';
+import 'assets/styles/components/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);
@@ -21,11 +21,16 @@ class Category extends React.Component {
       <Panel
         key={item.category}
         style={{ borderLeft: `8px solid ${item.color}` }}
-        className={bemClasses('category', 'disable-border')}
-      >
-        <Panel.Heading className={bemClasses('category', ['disable-border', 'padding-heading'])}>
+        className={bemClasses('category', 'disable-border')}>
+        <Panel.Heading
+          className={bemClasses('category', [
+            'disable-border',
+            'padding-heading',
+          ])}>
           <Panel.Title toggle className={bemClasses('category', 'underline')}>
-            <span className={bemClasses('category', 'id')}>{item.category.slice(0, 1)} </span>
+            <span className={bemClasses('category', 'id')}>
+              {item.category.slice(0, 1)}
+            </span>
             <span> &#8210; {item.category}</span>
           </Panel.Title>
         </Panel.Heading>
@@ -47,7 +52,9 @@ class Category extends React.Component {
   render() {
     return (
       <div>
-        <Panel defaultExpanded className={bemClasses('category', 'disable-border')}>
+        <Panel
+          defaultExpanded
+          className={bemClasses('category', 'disable-border')}>
           {this.renderPanelData()}
         </Panel>
       </div>

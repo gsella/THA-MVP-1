@@ -4,7 +4,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faAlignLeft } from '@fortawesome/fontawesome-free-solid';
 import Button from 'components/common/button/Button';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/configuration-page-wrapper.css';
+import 'assets/styles/components/configuration-page-wrapper.css';
 
 const configurationPageWrapper = 'configuration-page-wrapper';
 const bemClasses = getBEMClasses([configurationPageWrapper]);

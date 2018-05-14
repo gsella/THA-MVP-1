@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/tags-sections.css';
+import 'assets/styles/components/tags-sections.css';
 
 const tagSectionClass = 'tags-sections';
 const bemClasses = getBEMClasses([tagSectionClass]);
@@ -22,10 +22,10 @@ const TagSection = ({ tags, size }) => (
 TagSection.propTypes = {
   tags: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string
+      name: PropTypes.string,
     })
   ).isRequired,
-  size: PropTypes.number.isRequired
+  size: PropTypes.number.isRequired,
 };
 
 export default TagSection;

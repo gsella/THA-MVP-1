@@ -5,7 +5,7 @@
 }
 
 .tags-sections__item {
-  background-color: #f0f0f0;
+  background-color: var(--bgcolor-default);
   display: flex;
   align-items: center;
   justify-content: center;

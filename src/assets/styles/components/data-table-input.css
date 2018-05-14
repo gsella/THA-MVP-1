@@ -14,7 +14,7 @@
 .data-table-input:focus,
 .data-table-input:active {
   outline: 0;
-  outline-offset: 0;  
+  outline-offset: 0;
   border: 0;
   box-shadow: none;
 }

@@ -14,9 +14,9 @@ import LightningIcon from 'assets/images/lightning-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../../propTypes/categoryType';
 
-import 'assets/styles/data-table-dropdown.css';
-import 'assets/styles/data-table.css';
-import 'assets/styles/right-click-dropdown.css';
+import 'assets/styles/components/data-table-dropdown.css';
+import 'assets/styles/components/data-table.css';
+import 'assets/styles/components/right-click-dropdown.css';
 
 const tableRow = 'data-table-row';
 const bemClasses = getBEMClasses([tableRow]);

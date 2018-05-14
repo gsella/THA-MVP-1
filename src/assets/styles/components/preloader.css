@@ -1,8 +1,8 @@
 .preloader__alignment {
   text-align: center;
-  width: calc(100% - 300px);
+  width: calc(100% - var(--width-sidebar) - 45px);
   position: absolute;
-  top: calc(50% - 60px);
+  top: calc(50% - 100px);
   z-index: 100;
   white-space: pre;
   display: flex;

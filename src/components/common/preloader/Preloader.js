@@ -1,6 +1,6 @@
 import React from 'react';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/preloader.css';
+import 'assets/styles/components/preloader.css';
 
 const preloader = 'preloader';
 const bemClasses = getBEMClasses([preloader]);

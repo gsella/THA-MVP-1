@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { reduxForm } from 'redux-form';
 import { getBEMClasses } from 'helper/BEMHelper';
 import DatePickerWrapper from 'components/common/date-picker/DatePicker';
-import 'assets/styles/select-date-form.css';
+import 'assets/styles/components/select-date-form.css';
 
 const selectDateForm = 'select-date-form';
 const bemClasses = getBEMClasses([selectDateForm]);
@@ -14,8 +14,7 @@ const DataPickersForm = props => {
     <form
       onSubmit={handleSubmit}
       onBlur={handleSubmit}
-      className={bemClasses()}
-    >
+      className={bemClasses()}>
       <div className={bemClasses('input')}>
         <DatePickerWrapper name="selectedDate" label="Select date:" />
       </div>
@@ -23,4 +22,4 @@ const DataPickersForm = props => {
   );
 };
 
-export default reduxForm({form: 'mainGraphDatepickers'})(DataPickersForm);
+export default reduxForm({ form: 'mainGraphDatepickers' })(DataPickersForm);

@@ -8,7 +8,7 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import 'react-notifications/dist/react-notifications.css';
-import 'assets/styles/notification.css';
+import 'assets/styles/components/notification.css';
 
 class Notification extends React.Component {
   static propTypes = {

@@ -17,7 +17,7 @@ import Notification from 'components/containers/Notification';
 import Preloader from 'components/common/preloader/Preloader';
 import DateInfo from './DateInfo';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/main-graph.css';
+import 'assets/styles/components/main-graph.css';
 
 const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);

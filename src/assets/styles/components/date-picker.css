@@ -3,7 +3,7 @@
 }
 
 .custom-datepicker__dpk-input {
-  font-size: 1rem;
+  font-size: var(--font-size-small);
   height: 20px;
   display: inline-block;
   width: auto;

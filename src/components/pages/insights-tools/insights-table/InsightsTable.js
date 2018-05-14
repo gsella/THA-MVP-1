@@ -7,7 +7,7 @@ import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../propTypes/categoryType';
 import { insightsType } from '../../../../propTypes/insightType';
 
-import 'assets/styles/data-table.css';
+import 'assets/styles/components/data-table.css';
 
 const dataTable = 'data-table';
 const formName = 'insights';

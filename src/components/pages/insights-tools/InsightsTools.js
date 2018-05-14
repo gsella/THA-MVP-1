@@ -5,7 +5,7 @@ import Select from 'components/common/select/Select';
 import InsightsTable from './insights-table/InsightsTableContainer';
 import ConfigurationPageWrapperContainer from 'components/common/configuration-page-wrapper/ConfigurationPageWrapperContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/insights-tools.css';
+import 'assets/styles/components/insights-tools.css';
 
 const insightsTools = 'insights-tools';
 const bemClasses = getBEMClasses([insightsTools]);

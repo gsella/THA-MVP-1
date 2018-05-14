@@ -4,7 +4,7 @@ import { FormControl } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { getBEMClasses } from 'helper/BEMHelper';
 
-import 'assets/styles/data-table-input.css';
+import 'assets/styles/components/data-table-input.css';
 
 const baseClass = 'input-component';
 

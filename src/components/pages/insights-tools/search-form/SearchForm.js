@@ -3,7 +3,7 @@ import SearchIcon from 'react-icons/lib/fa/search';
 import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/search-form.css';
+import 'assets/styles/components/search-form.css';
 
 const searchForm = 'search-form';
 const bemClasses = getBEMClasses([searchForm]);
@@ -18,7 +18,8 @@ class SearchForm extends React.Component {
     return (
       <FormGroup>
         <InputGroup>
-          <InputGroup.Addon className={bemClasses('input', ['border', 'addon-border'])}>
+          <InputGroup.Addon
+            className={bemClasses('input', ['border', 'addon-border'])}>
             <SearchIcon className={bemClasses('input', 'search-icon')} />
           </InputGroup.Addon>
           <FormControl
@@ -34,9 +35,7 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <form
-          className={bemClasses('form')}
-        >
+        <form className={bemClasses('form')}>
           <Field
             name="searchForm"
             type="text"

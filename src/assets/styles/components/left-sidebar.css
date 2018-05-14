@@ -1,7 +1,7 @@
 .left-sidebar {
-  background-color: #f0f0f0;
-  min-width: 255px;
-  width: 255px;
+  background-color: var(--bgcolor-default);
+  min-width: var(--width-sidebar);
+  width: var(--width-sidebar);
   height: 100vh;
   overflow: auto;
 }
@@ -23,7 +23,7 @@
 .left-sidebar__insight-title {
   display: flex;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: var(--font-size-medium-1);
   font-weight: 900;
   color: #222;
   padding: 20px 10px;
@@ -35,7 +35,7 @@
 }
 
 .left-sidebar__category--disable-border {
-  background-color: #f0f0f0;
+  background-color: var(--bgcolor-default);
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -44,7 +44,7 @@
 
 /*use nested selectors to overlap bootstrap styles*/
 .panel-default > .panel-heading {
-  background-color: #f0f0f0;
+  background-color: var(--bgcolor-default);
 }
 
 .left-sidebar__category--underline a {

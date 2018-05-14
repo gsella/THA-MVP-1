@@ -10,7 +10,7 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
 import Preloader from 'components/common/preloader/Preloader';
 import ThunderIcon from 'assets/images/lightning-blue-background.svg';
 
-import 'assets/styles/graph-layout.css';
+import 'assets/styles/components/graph-layout.css';
 import Graph from './Graph';
 
 const graph = 'graph-layout';

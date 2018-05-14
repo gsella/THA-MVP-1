@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { format, parse } from 'helper/dateHelper';
 import 'pikaday/css/pikaday.css';
-import 'assets/styles/date-picker.css';
+import 'assets/styles/components/date-picker.css';
 
 const datepicker = 'datepicker';
 const bemClasses = getBEMClasses([datepicker]);

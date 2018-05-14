@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/graph.css';
+import 'assets/styles/components/graph.css';
 
 const graphClass = 'graph';
 

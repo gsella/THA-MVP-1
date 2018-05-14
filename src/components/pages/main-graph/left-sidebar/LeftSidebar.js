@@ -5,7 +5,7 @@ import Category from 'components/pages/main-graph/left-sidebar/Categories/Catego
 import { getBEMClasses } from 'helper/BEMHelper';
 import { insightsType } from '../../../../propTypes/insightType';
 import ThunderIcon from 'assets/images/lightning-icon-small.svg';
-import 'assets/styles/left-sidebar.css';
+import 'assets/styles/components/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);

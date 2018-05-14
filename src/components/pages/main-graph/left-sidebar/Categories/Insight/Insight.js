@@ -4,7 +4,7 @@ import { Panel } from 'react-bootstrap';
 import Eye from 'react-icons/lib/fa/eye';
 import EyeSlash from 'react-icons/lib/fa/eye-slash';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/left-sidebar.css';
+import 'assets/styles/components/left-sidebar.css';
 
 const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);
