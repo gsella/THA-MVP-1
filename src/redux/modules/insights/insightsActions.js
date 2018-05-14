@@ -13,7 +13,7 @@ export const getInsights = (thunderkey = 4, date) => async (
   getState
 ) => {
   dispatch({ type: GET_INSIGHTS_PENDING, payload: true });
-  const { categories } = getState();
+  const { categories } = getState().categories;
 
   const response = await insightsApi.getInsights(thunderkey);
 

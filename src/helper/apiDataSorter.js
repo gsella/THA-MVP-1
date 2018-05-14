@@ -1,13 +1,13 @@
 export const sortInsightsByCategoryAndOrder = categories => (a, b) => {
   if (
-    categories.categories[a.categoryId].abbreviation >
-    categories.categories[b.categoryId].abbreviation
+    categories[a.categoryId].abbreviation >
+    categories[b.categoryId].abbreviation
   ) {
     return 1;
   }
   if (
-    categories.categories[a.categoryId].abbreviation <
-    categories.categories[b.categoryId].abbreviation
+    categories[a.categoryId].abbreviation <
+    categories[b.categoryId].abbreviation
   ) {
     return -1;
   }
