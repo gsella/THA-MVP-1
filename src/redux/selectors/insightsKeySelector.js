@@ -8,17 +8,19 @@ const calcInsightsKey = (insights, categories) => {
     return insights
       .sort(sortInsightsByCategoryAndOrder(categories))
       .map(insight => {
-        const categoryKey = categoryKeys[insight.categoryId];
+        const newInsight = { ...insight };
+        const categoryKey = categoryKeys[newInsight.categoryId];
 
         if (categoryKey) {
-          insight.categoryKey =
-            categories[insight.categoryId].abbreviation + categoryKey;
+          newInsight.categoryKey =
+            categories[newInsight.categoryId].abbreviation + categoryKey;
         } else {
-          categoryKeys[insight.categoryId] = 1;
-          insight.categoryKey = categories[insight.categoryId].abbreviation + 1;
+          categoryKeys[newInsight.categoryId] = 1;
+          newInsight.categoryKey =
+            categories[newInsight.categoryId].abbreviation + 1;
         }
-        categoryKeys[insight.categoryId]++;
-        return insight;
+        categoryKeys[newInsight.categoryId]++;
+        return newInsight;
       });
   }
   return insights;
