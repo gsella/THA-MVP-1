@@ -40,6 +40,7 @@ class InsightsTools extends React.Component {
         }
       }
     }
+    return null;
   }
 
   handleSearch(querry) {

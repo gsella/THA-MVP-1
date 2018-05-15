@@ -148,10 +148,10 @@ class TableRow extends React.Component {
   }
 
   render() {
-    const { isNew, item, namePrefix, categories } = this.props;
+    const { isNew, item, namePrefix, categories, categoryKey } = this.props;
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
     const idCellModifiers = ['id', 'for-text'];
-    if (item.categoryKey) {
+    if (categoryKey) {
       idCellModifiers.push('white-text');
     }
     const selectedCategory = categories[item.categoryId];
@@ -176,10 +176,7 @@ class TableRow extends React.Component {
         <td
           className={bemClasses('cell', idCellModifiers)}
           style={{ backgroundColor: color }}>
-          {this.addDropdownTrigger(
-            item,
-            item.categoryKey ? item.categoryKey : 'ID'
-          )}
+          {this.addDropdownTrigger(item, categoryKey ? categoryKey : 'ID')}
         </td>
         <td
           className={bemClasses('cell', ['category', 'white-text'])}

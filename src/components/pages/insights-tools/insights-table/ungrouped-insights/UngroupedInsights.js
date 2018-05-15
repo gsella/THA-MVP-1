@@ -6,12 +6,12 @@ const UngroupedInsights = props => {
   const {
     categories,
     tags,
-    formValues,
     fields,
     searchQuery,
+    categoryKeys,
     ...otherProps
   } = props;
-
+  const formValues = fields.getAll();
   let matchingData = formValues;
 
   if (searchQuery.length > 0) {
@@ -30,7 +30,7 @@ const UngroupedInsights = props => {
           categories={categories}
           allTags={tags}
           isNew={false}
-          item={formValues[index]}
+          categoryKey={categoryKeys[index].categoryKey}
           {...otherProps}
           disableMoveUp={index === 0}
           disableMoveDown={index === formValues.length - 1}
@@ -46,7 +46,6 @@ const UngroupedInsights = props => {
 UngroupedInsights.propTypes = {
   categories: PropTypes.object.isRequired,
   tags: PropTypes.object.isRequired,
-  formValues: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };

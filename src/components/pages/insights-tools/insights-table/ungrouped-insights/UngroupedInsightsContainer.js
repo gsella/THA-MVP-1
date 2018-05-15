@@ -7,7 +7,7 @@ const insightsTableSelector = formValueSelector('insightsTable');
 
 const mapStateToProps = state => {
   return {
-    formValues: insightsKeySelector(
+    categoryKeys: insightsKeySelector(
       insightsTableSelector(state, 'insights'),
       state.categories.categories
     ),

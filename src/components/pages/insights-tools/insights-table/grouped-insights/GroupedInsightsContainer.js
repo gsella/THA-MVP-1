@@ -8,10 +8,11 @@ const groupingDropdownSelector = formValueSelector('dropdownByGroup');
 
 const mapStateToProps = state => {
   return {
-    formValues: insightsKeySelector(
+    categoryKeys: insightsKeySelector(
       insightsTableSelector(state, 'insights'),
       state.categories.categories
     ),
+    formValues: insightsTableSelector(state, 'insights'),
     tags: state.tags.tags,
     categories: state.categories.categories,
     groupId: groupingDropdownSelector(state, 'groupId'),

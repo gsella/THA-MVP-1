@@ -1,10 +1,13 @@
-import { createSelector } from 'reselect';
+import {
+  createSelector,
+  createSelectorCreator,
+  defaultMemoize,
+} from 'reselect';
 import { sortInsightsByCategoryAndOrder } from 'helper/apiDataSorter';
 
 const calcInsightsKey = (insights, categories) => {
   if (categories && insights && insights.length > 0) {
     const categoryKeys = {};
-
     return insights
       .sort(sortInsightsByCategoryAndOrder(categories))
       .map(insight => {
@@ -22,14 +25,47 @@ const calcInsightsKey = (insights, categories) => {
           }
         }
         categoryKeys[newInsight.categoryId]++;
+
         return newInsight;
       });
   }
   return insights;
 };
 
+/**
+ * Compare insights by category, order should stay the same
+ * @param {Array} oldValues array of old insights
+ * @param {Array} newValues array of new inssights
+ */
+const AreInsightsEqualByCategory = (oldValues, newValues) => {
+  if (oldValues.length !== newValues.length) return false;
+
+  for (let i = 0; i < oldValues.length; i++) {
+    const oldInsight = oldValues[i];
+    const newInsight = newValues[i];
+
+    if (
+      oldInsight.categoryId !== newInsight.categoryId ||
+      oldInsight.id !== newInsight.id
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const createInsightSelector = createSelectorCreator(
+  defaultMemoize,
+  AreInsightsEqualByCategory
+);
+
+const insightSelector = createInsightSelector(
+  insights => insights,
+  insights => insights
+);
+
 export const insightsKeySelector = createSelector(
-  (insights, categories) => insights,
+  insightSelector,
   (insights, categories) => categories,
   calcInsightsKey
 );

@@ -15,6 +15,7 @@ const GroupedByCategoryInsights = props => {
   const {
     categories,
     tags,
+    categoryKeys,
     formValues,
     fields,
     groupId,
@@ -66,8 +67,8 @@ const GroupedByCategoryInsights = props => {
                   key={index}
                   categories={categories}
                   allTags={tags}
-                  item={field}
                   isNew={false}
+                  categoryKey={categoryKeys[index].categoryKey}
                   {...otherProps}
                   disableMoveUp={index === 0}
                   disableMoveDown={index === formValues.length - 1}
@@ -113,7 +114,6 @@ const GroupedByCategoryInsights = props => {
 GroupedByCategoryInsights.propTypes = {
   categories: PropTypes.object.isRequired,
   tags: PropTypes.object.isRequired,
-  formValues: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
   groupId: PropTypes.number.isRequired,
   searchQuery: PropTypes.string.isRequired,
