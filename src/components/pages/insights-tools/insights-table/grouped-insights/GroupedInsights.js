@@ -41,7 +41,9 @@ const GroupedByCategoryInsights = props => {
 
   if (searchQuery.length > 0) {
     const queryRegexp = new RegExp(searchQuery, 'i');
-    matchingData = matchingData.filter(item => item.insight.match(queryRegexp));
+    matchingData = matchingData.filter(
+      item => ('insight' in item ? item.insight.match(queryRegexp) : false)
+    );
   }
 
   const groups = options.map((item, key) => {
@@ -113,7 +115,7 @@ GroupedByCategoryInsights.propTypes = {
   tags: PropTypes.object.isRequired,
   formValues: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
-  groupedBy: PropTypes.string.isRequired,
+  groupId: PropTypes.number.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };
 

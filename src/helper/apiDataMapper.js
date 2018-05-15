@@ -2,7 +2,7 @@ export const mapInsightFromApi = insight => {
   return {
     id: insight.InsightKey,
     categoryId: insight.Categorykey,
-    tagId: insight.Tagkey,
+    tagId: insight.Tagkey === 0 ? 1 : insight.Tagkey,
     categoryKey: insight.InsightID,
     insight: insight.InsightName,
     popularity: insight.InsightPopularity,

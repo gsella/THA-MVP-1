@@ -15,9 +15,11 @@ const calcInsightsKey = (insights, categories) => {
           newInsight.categoryKey =
             categories[newInsight.categoryId].abbreviation + categoryKey;
         } else {
-          categoryKeys[newInsight.categoryId] = 1;
-          newInsight.categoryKey =
-            categories[newInsight.categoryId].abbreviation + 1;
+          if ('categoryId' in insight) {
+            categoryKeys[insight.categoryId] = 1;
+            newInsight.categoryKey =
+              categories[insight.categoryId].abbreviation + 1;
+          }
         }
         categoryKeys[newInsight.categoryId]++;
         return newInsight;

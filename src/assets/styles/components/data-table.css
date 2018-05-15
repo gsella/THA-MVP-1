@@ -31,6 +31,7 @@
 }
 
 .data-table-row__cell--id {
+  color: rgba(34, 34, 34, 0.5);
   width: 5%;
 }
 
@@ -38,8 +39,7 @@
   min-width: 120px;
 }
 
-.data-table-row__cell--id,
-.data-table-row__cell--category {
+.data-table-row__cell--white-text {
   color: #fff;
 }
 

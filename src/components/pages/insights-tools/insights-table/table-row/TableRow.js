@@ -53,7 +53,14 @@ class TableRow extends React.Component {
       { value: -1, label: <ThumbsDown /> },
     ];
 
-    return <Select items={options} name={`${namePrefix}.impact`} />;
+    return (
+      <Select
+        items={options}
+        name={`${namePrefix}.impact`}
+        customClass={bemClasses('select')}
+        placeholder="Impact"
+      />
+    );
   }
 
   renderCategory() {
@@ -67,7 +74,8 @@ class TableRow extends React.Component {
       <Select
         items={options}
         name={`${namePrefix}.categoryId`}
-        customClass="table-row-category-select"
+        customClass={bemClasses('select', 'colored-category')}
+        placeholder="Category"
       />
     );
   }
@@ -83,7 +91,8 @@ class TableRow extends React.Component {
       <Select
         items={options}
         name={`${namePrefix}.tagId`}
-        customClass="table-row-tag-select"
+        customClass={bemClasses('select')}
+        placeholder="Tag"
       />
     );
   }
@@ -141,8 +150,12 @@ class TableRow extends React.Component {
   render() {
     const { isNew, item, namePrefix, categories } = this.props;
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
+    const idCellModifiers = ['id', 'for-text'];
+    if (item.categoryKey) {
+      idCellModifiers.push('white-text');
+    }
     const selectedCategory = categories[item.categoryId];
-    const { color } = selectedCategory;
+    const color = selectedCategory ? selectedCategory.color : null;
 
     if (!this.props.item.isActive) return null;
 
@@ -161,7 +174,7 @@ class TableRow extends React.Component {
           {this.renderDropdown()}
         </td>
         <td
-          className={bemClasses('cell', ['id', 'for-text'])}
+          className={bemClasses('cell', idCellModifiers)}
           style={{ backgroundColor: color }}>
           {this.addDropdownTrigger(
             item,
@@ -169,7 +182,7 @@ class TableRow extends React.Component {
           )}
         </td>
         <td
-          className={bemClasses('cell', ['category'])}
+          className={bemClasses('cell', ['category', 'white-text'])}
           style={{ backgroundColor: color }}>
           {this.addDropdownTrigger(item, this.renderCategory())}
         </td>

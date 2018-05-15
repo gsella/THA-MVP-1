@@ -29,7 +29,7 @@
   float: right;
 }
 
-.table-row-category-select .Select-value-label {
+.data-table-row__select--colored-category .Select-value-label {
   color: #fff !important;
 }
 
@@ -61,4 +61,22 @@
   .dropdown-menu .data-table-dropdown__menu-item a {
     padding: 3px 5px;
   }
+}
+
+.table-row-dropdown-select
+  > .Select-control
+  > .Select-multi-value-wrapper
+  > .Select-placeholder {
+  color: #fff !important;
+  font-weight: bold;
+  font-size: var(--font-size-medium-2);
+  line-height: 46px;
+  text-align: center;
+}
+
+.data-table-row__select
+  > .Select-control
+  > .Select-multi-value-wrapper
+  > .Select-placeholder {
+  line-height: 60px;
 }

@@ -16,7 +16,9 @@ const UngroupedInsights = props => {
 
   if (searchQuery.length > 0) {
     const queryRegexp = new RegExp(searchQuery, 'i');
-    matchingData = matchingData.filter(item => item.insight.match(queryRegexp));
+    matchingData = matchingData.filter(
+      item => ('insight' in item ? item.insight.match(queryRegexp) : false)
+    );
   }
 
   return fields.map((insight, index) => {

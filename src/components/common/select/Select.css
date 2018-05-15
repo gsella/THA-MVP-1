@@ -74,11 +74,3 @@
 .Select-input {
   background-color: inherit;
 }
-
-.Select-placeholder {
-  color: #fff !important;
-  font-weight: bold;
-  font-size: var(--font-size-medium-2);
-  line-height: 46px;
-  text-align: center;
-}

@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 
-import changeCategoryMiddleware from './middlewares/changeCategoryMiddleware';
+import handleIsEmptyFlagMiddleware from './middlewares/handleIsEmptyFlagMiddleware';
 import swapInsightsMiddleware from './middlewares/swapInsightsMiddleware';
 import insightsTableUpdateMiddleware from './middlewares/insightsTableUpdateMiddleware';
 
@@ -13,7 +13,7 @@ export default createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(
-      changeCategoryMiddleware,
+      handleIsEmptyFlagMiddleware,
       swapInsightsMiddleware,
       insightsTableUpdateMiddleware,
       promise(),
