@@ -49,6 +49,7 @@ const GroupedByCategoryInsights = props => {
 
   const groups = options.map((item, key) => {
     const group = formValues.filter(item => item[filterField] === key);
+
     return (
       <TableGroup
         key={`-${key}`}
@@ -70,10 +71,9 @@ const GroupedByCategoryInsights = props => {
                   isNew={false}
                   categoryKey={categoryKeys[index].categoryKey}
                   {...otherProps}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === formValues.length - 1}
-                  moveInsightUp={() => fields.swap(index, index - 1)}
-                  moveInsightDown={() => fields.swap(index, index + 1)}
+                  filterInsightsByCategoryLength={group.length}
+                  moveInsightUp={props.moveInsightUp}
+                  moveInsightDown={props.moveInsightDown}
                 />
               );
             return null;
@@ -117,6 +117,8 @@ GroupedByCategoryInsights.propTypes = {
   fields: PropTypes.object.isRequired,
   groupId: PropTypes.number.isRequired,
   searchQuery: PropTypes.string.isRequired,
+  moveInsightUp: PropTypes.func,
+  moveInsightDown: PropTypes.func,
 };
 
 export default GroupedByCategoryInsights;

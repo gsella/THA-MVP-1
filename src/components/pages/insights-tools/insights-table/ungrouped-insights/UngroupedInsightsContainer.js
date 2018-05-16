@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import UngroupedInsights from './UngroupedInsights';
+import * as actions from 'redux/modules/insights/insightsActions';
 import { insightsKeySelector } from '../../../../../redux/selectors/insightsKeySelector';
 
 const insightsTableSelector = formValueSelector('insightsTable');
@@ -20,4 +21,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UngroupedInsights);
+const mapDispatchToProps = {
+  moveInsightUp: actions.moveInsightUp,
+  moveInsightDown: actions.moveInsightDown,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UngroupedInsights);

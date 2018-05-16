@@ -46,7 +46,8 @@ const AreInsightsEqualByCategory = (oldValues, newValues) => {
 
     if (
       oldInsight.categoryId !== newInsight.categoryId ||
-      oldInsight.id !== newInsight.id
+      oldInsight.id !== newInsight.id ||
+      oldInsight.order !== newInsight.order
     ) {
       return false;
     }

@@ -19,20 +19,6 @@ export const hidingInsight = key => (dispatch, getState) => {
   });
 };
 
-export const moveInsightUp = id => dispatch => {
-  dispatch({
-    type: ACTION_CONSTANTS.MOVE_INSIGHT_UP,
-    payload: id,
-  });
-};
-
-export const moveInsightDown = id => dispatch => {
-  dispatch({
-    type: ACTION_CONSTANTS.MOVE_INSIGHT_DOWN,
-    payload: id,
-  });
-};
-
 export const refreshThunder = (thunderkey = 4) => async (
   dispatch,
   getState

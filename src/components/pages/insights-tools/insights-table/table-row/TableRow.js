@@ -29,13 +29,12 @@ class TableRow extends React.Component {
   }
 
   static propTypes = {
+    filterInsightsByCategoryLength: PropTypes.number.isRequired,
     namePrefix: PropTypes.string.isRequired,
     item: PropTypes.object.isRequired,
     isNew: PropTypes.bool,
     categories: categoriesType.isRequired,
     allTags: PropTypes.object.isRequired,
-    disableMoveUp: PropTypes.bool.isRequired,
-    disableMoveDown: PropTypes.bool.isRequired,
     deleteInsight: PropTypes.func.isRequired,
     moveInsightUp: PropTypes.func.isRequired,
     moveInsightDown: PropTypes.func.isRequired,
@@ -98,22 +97,33 @@ class TableRow extends React.Component {
   }
 
   renderDropdown() {
+    const {
+      item,
+      moveInsightDown,
+      moveInsightUp,
+      deleteInsight,
+      namePrefix,
+      filterInsightsByCategoryLength,
+    } = this.props;
+
     return (
-      <ContextMenu id={`row-dropdown-${this.props.item.id}`}>
+      <ContextMenu id={`row-dropdown-${item.id}`}>
         <MenuItem
-          disabled={this.props.disableMoveUp}
-          onClick={() => this.props.moveInsightUp(this.props.index)}
+          disabled={item.order === 1}
+          onClick={() => moveInsightUp(item.id)}
           data={{ action: 'move up' }}>
           Move Insight Up
         </MenuItem>
         <MenuItem
-          disabled={this.props.disableMoveDown}
-          onClick={() => this.props.moveInsightDown(this.props.index)}
+          disabled={filterInsightsByCategoryLength === item.order}
+          onClick={() =>
+            moveInsightDown(item.id, filterInsightsByCategoryLength)
+          }
           data={{ action: 'move down' }}>
           Move Insight Down
         </MenuItem>
         <MenuItem
-          onClick={() => this.props.deleteInsight(this.props.namePrefix)}
+          onClick={() => deleteInsight(namePrefix)}
           data={{ action: 'delete' }}>
           Delete Selected Insight(s)
         </MenuItem>

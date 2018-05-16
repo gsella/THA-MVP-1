@@ -4,7 +4,6 @@ import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 
 import handleIsEmptyFlagMiddleware from './middlewares/handleIsEmptyFlagMiddleware';
-import swapInsightsMiddleware from './middlewares/swapInsightsMiddleware';
 import insightsTableUpdateMiddleware from './middlewares/insightsTableUpdateMiddleware';
 
 import rootReducer from 'redux/rootReducer';
@@ -14,7 +13,6 @@ export default createStore(
   composeWithDevTools(
     applyMiddleware(
       handleIsEmptyFlagMiddleware,
-      swapInsightsMiddleware,
       insightsTableUpdateMiddleware,
       promise(),
       thunk

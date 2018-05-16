@@ -5,6 +5,7 @@ import {
   GET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
 } from './insightsActionConstants';
+import { change } from 'redux-form';
 import history from 'components/containers/history';
 import { sortInsightsByCategoryAndOrder } from '../../../helper/apiDataSorter';
 
@@ -55,4 +56,45 @@ export const updateInsights = () => (dispatch, getState) => {
   const updatedInsights = insights.filter(item => item.isUpdated);
 
   console.log(updatedInsights);
+};
+
+export const moveInsightUp = id => (dispatch, getState) => {
+  const insights = getState().form.insightsTable.values.insights;
+
+  insights.forEach((item, index) => {
+    if (item.id === id && item.order === 1) {
+      return;
+    }
+    if (item.id === id) {
+      const prevOrder = insights[index - 1].order;
+      const currentOrder = insights[index].order;
+
+      dispatch(change('insightsTable', `insights[${index}].order`, prevOrder));
+      dispatch(
+        change('insightsTable', `insights[${index - 1}].order`, currentOrder)
+      );
+    }
+  });
+};
+
+export const moveInsightDown = (id, filterInsightsByCategoryLength) => (
+  dispatch,
+  getState
+) => {
+  const insights = getState().form.insightsTable.values.insights;
+
+  insights.forEach((item, index) => {
+    if (item.id === id && item.order === filterInsightsByCategoryLength) {
+      return;
+    }
+    if (item.id === id) {
+      const nextOrder = insights[index + 1].order;
+      const currentOrder = insights[index].order;
+
+      dispatch(change('insightsTable', `insights[${index}].order`, nextOrder));
+      dispatch(
+        change('insightsTable', `insights[${index + 1}].order`, currentOrder)
+      );
+    }
+  });
 };

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import TableRow from '../table-row/TableRowContainer';
 
 class UngroupedInsights extends React.Component {
-  moveInsightUp = index => {
-    this.props.fields.swap(index, index - 1);
-  };
-
-  moveInsightDown = index => {
-    this.props.fields.swap(index, index + 1);
-  };
-
   render() {
-    const { categories, tags, fields, searchQuery, categoryKeys } = this.props;
+    const {
+      categories,
+      tags,
+      fields,
+      searchQuery,
+      categoryKeys,
+      moveInsightUp,
+      moveInsightDown,
+    } = this.props;
     const formValues = fields.getAll();
     let matchingData = formValues;
 
@@ -24,6 +24,10 @@ class UngroupedInsights extends React.Component {
     }
 
     return fields.map((insight, index) => {
+      const filterInsightsByCategory = formValues.filter(
+        insights => insights.categoryId === formValues[index].categoryId
+      );
+
       if (matchingData.includes(formValues[index])) {
         return (
           <TableRow
@@ -34,10 +38,9 @@ class UngroupedInsights extends React.Component {
             allTags={tags}
             isNew={false}
             categoryKey={categoryKeys[index].categoryKey}
-            disableMoveUp={index === 0}
-            disableMoveDown={index === formValues.length - 1}
-            moveInsightUp={this.moveInsightUp}
-            moveInsightDown={this.moveInsightDown}
+            filterInsightsByCategoryLength={filterInsightsByCategory.length}
+            moveInsightUp={moveInsightUp}
+            moveInsightDown={moveInsightDown}
           />
         );
       }
@@ -51,6 +54,8 @@ UngroupedInsights.propTypes = {
   tags: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   searchQuery: PropTypes.string.isRequired,
+  moveInsightUp: PropTypes.func,
+  moveInsightDown: PropTypes.func,
 };
 
 export default UngroupedInsights;
