@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 
 import handleIsEmptyFlagMiddleware from './middlewares/handleIsEmptyFlagMiddleware';
 import insightsTableUpdateMiddleware from './middlewares/insightsTableUpdateMiddleware';
+import changeOrderOnCategoryUpdateMiddleware from './middlewares/changeOrderOnCategoryUpdateMiddleware';
 
 import rootReducer from 'redux/rootReducer';
 
@@ -13,6 +14,7 @@ export default createStore(
   composeWithDevTools(
     applyMiddleware(
       handleIsEmptyFlagMiddleware,
+      changeOrderOnCategoryUpdateMiddleware,
       insightsTableUpdateMiddleware,
       promise(),
       thunk
