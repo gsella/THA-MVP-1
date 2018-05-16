@@ -79,4 +79,7 @@
   > .Select-multi-value-wrapper
   > .Select-placeholder {
   line-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 2px;
 }

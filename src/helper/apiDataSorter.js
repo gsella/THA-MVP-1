@@ -1,8 +1,8 @@
 export const sortInsightsByCategoryAndOrder = categories => (a, b) => {
-  if (!('categoryId' in a)) {
+  if ('isEmpty' in a ? a.isEmpty : false) {
     return 1;
   }
-  if (!('categoryId' in b)) {
+  if ('isEmpty' in b ? b.isEmpty : false) {
     return -1;
   }
   if (
