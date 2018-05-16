@@ -102,13 +102,13 @@ class TableRow extends React.Component {
       <ContextMenu id={`row-dropdown-${this.props.item.id}`}>
         <MenuItem
           disabled={this.props.disableMoveUp}
-          onClick={() => this.props.moveInsightUp()}
+          onClick={() => this.props.moveInsightUp(this.props.index)}
           data={{ action: 'move up' }}>
           Move Insight Up
         </MenuItem>
         <MenuItem
           disabled={this.props.disableMoveDown}
-          onClick={() => this.props.moveInsightDown()}
+          onClick={() => this.props.moveInsightDown(this.props.index)}
           data={{ action: 'move down' }}>
           Move Insight Down
         </MenuItem>
@@ -152,7 +152,7 @@ class TableRow extends React.Component {
     const textColorModifier = isNew ? { modifiers: 'is-new' } : {};
     const idCellModifiers = ['id', 'for-text'];
     const categoryCellModifiers = ['category'];
-    
+
     if (categoryKey) {
       idCellModifiers.push('white-text');
       categoryCellModifiers.push('white-text');
