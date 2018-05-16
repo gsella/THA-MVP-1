@@ -6,16 +6,24 @@ import {
   getNewInsights,
 } from '../../../redux/modules/insights/insightsActions';
 import { insightsKeySelector } from '../../../redux/selectors/insightsKeySelector';
+import { formValueSelector } from 'redux-form';
 
-const mapStateToProps = state => ({
-  insights: insightsKeySelector(
-    state.insights.insights,
-    state.categories.categories
-  ),
-  newInsights: state.insights.newInsights,
-  isRefresh: state.app.isRefresh,
-  isDataLoading: state.insights.isDataLoading,
-});
+const mapStateToProps = state => {
+  const mainGraphDatepickersSelector = formValueSelector(
+    'mainGraphDatepickers'
+  );
+
+  return {
+    insights: insightsKeySelector(
+      state.insights.insights,
+      state.categories.categories
+    ),
+    newInsights: state.insights.newInsights,
+    isRefresh: state.app.isRefresh,
+    isDataLoading: state.insights.isDataLoading,
+    selectedDate: mainGraphDatepickersSelector(state, 'selectedDate'),
+  };
+};
 
 const mapDispatchToProps = {
   getInsights,

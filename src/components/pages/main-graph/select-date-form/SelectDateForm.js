@@ -22,4 +22,9 @@ const DataPickersForm = props => {
   );
 };
 
-export default reduxForm({ form: 'mainGraphDatepickers' })(DataPickersForm);
+export default reduxForm({
+  form: 'mainGraphDatepickers',
+  initialValues: {
+    selectedDate: new Date(),
+  },
+})(DataPickersForm);
