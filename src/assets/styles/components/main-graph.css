@@ -7,7 +7,7 @@
 }
 
 .main-graph--padding {
-  margin-top: 50px;
+  padding-top: 50px;
 }
 
 .main-graph__graph-layout {
@@ -27,7 +27,7 @@
 
 .main-graph__graph-layout-wrapper {
   width: 100%;
-  height: calc(100% - var(--height-date-picker));
+  height: calc(100% - 125px);
   display: flex;
 }
 
