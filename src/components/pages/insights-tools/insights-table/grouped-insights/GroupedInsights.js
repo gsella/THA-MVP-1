@@ -19,7 +19,6 @@ const GroupedByCategoryInsights = props => {
     tags,
     categoryKeys,
     formValues,
-    fields,
     groupId,
     searchQuery,
     ...otherProps
@@ -33,7 +32,7 @@ const GroupedByCategoryInsights = props => {
   } else if (mapGroupIdToProperty[groupId] === 'categories') {
     Object.keys(categories).forEach(key => {
       options[key] = {
-        key: key,
+        key: Number(key),
         name: `${categories[key].name[0]} - ${categories[key].name}`,
         color: categories[key].color,
       };
@@ -59,6 +58,7 @@ const GroupedByCategoryInsights = props => {
     const group = formValues.filter(
       insight => insight[filterField] === item.key
     );
+
     return (
       <TableGroup
         key={`-${key}`}
