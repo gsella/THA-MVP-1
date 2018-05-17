@@ -7,27 +7,18 @@ import { sortInsightsByCategoryAndOrder } from 'helper/apiDataSorter';
 
 const calcInsightsKey = (insights, categories) => {
   if (categories && insights && insights.length > 0) {
-    const categoryKeys = {};
     return insights
-      .sort(sortInsightsByCategoryAndOrder(categories))
+
       .map(insight => {
         const newInsight = { ...insight };
-        const categoryKey = categoryKeys[newInsight.categoryId];
 
-        if (categoryKey) {
+        if ('categoryId' in newInsight) {
           newInsight.categoryKey =
-            categories[newInsight.categoryId].abbreviation + categoryKey;
-        } else {
-          if ('categoryId' in insight) {
-            categoryKeys[insight.categoryId] = 1;
-            newInsight.categoryKey =
-              categories[insight.categoryId].abbreviation + 1;
-          }
+            categories[newInsight.categoryId].abbreviation + newInsight.order;
         }
-        categoryKeys[newInsight.categoryId]++;
-
         return newInsight;
-      });
+      })
+      .sort(sortInsightsByCategoryAndOrder(categories));
   }
   return insights;
 };

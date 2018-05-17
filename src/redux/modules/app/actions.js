@@ -36,19 +36,42 @@ export const refreshThunder = (thunderkey = 4) => async (
 
   dispatch({
     type: ACTION_CONSTANTS.PRELOADER,
-    payload: !isRefresh,
+    payload: true,
   });
 
   dispatch({
     type: GET_NEW_INSIGHTS,
-    payload: [],
+    payload: [
+      {
+        InsightKey: 30,
+        InsightID: 'T1',
+        InsightName: 'e-Signature; e-Sig; Electronic Signature',
+        InsightScale: '0.0',
+        InsightCategory: { InsightCategoryID: 5, InsightCategoryName: '' },
+        InsightPopularity: 5,
+        InsightSize: 4,
+        InsightDescription:
+          'eSig is a theme that we have been debating if to take action in',
+        Words: {
+          ListOfWords: { 'e-Signature; e-Sig; Electronic Signature': 1 },
+        },
+        Tagkey: 1,
+        Categorykey: 5,
+        ThunderKey: 4,
+        InsightDate: '2018-01-01T00:00:00',
+        InsightOrder: 1,
+        isActive: true,
+      },
+    ]
+      .map(mapInsightFromApi)
+      .map(a => ({ ...a, isNew: true })),
   });
 
   setTimeout(
     () =>
       dispatch({
         type: ACTION_CONSTANTS.PRELOADER,
-        payload: isRefresh,
+        payload: false,
       }),
     1000
   );

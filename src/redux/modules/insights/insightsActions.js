@@ -31,19 +31,80 @@ export const getInsights = (thunderkey = 4, date) => async (
   }
 };
 
-export const getNewInsights = date => dispatch => {
+export const getNewInsights = date => (dispatch, getState) => {
+  const { categories } = getState().categories;
+
   // TODO: get new insights from server
   const newInsights = [
-    { id: 1, instances: 1, insight: 'Lever' },
-    { id: 2, instances: 1, insight: 'Mench' },
-    { id: 3, instances: 4, insight: 'Facebook' },
+    {
+      InsightKey: 35,
+      InsightID: 'T1',
+      InsightName: 'e-Signature; e-Sig; Electronic Signature',
+      InsightScale: '0.0',
+      InsightCategory: { InsightCategoryID: 5, InsightCategoryName: '' },
+      InsightPopularity: 5,
+      InsightSize: 4,
+      InsightDescription:
+        'eSig is a theme that we have been debating if to take action in',
+      Words: {
+        ListOfWords: { 'e-Signature; e-Sig; Electronic Signature': 1 },
+      },
+      Tagkey: 1,
+      Categorykey: 5,
+      ThunderKey: 4,
+      InsightDate: '2018-01-01T00:00:00',
+      InsightOrder: 5,
+      isActive: true,
+    },
+    {
+      InsightKey: 36,
+      InsightID: 'T1',
+      InsightName: 'e-Signature; e-Sig; Electronic Signature',
+      InsightScale: '0.0',
+      InsightCategory: { InsightCategoryID: 5, InsightCategoryName: '' },
+      InsightPopularity: 5,
+      InsightSize: 4,
+      InsightDescription:
+        'eSig is a theme that we have been debating if to take action in',
+      Words: {
+        ListOfWords: { 'e-Signature; e-Sig; Electronic Signature': 1 },
+      },
+      Tagkey: 1,
+      Categorykey: 5,
+      ThunderKey: 4,
+      InsightDate: '2018-01-01T00:00:00',
+      InsightOrder: 4,
+      isActive: true,
+    },
+    {
+      InsightKey: 37,
+      InsightID: 'T1',
+      InsightName: 'e-Signature; e-Sig; Electronic Signature',
+      InsightScale: '0.0',
+      InsightCategory: { InsightCategoryID: 5, InsightCategoryName: '' },
+      InsightPopularity: 5,
+      InsightSize: 4,
+      InsightDescription:
+        'eSig is a theme that we have been debating if to take action in',
+      Words: {
+        ListOfWords: { 'e-Signature; e-Sig; Electronic Signature': 1 },
+      },
+      Tagkey: 1,
+      Categorykey: 5,
+      ThunderKey: 4,
+      InsightDate: '2018-01-01T00:00:00',
+      InsightOrder: 3,
+      isActive: true,
+    },
   ];
 
   setTimeout(
     () =>
       dispatch({
         type: GET_NEW_INSIGHTS,
-        payload: newInsights,
+        payload: newInsights
+          .map(mapInsightFromApi)
+          .map(a => ({ ...a, isNew: true })),
       }),
     2000
   );

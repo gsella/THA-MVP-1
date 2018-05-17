@@ -20,6 +20,10 @@ class Notification extends React.Component {
     this.createNotification()();
   }
 
+  componentDidUpdate() {
+    this.createNotification()();
+  }
+
   notificationMessage = () => {
     return (
       <div>

@@ -3,13 +3,15 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 import InsightsTable from './InsightsTable';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
+import { sortInsightsByCategoryAndOrder } from '../../../../helper/apiDataSorter';
 
-const insightsArrayToObject = array => {
-  if (!array.length) return {};
+const insightsArrayToObject = (insights, newInsights) => {
+  if (!insights.length && !newInsights.length) return {};
 
   return {
-    insights: array.map(item => ({
+    insights: insights.concat(newInsights).map(item => ({
       ...item,
+      isNew: item.isNew ? item.isNew : false,
       isActive: true,
       isUpdated: false,
     })),
@@ -18,6 +20,7 @@ const insightsArrayToObject = array => {
 
 const initialValuesSelector = createSelector(
   state => state.insights.insights,
+  state => state.insights.newInsights,
   insightsArrayToObject
 );
 
@@ -30,7 +33,11 @@ const mapStateToProps = state => {
     categories: state.categories.categories,
     insights,
     initialValues: initialValuesSelector(state),
-    formValues: insightTableSelector(state, 'insights'),
+    formValues: insightTableSelector(state, 'insights')
+      ? insightTableSelector(state, 'insights').sort(
+          sortInsightsByCategoryAndOrder(state.categories.categories)
+        )
+      : insightTableSelector(state, 'insights'),
   };
 };
 
