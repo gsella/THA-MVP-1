@@ -110,14 +110,18 @@ class TableRow extends React.Component {
       <ContextMenu id={`row-dropdown-${item.id}`}>
         <MenuItem
           disabled={item.order === 1}
-          onClick={() => moveInsightUp(item.id)}
+          onClick={() => moveInsightUp(item.id, item.categoryId)}
           data={{ action: 'move up' }}>
           Move Insight Up
         </MenuItem>
         <MenuItem
           disabled={filterInsightsByCategoryLength === item.order}
           onClick={() =>
-            moveInsightDown(item.id, filterInsightsByCategoryLength)
+            moveInsightDown(
+              item.id,
+              filterInsightsByCategoryLength,
+              item.categoryId
+            )
           }
           data={{ action: 'move down' }}>
           Move Insight Down

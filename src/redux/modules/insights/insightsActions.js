@@ -58,43 +58,76 @@ export const updateInsights = () => (dispatch, getState) => {
   console.log(updatedInsights);
 };
 
-export const moveInsightUp = id => (dispatch, getState) => {
+export const moveInsightUp = (id, categoryId) => (dispatch, getState) => {
   const insights = getState().form.insightsTable.values.insights;
 
-  insights.forEach((item, index) => {
-    if (item.id === id && item.order === 1) {
-      return;
-    }
-    if (item.id === id) {
-      const prevOrder = insights[index - 1].order;
-      const currentOrder = insights[index].order;
+  const insightsByCurrentId = insights.find(item => item.id === id);
 
-      dispatch(change('insightsTable', `insights[${index}].order`, prevOrder));
-      dispatch(
-        change('insightsTable', `insights[${index - 1}].order`, currentOrder)
-      );
-    }
-  });
+  const currentOrder = insightsByCurrentId.order;
+
+  const filteredInsightsByCategory = insights
+    .filter(a => a.categoryId === categoryId)
+    .sort((a, b) => a.order - b.order);
+
+  const currentIndexInCategory = filteredInsightsByCategory.indexOf(
+    insightsByCurrentId
+  );
+
+  if (currentIndexInCategory === 0) return;
+
+  const prevItem = filteredInsightsByCategory[currentIndexInCategory - 1];
+
+  const prevIndex = insights.indexOf(prevItem);
+
+  const prevOrder = insights[prevIndex].order;
+
+  dispatch(
+    change(
+      'insightsTable',
+      `insights[${insights.indexOf(insightsByCurrentId)}].order`,
+      prevOrder
+    )
+  );
+  dispatch(
+    change('insightsTable', `insights[${prevIndex}].order`, currentOrder)
+  );
 };
 
-export const moveInsightDown = (id, filterInsightsByCategoryLength) => (
-  dispatch,
-  getState
-) => {
+export const moveInsightDown = (
+  id,
+  filterInsightsByCategoryLength,
+  categoryId
+) => (dispatch, getState) => {
   const insights = getState().form.insightsTable.values.insights;
 
-  insights.forEach((item, index) => {
-    if (item.id === id && item.order === filterInsightsByCategoryLength) {
-      return;
-    }
-    if (item.id === id) {
-      const nextOrder = insights[index + 1].order;
-      const currentOrder = insights[index].order;
+  const insightsByCurrentId = insights.find(item => item.id === id);
 
-      dispatch(change('insightsTable', `insights[${index}].order`, nextOrder));
-      dispatch(
-        change('insightsTable', `insights[${index + 1}].order`, currentOrder)
-      );
-    }
-  });
+  const currentOrder = insightsByCurrentId.order;
+
+  const filteredInsightsByCategory = insights
+    .filter(a => a.categoryId === categoryId)
+    .sort((a, b) => a.order - b.order);
+
+  const currentIndexInCategory = filteredInsightsByCategory.indexOf(
+    insightsByCurrentId
+  );
+
+  if (filteredInsightsByCategory.length - 1 === currentIndexInCategory) return;
+
+  const nextItem = filteredInsightsByCategory[currentIndexInCategory + 1];
+
+  const nextIndex = insights.indexOf(nextItem);
+
+  const nextOrder = insights[nextIndex].order;
+
+  dispatch(
+    change(
+      'insightsTable',
+      `insights[${insights.indexOf(insightsByCurrentId)}].order`,
+      nextOrder
+    )
+  );
+  dispatch(
+    change('insightsTable', `insights[${nextIndex}].order`, currentOrder)
+  );
 };
