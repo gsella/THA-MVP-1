@@ -27,7 +27,7 @@
 
 .data-table-row__cell--for-icons {
   background: none;
-  width: 10px;
+  width: 15px;
 }
 
 .data-table-row__cell--id {
@@ -76,15 +76,14 @@
   float: right;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 730px) {
   .data-table {
     display: block;
-    padding: 0;
+    padding: 0 15px 0 0;
     width: 100%;
     overflow-x: auto;
     overflow-y: visible;
     height: 100%;
-    padding-right: 15px;
     margin-bottom: 65px;
   }
 

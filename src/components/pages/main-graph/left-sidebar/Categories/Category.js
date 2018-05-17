@@ -19,6 +19,7 @@ class Category extends React.Component {
   renderPanelData() {
     return this.props.categories.map(item => (
       <Panel
+        defaultExpanded
         key={item.category}
         style={{ borderLeft: `8px solid ${item.color}` }}
         className={bemClasses('category', 'disable-border')}>

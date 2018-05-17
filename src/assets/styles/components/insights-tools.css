@@ -1,9 +1,9 @@
 .insights-tools__search-panel {
   display: flex;
-  padding: 0 80px;
+  padding: 0 81px 0 79px;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 730px) {
   .insights-tools__search-panel {
     padding: 0 3%;
   }
