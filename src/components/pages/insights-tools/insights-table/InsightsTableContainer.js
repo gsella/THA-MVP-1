@@ -10,7 +10,6 @@ const insightsArrayToObject = array => {
   return {
     insights: array.map(item => ({
       ...item,
-      impact: 0,
       isActive: true,
       isUpdated: false,
     })),

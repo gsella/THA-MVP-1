@@ -8,11 +8,10 @@ import {
 } from 'react-contextmenu';
 import Select from 'components/common/select/Select';
 import Input from 'components/common/input/InputField';
-import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
-import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
 import LightningIcon from 'assets/images/lightning-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../../propTypes/categoryType';
+import { impactNames } from 'constants/impactConstants';
 
 import 'assets/styles/components/data-table-dropdown.css';
 import 'assets/styles/components/data-table.css';
@@ -46,11 +45,10 @@ class TableRow extends React.Component {
 
   renderImpact() {
     const { namePrefix } = this.props;
-    const options = [
-      { value: 1, label: <ThumbsUp /> },
-      { value: 0, label: 'Impact' },
-      { value: -1, label: <ThumbsDown /> },
-    ];
+
+    const options = Object.keys(impactNames).map(key => {
+      return { value: impactNames[key].id, label: impactNames[key].name };
+    });
 
     return (
       <Select

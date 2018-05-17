@@ -1,4 +1,4 @@
-import IMPACTS from 'constants/impactConstants';
+import { IMPACTS } from 'constants/impactConstants';
 import * as d3 from 'd3';
 
 export function radiusHelper(tags, bubbles, categories, size) {
@@ -29,7 +29,7 @@ function getMaxСongestion(tags, impacts, bubbles) {
   impacts.forEach(impact => {
     tags.forEach(tag => {
       const currentBubbles = bubbles.filter(
-        bubble => bubble.tag === tag.name && bubble.popularity === impact
+        bubble => bubble.tag === tag.name && bubble.impact === impact
       );
       const items = currentBubbles.map(bubble => ({
         label: bubble.categoryKey,

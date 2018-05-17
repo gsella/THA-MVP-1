@@ -63,7 +63,8 @@ class TableGroup extends React.Component {
 }
 
 TableGroup.propTypes = {
-  groupName: PropTypes.string.isRequired,
+  groupName: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    .isRequired,
   content: PropTypes.array.isRequired,
   color: PropTypes.string,
 };

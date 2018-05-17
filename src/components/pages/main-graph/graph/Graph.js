@@ -32,7 +32,7 @@ class Graph extends React.Component {
         tagId: PropTypes.number.isRequired,
         categoryKey: PropTypes.string.isRequired,
         insight: PropTypes.string.isRequired,
-        popularity: PropTypes.number.isRequired,
+        impact: PropTypes.number.isRequired,
         instances: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
         category: PropTypes.shape({

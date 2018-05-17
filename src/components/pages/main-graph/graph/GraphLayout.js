@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { radiusHelper } from 'helper/radiusHelper';
 import TagsSection from './TagsSection';
-import IMPACTS from 'constants/impactConstants';
+import { IMPACTS } from 'constants/impactConstants';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { graphSizeHelper } from 'helper/graphSizeHelper';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
@@ -58,7 +58,7 @@ class GraphLayout extends React.Component {
         const currentBubbles = insights.filter(
           bubble =>
             bubble.tag === tag.name &&
-            bubble.popularity === impact &&
+            bubble.impact === impact &&
             !this.props.hiddenInsights.some(a => a === bubble.categoryKey)
         );
 

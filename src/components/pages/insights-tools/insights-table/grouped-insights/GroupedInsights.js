@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '../table-row/TableRowContainer';
 import TableGroup from '../table-group/TableGroup';
+import { impactNames } from 'constants/impactConstants';
 
 const mapGroupIdToProperty = {
   1: 'categories',
   2: 'tags',
+  3: 'impact',
 };
 
 const GroupedByCategoryInsights = props => {
@@ -25,17 +27,23 @@ const GroupedByCategoryInsights = props => {
 
   if (mapGroupIdToProperty[groupId] === 'tags') {
     Object.keys(tags).forEach(key => {
-      options[key] = { name: tags[key].name };
+      options[key] = { key: Number(key), name: tags[key].name };
     });
     filterField = 'tagId';
-  } else {
+  } else if (mapGroupIdToProperty[groupId] === 'categories') {
     Object.keys(categories).forEach(key => {
       options[key] = {
+        key: key,
         name: `${categories[key].name[0]} - ${categories[key].name}`,
         color: categories[key].color,
       };
     });
     filterField = 'categoryId';
+  } else {
+    Object.keys(impactNames).forEach(key => {
+      options[key] = { key: impactNames[key].id, name: impactNames[key].name };
+    });
+    filterField = 'impact';
   }
 
   let matchingData = formValues;
@@ -48,8 +56,9 @@ const GroupedByCategoryInsights = props => {
   }
 
   const groups = options.map((item, key) => {
-    const group = formValues.filter(item => item[filterField] === key);
-
+    const group = formValues.filter(
+      insight => insight[filterField] === item.key
+    );
     return (
       <TableGroup
         key={`-${key}`}

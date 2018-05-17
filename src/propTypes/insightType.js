@@ -6,7 +6,7 @@ export const insightType = PropTypes.shape({
   categoryKey: PropTypes.string.isRequired,
   tagId: PropTypes.number.isRequired,
   insight: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
+  impact: PropTypes.number.isRequired,
   instances: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
 });
