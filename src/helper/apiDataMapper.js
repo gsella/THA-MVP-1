@@ -9,5 +9,25 @@ export const mapInsightFromApi = insight => {
     instances: insight.InsightSize,
     description: insight.InsightDescription,
     order: insight.InsightOrder,
+
+    // fields that can be modified on server side only
+    popularity: insight.InsightPopularity,
+  };
+};
+
+export const mapInsightsFromPUTApi = insight => {
+  return {
+    id: insight.InsightKey,
+    categoryId: insight.CategoryKey,
+    tagId: insight.TagKey === 0 ? 1 : insight.TagKey,
+    categoryKey: insight.InsightId,
+    insight: insight.InsightName,
+    impact: insight.Impact,
+    instances: insight.Size,
+    description: insight.Description,
+    order: insight.InsightOrder,
+
+    // fields that can be modified on server side only
+    popularity: insight.Popularity,
   };
 };

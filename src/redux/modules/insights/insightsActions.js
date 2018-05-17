@@ -1,9 +1,13 @@
 import * as insightsApi from '../../../api/insightsApi';
-import { mapInsightFromApi } from '../../../helper/apiDataMapper';
+import {
+  mapInsightFromApi,
+  mapInsightsFromPUTApi,
+} from '../../../helper/apiDataMapper';
 import {
   GET_INSIGHTS,
   GET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
+  UPDATE_INSIGHTS,
 } from './insightsActionConstants';
 import { change } from 'redux-form';
 import history from 'components/containers/history';
@@ -110,13 +114,44 @@ export const getNewInsights = date => (dispatch, getState) => {
   );
 };
 
-export const updateInsights = () => (dispatch, getState) => {
-  history.push('/main-graph');
-
-  const insights = [...getState().form.insightsTable.values.insights];
+export const updateInsights = () => async (dispatch, getState) => {
+  const thunderKey = 4;
+  const insights = [...getState().form.insightsTable.values.insights].filter(
+    i => !i.isEmpty
+  );
+  const createdInsights = insights.filter(item => item.isCreated);
   const updatedInsights = insights.filter(item => item.isUpdated);
 
-  console.log(updatedInsights);
+  let promises = [];
+  const promisesPost = createdInsights.map(insight => {
+    return insightsApi.addInsight(insight);
+  });
+
+  if (updatedInsights.length) {
+    promises.push(insightsApi.updateInsights(thunderKey, updatedInsights));
+  }
+
+  promises = promises.concat(promisesPost);
+
+  const responses = await Promise.all(promises);
+
+  if (!responses.every(i => i.status === 200)) {
+    console.error("some response isn't successful", responses);
+    return;
+  }
+
+  if (updatedInsights.length) {
+    const updatedInsights = responses[0].data.insights.map(
+      mapInsightsFromPUTApi
+    );
+
+    dispatch({
+      type: UPDATE_INSIGHTS,
+      payload: updatedInsights,
+    });
+  }
+
+  history.push('/main-graph');
 };
 
 export const moveInsightUp = (id, categoryId) => (dispatch, getState) => {

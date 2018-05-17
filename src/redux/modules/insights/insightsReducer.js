@@ -2,6 +2,7 @@ import {
   GET_INSIGHTS,
   GET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
+  UPDATE_INSIGHTS,
 } from './insightsActionConstants';
 
 const defaultState = {
@@ -18,7 +19,8 @@ export default function(state = defaultState, { type, payload }) {
       return handleLoadingData(state, payload);
     case GET_NEW_INSIGHTS:
       return { ...state, newInsights: payload };
-
+    case UPDATE_INSIGHTS:
+      return handleUpdateInsihgts(state, payload);
     default:
       return state;
   }
@@ -30,4 +32,17 @@ function handleLoadingData(state, isDataLoading) {
 
 function handleGetInsights(state, { insights, isDataLoading }) {
   return { ...state, insights, isDataLoading };
+}
+
+function handleUpdateInsihgts(state, updatedInsights) {
+  const insights = [...state.insights].map(oldInsight => {
+    const updatedInsight = updatedInsights.find(i => i.id === oldInsight.id);
+
+    return updatedInsight || oldInsight;
+  });
+
+  return {
+    ...state,
+    insights,
+  };
 }
