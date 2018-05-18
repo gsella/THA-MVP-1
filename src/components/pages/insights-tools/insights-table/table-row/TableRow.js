@@ -220,7 +220,9 @@ class TableRow extends React.Component {
         <td className={bemClasses('cell', ['tag'])}>
           {this.addDropdownTrigger(item, this.renderTag())}
         </td>
-        <td className={bemClasses('cell')}>{this.renderImpact()}</td>
+        <td className={bemClasses('cell')}>
+          {this.addDropdownTrigger(item, this.renderImpact())}
+        </td>
       </tr>
     );
   }

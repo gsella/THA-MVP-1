@@ -12,8 +12,8 @@ class UngroupedInsights extends React.Component {
       categoryKeys,
       moveInsightUp,
       moveInsightDown,
+      formValues,
     } = this.props;
-    const formValues = fields.getAll();
     let matchingData = formValues;
 
     if (searchQuery.length > 0) {

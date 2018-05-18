@@ -12,6 +12,7 @@ const mapStateToProps = state => {
       insightsTableSelector(state, 'insights'),
       state.categories.categories
     ),
+    formValues: insightsTableSelector(state, 'insights'),
     tags: state.tags.tags,
     categories: state.categories.categories,
     searchQuery:
