@@ -34,9 +34,7 @@ export const getInsights = (thunderkey = 4, date) => async (
   }
 };
 
-export const getNewInsights = date => (dispatch, getState) => {
-  const { categories } = getState().categories;
-
+export const getNewInsights = date => dispatch => {
   // TODO: get new insights from server
   const newInsights = [
     {

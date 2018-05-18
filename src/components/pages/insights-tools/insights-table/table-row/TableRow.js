@@ -160,7 +160,7 @@ class TableRow extends React.Component {
   }
 
   render() {
-    const { isNew, item, namePrefix, categories, categoryKey } = this.props;
+    const { item, namePrefix, categories, categoryKey } = this.props;
     const textColorModifier = item.isNew ? { modifiers: 'is-new' } : {};
     const idCellModifiers = ['id', 'for-text'];
     const categoryCellModifiers = ['category'];
