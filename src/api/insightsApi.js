@@ -63,7 +63,7 @@ export const updateInsights = async (ThunderKey = 4, insights) => {
     CategoryKey: insight.categoryId,
     InsightOrder: insight.order,
     Impact: insight.impact,
-    isActive: insight.isActive,
+    IsActive: insight.isActive,
   }));
 
   const response = await axios.put(url, mappedInsights);
@@ -93,7 +93,7 @@ export const addInsight = async insight => {
         insightDate: insight.insightDate,
         InsightOrder: insight.order,
         InsightImpact: insight.impact,
-        isActive: insight.isActive,
+        IsActive: insight.isActive,
       },
     }
   );
