@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.react-contextmenu--visible {
+.react-contextmenu {
   min-width: 160px;
   padding: 5px 0;
   font-size: var(--font-size-small);
@@ -13,7 +13,16 @@
   background-clip: padding-box;
   -webkit-box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  outline: none;
+  pointer-events: none;
+  transition: opacity 250ms ease !important;
+}
+
+.react-contextmenu--visible {
+  opacity: 1;
   z-index: 1000;
+  pointer-events: auto;
 }
 
 .react-contextmenu-item {
@@ -22,6 +31,8 @@
   line-height: 35px;
   padding: 0 10px;
   color: #333;
+  outline: none;
+  cursor: pointer;
 }
 
 .react-contextmenu-item--disabled {
@@ -30,15 +41,6 @@
 
 .react-contextmenu-submenu {
   padding: 0;
-}
-
-.react-contextmenu {
-  opacity: 0;
-}
-
-.react-contextmenu--visible {
-  opacity: 1;
-  z-index: 1000;
 }
 
 .react-contextmenu-item--selected {
