@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import * as insightsApi from '../../../api/insightsApi';
 import {
   mapInsightFromApi,
@@ -112,11 +113,12 @@ export const getNewInsights = date => dispatch => {
 };
 
 export const updateInsights = () => async (dispatch, getState) => {
+  const { categories } = getState();
   const thunderKey = 4;
   const insights = [...getState().form.insightsTable.values.insights].filter(
     i => !i.isEmpty
   );
-  const createdInsights = insights.filter(item => item.isCreated);
+  const createdInsights = getCreatedInsights(insights, categories.categories);
   const updatedInsights = insights.filter(item => item.isUpdated);
 
   let promises = [];
@@ -229,3 +231,16 @@ export const moveInsightDown = (
     change('insightsTable', `insights[${nextIndex}].order`, currentOrder)
   );
 };
+
+function getCreatedInsights(insights, categories) {
+  const createdInsights = insights.filter(item => item.isCreated);
+
+  return createdInsights.map(i => {
+    const category = categories[i.categoryId];
+
+    i.insightId = `${category.abbreviation}${i.order}`;
+    i.insightDate = format(new Date(), 'YYYY-MM-DD');
+
+    return i;
+  });
+}

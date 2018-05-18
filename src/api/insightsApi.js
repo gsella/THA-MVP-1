@@ -63,6 +63,7 @@ export const updateInsights = async (ThunderKey = 4, insights) => {
     CategoryKey: insight.categoryId,
     InsightOrder: insight.order,
     Impact: insight.impact,
+    isActive: insight.isActive,
   }));
 
   const response = await axios.put(url, mappedInsights);
@@ -78,7 +79,7 @@ export const addInsight = async insight => {
     {
       params: {
         // insightKey: 1,
-        insightId: insight.categoryKey,
+        insightId: insight.insightId,
         insightName: insight.insight,
         insightScale: '0.0',
         insightCategoryKey: insight.categoryKey,
@@ -88,10 +89,11 @@ export const addInsight = async insight => {
         words: insight.insight,
         insightTagKey: insight.tagId,
         CategoryKey: insight.categoryId, // TODO: excess field ?
-        thunderKey: 4,
-        insightDate: '2018-05-17', // TODO: use today's date
+        thunderkey: 4,
+        insightDate: insight.insightDate,
         InsightOrder: insight.order,
         InsightImpact: insight.impact,
+        isActive: insight.isActive,
       },
     }
   );
