@@ -61,7 +61,7 @@ const GroupedByCategoryInsights = props => {
 
     return (
       <TableGroup
-        key={`-${key}`}
+        key={`${item.name}-${key}`}
         groupName={item.name}
         color={'color' in item ? item.color : null}
         content={formValues
