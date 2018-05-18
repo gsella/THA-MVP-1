@@ -1,6 +1,6 @@
 import {
   GET_INSIGHTS,
-  GET_INSIGHTS_PENDING,
+  SET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
   UPDATE_INSIGHTS,
 } from './insightsActionConstants';
@@ -15,7 +15,7 @@ export default function(state = defaultState, { type, payload }) {
   switch (type) {
     case GET_INSIGHTS:
       return handleGetInsights(state, payload);
-    case GET_INSIGHTS_PENDING:
+    case SET_INSIGHTS_PENDING:
       return handleLoadingData(state, payload);
     case GET_NEW_INSIGHTS:
       return { ...state, newInsights: payload };
@@ -30,8 +30,8 @@ function handleLoadingData(state, isDataLoading) {
   return { ...state, isDataLoading };
 }
 
-function handleGetInsights(state, { insights, isDataLoading }) {
-  return { ...state, insights, isDataLoading };
+function handleGetInsights(state, insights) {
+  return { ...state, insights };
 }
 
 function handleUpdateInsihgts(state, updatedInsights) {

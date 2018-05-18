@@ -64,6 +64,7 @@ class DatePicker extends React.Component {
       onSelect: input.onChange,
       defaultDate: new Date(),
       setDefaultDate: true,
+      maxDate: new Date(),
       ...this.props.initialOptions,
     });
 

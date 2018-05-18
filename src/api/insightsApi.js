@@ -1,11 +1,37 @@
 import axios from 'axios';
 import { getApiBaseUrl } from '../helper/apiHelper';
 
-export const getInsights = async thunderkey => {
+export const getInsights = async (thunderkey, endDate) => {
   const url = getApiBaseUrl('/Insight');
   const response = await axios.get(url, {
     params: {
       thunderkey,
+      startDate: '1970-01-01',
+      endDate,
+    },
+  });
+
+  const result = {
+    status: response.status,
+    data: [],
+  };
+
+  if (!response.status === 200) {
+    return result;
+  }
+
+  result.data = response.data.list;
+
+  return result;
+};
+
+export const getNewInsights = async (thunderkey, startDate, endDate) => {
+  const url = getApiBaseUrl('/Insight');
+  const response = await axios.get(url, {
+    params: {
+      thunderkey,
+      startDate,
+      endDate,
     },
   });
 

@@ -5,7 +5,7 @@ import {
 } from '../../../helper/apiDataMapper';
 import {
   GET_INSIGHTS,
-  GET_INSIGHTS_PENDING,
+  SET_INSIGHTS_PENDING,
   GET_NEW_INSIGHTS,
   UPDATE_INSIGHTS,
 } from './insightsActionConstants';
@@ -17,7 +17,7 @@ export const getInsights = (thunderkey = 4, date) => async (
   dispatch,
   getState
 ) => {
-  dispatch({ type: GET_INSIGHTS_PENDING, payload: true });
+  dispatch({ type: SET_INSIGHTS_PENDING, payload: true });
   const { categories } = getState().categories;
 
   const response = await insightsApi.getInsights(thunderkey);
@@ -25,13 +25,12 @@ export const getInsights = (thunderkey = 4, date) => async (
   if (response.status === 200) {
     dispatch({
       type: GET_INSIGHTS,
-      payload: {
-        insights: response.data
-          .map(mapInsightFromApi)
-          .sort(sortInsightsByCategoryAndOrder(categories)),
-        isDataLoading: false,
-      },
+      payload: response.data
+        .map(mapInsightFromApi)
+        .sort(sortInsightsByCategoryAndOrder(categories)),
     });
+
+    dispatch({ type: SET_INSIGHTS_PENDING, payload: false });
   }
 };
 
@@ -150,6 +149,11 @@ export const updateInsights = () => async (dispatch, getState) => {
       payload: updatedInsights,
     });
   }
+
+  dispatch({
+    type: GET_NEW_INSIGHTS,
+    payload: [],
+  });
 
   history.push('/main-graph');
 };

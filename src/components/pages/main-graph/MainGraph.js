@@ -55,20 +55,18 @@ class MainGraph extends React.Component {
 
   async componentDidMount() {
     await this.props.getInsights();
-    this.props.getNewInsights();
   }
 
   toggleFullScreenGraph() {
     this.setState({ isFullScreen: !this.state.isFullScreen });
   }
 
-  handleDateChange = async date => {
-    //TODO: handle date
-    await this.props.refreshThunder();
+  handleDateChange = async () => {
+    await this.props.refreshThunder(4, this.props.selectedDate);
   };
 
   async refreshThunder() {
-    await this.props.refreshThunder();
+    await this.props.refreshThunder(4, this.props.selectedDate);
   }
 
   renderRefreshingPreloader() {
