@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import app from './modules/app/reducer';
+import graphPage from './modules/graphPage/graphPageReducer';
 import categories from './modules/categories/categoriesReducer';
 import insights from './modules/insights/insightsReducer';
 import tags from './modules/tags/tagsReducer';
 
 const rootReducer = combineReducers({
-  app,
+  graphPage,
   categories,
   insights,
   tags,

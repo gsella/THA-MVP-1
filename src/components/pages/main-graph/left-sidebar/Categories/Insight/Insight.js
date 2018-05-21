@@ -10,8 +10,24 @@ const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);
 
 class Insight extends React.Component {
-  toggleVisibleCategory() {
-    this.props.hidingInsight(this.props.categoryKey);
+  toggleVisibleInsight() {
+    const { categoryKey, categoryId, hideInsight } = this.props;
+
+    hideInsight(categoryKey, categoryId);
+  }
+
+  renderEyeIcon() {
+    return (
+      <Eye
+        size={16}
+        onClick={() => this.toggleVisibleInsight()}
+        className={bemClasses('insight', 'visible-icon')}
+      />
+    );
+  }
+
+  renderEyeSlashIcon() {
+    return <EyeSlash size={16} onClick={() => this.toggleVisibleInsight()} />;
   }
 
   render() {
@@ -27,20 +43,9 @@ class Insight extends React.Component {
             &#8210; {this.props.insight}
           </span>
           <span className={bemClasses('insight', 'eye-icon')}>
-            {!this.props.hiddenInsights.some(
-              insight => insight === this.props.categoryKey
-            ) ? (
-              <Eye
-                size={14}
-                onClick={() => this.toggleVisibleCategory()}
-                className={bemClasses('insight', 'visible-icon')}
-              />
-            ) : (
-              <EyeSlash
-                size={14}
-                onClick={() => this.toggleVisibleCategory()}
-              />
-            )}
+            {this.props.isInsightShown
+              ? this.renderEyeIcon()
+              : this.renderEyeSlashIcon()}
           </span>
         </span>
       </Panel.Body>
@@ -52,7 +57,8 @@ Insight.propTypes = {
   id: PropTypes.number.isRequired,
   insight: PropTypes.string.isRequired,
   categoryKey: PropTypes.string.isRequired,
-  hiddenInsights: PropTypes.arrayOf(PropTypes.string).isRequired,
+  categoryId: PropTypes.number.isRequired,
+  isInsightShown: PropTypes.bool.isRequired,
 };
 
 export default Insight;

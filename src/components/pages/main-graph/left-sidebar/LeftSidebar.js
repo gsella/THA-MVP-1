@@ -20,6 +20,7 @@ class LeftSidebar extends React.Component {
     categories: PropTypes.object.isRequired,
     insights: insightsType.isRequired,
     getInsights: PropTypes.func.isRequired,
+    hideCategory: PropTypes.func.isRequired,
   };
 
   getChartData() {
@@ -32,6 +33,7 @@ class LeftSidebar extends React.Component {
           data: [],
           color: categories[item.categoryId].color,
           abbreviation: categories[item.categoryId].abbreviation,
+          categoryId: item.categoryId,
         };
 
         res[category.name].data.push(item);
@@ -44,6 +46,7 @@ class LeftSidebar extends React.Component {
         color: insightsObj[key].color,
         data: insightsObj[key].data,
         abbreviation: insightsObj[key].abbreviation,
+        categoryId: insightsObj[key].categoryId,
       }));
     }
   }
@@ -72,6 +75,9 @@ class LeftSidebar extends React.Component {
             <Category
               categories={this.getChartData()}
               hiddenInsights={this.props.hiddenInsights}
+              toggleVisibleCategory={(categoryId, abbreviation) =>
+                this.props.hideCategory(categoryId, abbreviation)
+              }
             />
           )}
         </div>

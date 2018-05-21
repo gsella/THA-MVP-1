@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import LeftSidebar from './LeftSidebar';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
+import { hideCategory } from '../../../../redux/modules/graphPage/graphPageActions';
 import { insightsKeySelector } from '../../../../redux/selectors/insightsKeySelector';
 
 const mapStateToProps = state => ({
@@ -9,11 +10,12 @@ const mapStateToProps = state => ({
     state.insights.insights,
     state.categories.categories
   ),
-  hiddenInsights: state.app.hiddenInsights,
+  hiddenInsights: state.graphPage.hiddenInsights,
 });
 
 const mapDispatchToProps = {
   getInsights,
+  hideCategory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftSidebar);

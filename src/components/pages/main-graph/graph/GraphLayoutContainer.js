@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
     state.insights.insights,
     state.categories.categories
   ),
-  hiddenInsights: state.app.hiddenInsights,
+  hiddenInsights: state.graphPage.hiddenInsights,
 });
 
 export default connect(mapStateToProps, null)(GraphLayout);

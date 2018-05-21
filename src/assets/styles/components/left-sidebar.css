@@ -60,6 +60,26 @@
   font-weight: 900;
 }
 
+.left-sidebar__category--title {
+  display: flex;
+}
+
+.left-sidebar__category--visible-icon {
+  display: none;
+}
+
+.left-sidebar__category--icon-align {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.left-sidebar__category--background:hover
+  .left-sidebar__category--visible-icon {
+  display: flex;
+}
+
 .left-sidebar__insight--background:hover {
   background-color: #d5d5d5;
   cursor: pointer;
@@ -83,5 +103,5 @@
 }
 
 .left-sidebar__insight--description {
-  padding-right: 14px;
+  padding-right: 10px;
 }

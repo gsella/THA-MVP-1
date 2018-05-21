@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
+import Eye from 'react-icons/lib/fa/eye';
+import EyeSlash from 'react-icons/lib/fa/eye-slash';
 import Insight from './Insight/InsightContainer';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/components/left-sidebar.css';
@@ -9,11 +11,43 @@ const leftSidebar = 'left-sidebar';
 const bemClasses = getBEMClasses([leftSidebar]);
 
 class Category extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      isVisible: true,
-    };
+  isCategoryShown(categoryId) {
+    return !(
+      this.props.hiddenInsights[categoryId] &&
+      this.props.hiddenInsights[categoryId].isAllInsightsInCategory
+    );
+  }
+
+  isInsightShown(categoryId, categoryKey) {
+    return !(
+      this.props.hiddenInsights[categoryId] &&
+      this.props.hiddenInsights[categoryId].categoryKeys.some(
+        insight => insight === categoryKey
+      )
+    );
+  }
+
+  renderEyeIcon(categoryId, abbreviation) {
+    return (
+      <Eye
+        size={16}
+        className={bemClasses('category', 'visible-icon')}
+        onClick={() =>
+          this.props.toggleVisibleCategory(categoryId, abbreviation)
+        }
+      />
+    );
+  }
+
+  renderEyeSlashIcon(categoryId, abbreviation) {
+    return (
+      <EyeSlash
+        size={16}
+        onClick={() =>
+          this.props.toggleVisibleCategory(categoryId, abbreviation)
+        }
+      />
+    );
   }
 
   renderPanelData() {
@@ -28,12 +62,19 @@ class Category extends React.Component {
             'disable-border',
             'padding-heading',
           ])}>
-          <Panel.Title toggle className={bemClasses('category', 'underline')}>
-            <span className={bemClasses('category', 'id')}>
-              {item.abbreviation}
-            </span>
-            <span> &#8210; {item.category}</span>
-          </Panel.Title>
+          <div className={bemClasses('category', ['title', 'background'])}>
+            <Panel.Title toggle className={bemClasses('category', 'underline')}>
+              <span className={bemClasses('category', 'id')}>
+                {item.abbreviation}
+              </span>
+              <span> &#8210; {item.category}</span>
+            </Panel.Title>
+            <div className={bemClasses('category', 'icon-align')}>
+              {this.isCategoryShown(item.categoryId)
+                ? this.renderEyeIcon(item.categoryId, item.abbreviation)
+                : this.renderEyeSlashIcon(item.categoryId, item.abbreviation)}
+            </div>
+          </div>
         </Panel.Heading>
         <Panel.Collapse className={bemClasses('insight')}>
           {item.data.map(data => (
@@ -41,8 +82,12 @@ class Category extends React.Component {
               key={data.id}
               id={data.id}
               categoryKey={data.categoryKey}
+              categoryId={data.categoryId}
               insight={data.insight}
-              hiddenInsights={this.props.hiddenInsights}
+              isInsightShown={this.isInsightShown(
+                data.categoryId,
+                data.categoryKey
+              )}
             />
           ))}
         </Panel.Collapse>
@@ -65,7 +110,8 @@ class Category extends React.Component {
 
 Category.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  hiddenInsights: PropTypes.arrayOf(PropTypes.string).isRequired,
+  hiddenInsights: PropTypes.object.isRequired,
+  toggleVisibleCategory: PropTypes.func,
 };
 
 export default Category;

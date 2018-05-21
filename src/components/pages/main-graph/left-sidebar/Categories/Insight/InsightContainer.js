@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import * as actions from 'redux/modules/app/actions';
+import * as actions from 'redux/modules/graphPage/graphPageActions';
 import Insight from './Insight';
 
 const mapDispatchToProps = {
-  hidingInsight: actions.hidingInsight,
+  hideInsight: actions.hideInsight,
 };
 
 export default connect(null, mapDispatchToProps)(Insight);

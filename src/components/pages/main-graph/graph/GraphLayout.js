@@ -27,6 +27,7 @@ class GraphLayout extends React.Component {
     categories: PropTypes.object.isRequired,
     insights: PropTypes.array.isRequired,
     fullScreen: PropTypes.bool.isRequired,
+    hiddenInsights: PropTypes.object.isRequired,
   };
 
   renderLaunchingPreloader() {
@@ -59,7 +60,12 @@ class GraphLayout extends React.Component {
           bubble =>
             bubble.tag === tag.name &&
             bubble.impact === impact &&
-            !this.props.hiddenInsights.some(a => a === bubble.categoryKey)
+            !(
+              this.props.hiddenInsights[bubble.categoryId] &&
+              this.props.hiddenInsights[bubble.categoryId].categoryKeys.some(
+                key => key === bubble.categoryKey
+              )
+            )
         );
 
         const items = currentBubbles.map(bubble => ({

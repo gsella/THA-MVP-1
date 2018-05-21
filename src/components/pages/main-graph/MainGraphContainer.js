@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import * as actions from 'redux/modules/app/actions';
 import MainGraph from './MainGraph';
+import { refreshThunder } from 'redux/modules/graphPage/graphPageActions';
 import {
   getInsights,
   getNewInsights,
@@ -19,7 +19,7 @@ const mapStateToProps = state => {
       state.categories.categories
     ),
     newInsights: state.insights.newInsights,
-    isRefresh: state.app.isRefresh,
+    isRefresh: state.graphPage.isRefresh,
     isDataLoading: state.insights.isDataLoading,
     selectedDate: mainGraphDatepickersSelector(state, 'selectedDate'),
   };
@@ -28,7 +28,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getInsights,
   getNewInsights,
-  refreshThunder: actions.refreshThunder,
+  refreshThunder,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainGraph);
