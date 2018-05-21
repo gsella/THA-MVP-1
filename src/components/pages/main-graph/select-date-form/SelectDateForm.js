@@ -7,14 +7,9 @@ import 'assets/styles/components/select-date-form.css';
 const selectDateForm = 'select-date-form';
 const bemClasses = getBEMClasses([selectDateForm]);
 
-const DataPickersForm = props => {
-  const { handleSubmit } = props;
-
+const DataPickersForm = () => {
   return (
-    <form
-      onSubmit={handleSubmit}
-      onBlur={handleSubmit}
-      className={bemClasses()}>
+    <form className={bemClasses()}>
       <div className={bemClasses('input')}>
         <DatePickerWrapper name="selectedDate" label="Select date:" />
       </div>

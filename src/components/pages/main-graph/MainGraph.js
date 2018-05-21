@@ -15,9 +15,9 @@ import LeftSidebarContainer from './left-sidebar/LeftSidebarContainer';
 import GraphLayout from './graph/GraphLayoutContainer';
 import Notification from 'components/containers/Notification';
 import Preloader from 'components/common/preloader/Preloader';
-import DateInfo from './DateInfo';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/components/main-graph.css';
+import SelectDateForm from './select-date-form/SelectDateForm';
 
 const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);
@@ -60,10 +60,6 @@ class MainGraph extends React.Component {
   toggleFullScreenGraph() {
     this.setState({ isFullScreen: !this.state.isFullScreen });
   }
-
-  handleDateChange = async () => {
-    await this.props.refreshThunder(4, this.props.selectedDate);
-  };
 
   async refreshThunder() {
     await this.props.refreshThunder(4, this.props.selectedDate);
@@ -189,6 +185,15 @@ class MainGraph extends React.Component {
     );
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.selectedDate &&
+      prevProps.selectedDate !== this.props.selectedDate
+    ) {
+      this.props.refreshThunder(4, this.props.selectedDate);
+    }
+  }
+
   render() {
     const { isDataLoading } = this.props;
 
@@ -203,7 +208,7 @@ class MainGraph extends React.Component {
                 <div className={bemClasses('graph-layout-wrapper')}>
                   {this.renderGraphLayout()}
                 </div>
-                <DateInfo handleDateChange={this.handleDateChange} />
+                <SelectDateForm />
               </React.Fragment>
             ) : (
               this.renderLaunchingPreloader()

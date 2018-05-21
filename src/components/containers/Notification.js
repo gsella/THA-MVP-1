@@ -42,7 +42,7 @@ class Notification extends React.Component {
             alt="thunder-icon"
             width={20}
             height={20}
-          />{' '}
+          />
           &nbsp;
           <span>{this.props.numberInsights} new insights found</span>
         </div>
@@ -69,9 +69,7 @@ class Notification extends React.Component {
   render() {
     return (
       <Link to="/create-insights" className="disable-default-a-style">
-        <div>
-          <NotificationContainer />
-        </div>
+        <NotificationContainer />
       </Link>
     );
   }
