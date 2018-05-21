@@ -27,7 +27,7 @@
 
 .main-graph__graph-layout-wrapper {
   width: 100%;
-  height: calc(100% - 125px);
+  height: calc(100% - 40px);
   display: flex;
 }
 

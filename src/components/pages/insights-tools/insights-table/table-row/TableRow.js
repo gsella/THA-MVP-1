@@ -161,7 +161,6 @@ class TableRow extends React.Component {
 
   render() {
     const { item, namePrefix, categories, categoryKey } = this.props;
-    const textColorModifier = item.isNew ? { modifiers: 'is-new' } : {};
     const idCellModifiers = ['id', 'for-text'];
     const categoryCellModifiers = ['category'];
 
@@ -174,9 +173,7 @@ class TableRow extends React.Component {
 
     if (!this.props.item.isActive) return null;
     return (
-      <tr
-        className={bemClasses(textColorModifier)}
-        id={`editable-row-${item.id}`}>
+      <tr id={`editable-row-${item.id}`}>
         <td className={bemClasses('cell', 'for-icons')}>
           {item.isNew ? (
             <img

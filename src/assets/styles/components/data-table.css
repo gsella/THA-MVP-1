@@ -10,10 +10,6 @@
   width: 100%;
 }
 
-.data-table-row--is-new {
-  color: rgba(34, 34, 34, 0.5);
-}
-
 .data-table-row__cell {
   background-color: #fff;
   text-align: center;
