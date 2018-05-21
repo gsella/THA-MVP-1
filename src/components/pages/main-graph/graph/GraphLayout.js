@@ -60,6 +60,7 @@ class GraphLayout extends React.Component {
           bubble =>
             bubble.tag === tag.name &&
             bubble.impact === impact &&
+            bubble.isActive &&
             !(
               this.props.hiddenInsights[bubble.categoryId] &&
               this.props.hiddenInsights[bubble.categoryId].categoryKeys.some(

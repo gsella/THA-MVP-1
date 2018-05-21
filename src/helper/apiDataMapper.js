@@ -9,6 +9,7 @@ export const mapInsightFromApi = insight => {
     instances: insight.InsightSize,
     description: insight.InsightDescription,
     order: insight.InsightOrder,
+    isActive: insight.isActive,
 
     // fields that can be modified on server side only
     popularity: insight.InsightPopularity,
@@ -26,6 +27,7 @@ export const mapInsightsFromPUTApi = insight => {
     instances: insight.Size,
     description: insight.Description,
     order: insight.InsightOrder,
+    isActive: insight.IsActive,
 
     // fields that can be modified on server side only
     popularity: insight.Popularity,

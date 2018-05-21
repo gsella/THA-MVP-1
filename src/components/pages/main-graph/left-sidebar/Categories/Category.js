@@ -27,6 +27,56 @@ class Category extends React.Component {
     );
   }
 
+  renderInsights(insights) {
+    return insights.map(data => (
+      <Insight
+        key={data.id}
+        id={data.id}
+        categoryKey={data.categoryKey}
+        categoryId={data.categoryId}
+        insight={data.insight}
+        isInsightShown={this.isInsightShown(data.categoryId, data.categoryKey)}
+      />
+    ));
+  }
+
+  renderCategory(insights) {
+    const filteredByActiveInsights = insights.data.filter(i => i.isActive);
+
+    if (filteredByActiveInsights.length === 0) {
+      return;
+    }
+    return (
+      <React.Fragment>
+        <Panel.Heading
+          className={bemClasses('category', [
+            'disable-border',
+            'padding-heading',
+          ])}>
+          <div className={bemClasses('category', ['title', 'background'])}>
+            <Panel.Title toggle className={bemClasses('category', 'underline')}>
+              <span className={bemClasses('category', 'id')}>
+                {insights.abbreviation}
+              </span>
+              <span> &#8210; {insights.category}</span>
+            </Panel.Title>
+            <div className={bemClasses('category', 'icon-align')}>
+              {this.isCategoryShown(insights.categoryId)
+                ? this.renderEyeIcon(insights.categoryId, insights.abbreviation)
+                : this.renderEyeSlashIcon(
+                    insights.categoryId,
+                    insights.abbreviation
+                  )}
+            </div>
+          </div>
+        </Panel.Heading>
+        <Panel.Collapse className={bemClasses('insight')}>
+          {this.renderInsights(filteredByActiveInsights)}
+        </Panel.Collapse>
+      </React.Fragment>
+    );
+  }
+
   renderEyeIcon(categoryId, abbreviation) {
     return (
       <Eye
@@ -57,40 +107,7 @@ class Category extends React.Component {
         key={item.category}
         style={{ borderLeft: `8px solid ${item.color}` }}
         className={bemClasses('category', 'disable-border')}>
-        <Panel.Heading
-          className={bemClasses('category', [
-            'disable-border',
-            'padding-heading',
-          ])}>
-          <div className={bemClasses('category', ['title', 'background'])}>
-            <Panel.Title toggle className={bemClasses('category', 'underline')}>
-              <span className={bemClasses('category', 'id')}>
-                {item.abbreviation}
-              </span>
-              <span> &#8210; {item.category}</span>
-            </Panel.Title>
-            <div className={bemClasses('category', 'icon-align')}>
-              {this.isCategoryShown(item.categoryId)
-                ? this.renderEyeIcon(item.categoryId, item.abbreviation)
-                : this.renderEyeSlashIcon(item.categoryId, item.abbreviation)}
-            </div>
-          </div>
-        </Panel.Heading>
-        <Panel.Collapse className={bemClasses('insight')}>
-          {item.data.map(data => (
-            <Insight
-              key={data.id}
-              id={data.id}
-              categoryKey={data.categoryKey}
-              categoryId={data.categoryId}
-              insight={data.insight}
-              isInsightShown={this.isInsightShown(
-                data.categoryId,
-                data.categoryKey
-              )}
-            />
-          ))}
-        </Panel.Collapse>
+        {this.renderCategory(item)}
       </Panel>
     ));
   }

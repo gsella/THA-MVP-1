@@ -12,7 +12,6 @@ const insightsArrayToObject = (insights, newInsights) => {
     insights: insights.concat(newInsights).map(item => ({
       ...item,
       isNew: item.isNew ? item.isNew : false,
-      isActive: true,
       isUpdated: false,
     })),
   };

@@ -20,7 +20,7 @@ export default function(state = defaultState, { type, payload }) {
     case GET_NEW_INSIGHTS:
       return { ...state, newInsights: payload };
     case UPDATE_INSIGHTS:
-      return handleUpdateInsihgts(state, payload);
+      return handleUpdateInsights(state, payload);
     default:
       return state;
   }
@@ -34,7 +34,7 @@ function handleGetInsights(state, insights) {
   return { ...state, insights };
 }
 
-function handleUpdateInsihgts(state, updatedInsights) {
+function handleUpdateInsights(state, updatedInsights) {
   const insights = [...state.insights].map(oldInsight => {
     const updatedInsight = updatedInsights.find(i => i.id === oldInsight.id);
 

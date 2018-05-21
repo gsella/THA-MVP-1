@@ -22,7 +22,7 @@ const defaultState = {
       id: 4,
       name: 'Custom',
       color: '#4a90e2',
-      abbreviation: 'U',
+      abbreviation: 'CU',
     },
     5: {
       id: 5,
