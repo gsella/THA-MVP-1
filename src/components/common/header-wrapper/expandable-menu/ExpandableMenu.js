@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getBEMClasses } from 'helper/BEMHelper';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
@@ -36,14 +35,13 @@ class ExpandableMenu extends React.Component {
         </div>
         <ul className={bemClasses('list')}>
           <li className={bemClasses('list-element')}>
-            <Link to="/" className={bemClasses('link')}>
-              Thunders Dashboard
-            </Link>
+            <a className={bemClasses('link')}>Thunders Dashboard</a>
           </li>
           <li className={bemClasses('list-element')}>
             <a
               href="https://thunderact.com/"
               target="_blank"
+              rel="noopener noreferrer"
               className={bemClasses('link')}>
               About
             </a>
@@ -52,6 +50,7 @@ class ExpandableMenu extends React.Component {
             <a
               href="https://thunderact.com/help"
               target="_blank"
+              rel="noopener noreferrer"
               className={bemClasses('link')}>
               Help
             </a>

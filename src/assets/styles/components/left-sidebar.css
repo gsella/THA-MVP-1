@@ -2,7 +2,7 @@
   background-color: var(--bgcolor-default);
   min-width: var(--width-sidebar);
   width: var(--width-sidebar);
-  height: 100vh;
+  height: 100%;
   overflow: auto;
 }
 

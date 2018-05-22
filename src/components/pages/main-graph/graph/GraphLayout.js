@@ -7,8 +7,6 @@ import { IMPACTS } from 'constants/impactConstants';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { graphSizeHelper } from 'helper/graphSizeHelper';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
-import Preloader from 'components/common/preloader/Preloader';
-import ThunderIcon from 'assets/images/lightning-blue-background.svg';
 
 import 'assets/styles/components/graph-layout.css';
 import Graph from './Graph';
@@ -29,19 +27,6 @@ class GraphLayout extends React.Component {
     fullScreen: PropTypes.bool.isRequired,
     hiddenInsights: PropTypes.object.isRequired,
   };
-
-  renderLaunchingPreloader() {
-    return (
-      <Preloader
-        preloadIcon={<img src={ThunderIcon} alt="preloader-icon" width={150} />}
-        title="Launching your Thunder..."
-        description={
-          'Depending om the amount of data, fetching it can take a while or two.' +
-          '\n Good time to make yourself a cup of something'
-        }
-      />
-    );
-  }
 
   renderGraphs = (impact, radiuses, graphSize) => {
     const { tags, categories, insights } = this.props;

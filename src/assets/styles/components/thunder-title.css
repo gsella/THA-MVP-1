@@ -1,0 +1,9 @@
+.thunder-title {
+  display: flex;
+  justify-content: center;
+  font-size: var(--font-size-large);
+  font-weight: 900;
+  position: relative;
+  top: -50px;
+  margin-bottom: -20px;
+}

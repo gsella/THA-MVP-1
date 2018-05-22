@@ -16,8 +16,8 @@ import GraphLayout from './graph/GraphLayoutContainer';
 import Notification from 'components/containers/Notification';
 import Preloader from 'components/common/preloader/Preloader';
 import { getBEMClasses } from 'helper/BEMHelper';
-import 'assets/styles/components/main-graph.css';
 import SelectDateForm from './select-date-form/SelectDateForm';
+import 'assets/styles/components/main-graph.css';
 
 const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);
@@ -104,7 +104,7 @@ class MainGraph extends React.Component {
 
   renderNavigationIcons() {
     return (
-      <div style={{ position: 'fixed', right: 0 }}>
+      <div>
         <div className={bemClasses('navigate-icons')}>
           <div className={bemClasses('navigate-icons', 'self-icon')}>
             <FontAwesomeIcon

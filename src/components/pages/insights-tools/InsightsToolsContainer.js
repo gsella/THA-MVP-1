@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 import InsightsTools from './InsightsTools';
 import { reduxForm, formValueSelector } from 'redux-form';
 import categoryFroupConstants from 'constants/categoryGroupConstants';
-import { getInsights } from '../../../redux/modules/insights/insightsActions';
+import {
+  getInsights,
+  updateInsights,
+} from '../../../redux/modules/insights/insightsActions';
 
 const mapStateToProps = state => {
   const groupingDropdownSelector = formValueSelector('dropdownByGroup');
@@ -15,6 +18,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getInsights,
+  updateInsights,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTools);

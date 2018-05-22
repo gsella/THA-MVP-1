@@ -1,0 +1,13 @@
+.footer {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  background-color: var(--bgcolor-white);
+  display: flex;
+  padding: 10px 50px;
+}
+
+.footer--for-insights {
+  justify-content: flex-end;
+}

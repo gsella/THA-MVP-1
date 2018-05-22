@@ -3,6 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  top: -50px;
 }
 
 .select-date-form__input {

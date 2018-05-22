@@ -3,7 +3,8 @@ import SearchForm from './search-form/SearchForm';
 import PropTypes from 'prop-types';
 import Select from 'components/common/select/Select';
 import InsightsTable from './insights-table/InsightsTableContainer';
-import ConfigurationPageWrapperContainer from 'components/common/configuration-page-wrapper/ConfigurationPageWrapperContainer';
+import InsightsFooter from './insights-footer/InsightsFooter';
+import ThunderTitle from 'components/common/thunder-title/ThunderTitle';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/components/insights-tools.css';
 
@@ -17,12 +18,6 @@ class InsightsTools extends React.Component {
       isGrouped: false,
     };
   }
-
-  static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    groupId: PropTypes.number,
-  };
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const groupId = nextProps.groupId;
     if (groupId !== undefined) {
@@ -43,19 +38,19 @@ class InsightsTools extends React.Component {
     return null;
   }
 
-  handleSearch(querry) {
-    if ('searchForm' in querry) {
-      if (querry.searchForm.trim().length > 0) {
-        this.props.getMatchingData(querry.searchForm);
-      }
-    }
-  }
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    groupId: PropTypes.number,
+    updateInsights: PropTypes.func.isRequired,
+  };
 
   render() {
     const { items } = this.props;
 
     return (
-      <ConfigurationPageWrapperContainer>
+      <React.Fragment>
+        <ThunderTitle title="Gogoro 2 Series" />
+
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
             <SearchForm />
@@ -68,7 +63,9 @@ class InsightsTools extends React.Component {
           </div>
           <InsightsTable isGrouped={this.state.isGrouped} />
         </div>
-      </ConfigurationPageWrapperContainer>
+
+        <InsightsFooter updateInsights={this.props.updateInsights} />
+      </React.Fragment>
     );
   }
 }
