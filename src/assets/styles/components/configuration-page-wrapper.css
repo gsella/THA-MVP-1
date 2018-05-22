@@ -30,6 +30,7 @@
   width: 1.3rem;
   height: 1.3rem;
   color: #26394d;
+  cursor: pointer;
 }
 
 .configuration-page-wrapper__footer {

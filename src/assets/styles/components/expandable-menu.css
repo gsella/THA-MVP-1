@@ -1,0 +1,47 @@
+.expandable-menu {
+  background-color: var(--bgcolor-default);
+  position: fixed;
+  top: 0;
+  left: -255px;
+  width: 255px;
+  height: 100%;
+  transition: left 250ms ease !important;
+  z-index: 100;
+}
+
+.expandable-menu--visible {
+  left: 0;
+}
+
+.expandable-menu__menu-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px 15px 0 0;
+  cursor: pointer;
+}
+
+.expandable-menu__list {
+  list-style-type: none;
+  margin-top: 60px;
+  padding-left: 30px;
+}
+
+.expandable-menu__list-element {
+  margin: 15px 0;
+}
+
+.expandable-menu__link,
+.expandable-menu__link:active,
+.expandable-menu__link:hover {
+  list-style-type: none;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: var(--font-size-small);
+  color: #222;
+}
+
+.expandable-menu__logo {
+  margin: 30px auto 0;
+  display: block;
+}

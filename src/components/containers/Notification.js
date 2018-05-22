@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import FontAesomeIcon from '@fortawesome/react-fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/fontawesome-free-regular';
 import {
   NotificationContainer,
@@ -28,7 +28,7 @@ class Notification extends React.Component {
   notificationMessage = () => {
     return (
       <div>
-        <FontAesomeIcon
+        <FontAwesomeIcon
           onClick={this.removeNotification}
           icon={faTimesCircle}
           style={{
