@@ -14,6 +14,7 @@ class Notification extends React.Component {
   static propTypes = {
     thunderIcon: PropTypes.string.isRequired,
     numberInsights: PropTypes.number.isRequired,
+    onClose: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -63,7 +64,8 @@ class Notification extends React.Component {
   removeNotification = e => {
     e.preventDefault();
 
-    return () => NotificationManager.remove({ id: 1 });
+    this.props.onClose();
+    NotificationManager.remove({ id: 1 });
   };
 
   render() {

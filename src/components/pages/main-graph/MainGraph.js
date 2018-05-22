@@ -28,6 +28,7 @@ class MainGraph extends React.Component {
     this.state = {
       isFullScreen: false,
       zoom: 1,
+      isHiddenNotification: false,
     };
   }
 
@@ -63,6 +64,7 @@ class MainGraph extends React.Component {
 
   async refreshThunder() {
     await this.props.refreshThunder(4, this.props.selectedDate);
+    this.setState({ isHiddenNotification: false });
   }
 
   renderRefreshingPreloader() {
@@ -190,7 +192,7 @@ class MainGraph extends React.Component {
       prevProps.selectedDate &&
       prevProps.selectedDate !== this.props.selectedDate
     ) {
-      this.props.refreshThunder(4, this.props.selectedDate);
+      this.refreshThunder();
     }
   }
 
@@ -216,12 +218,14 @@ class MainGraph extends React.Component {
           </div>
         </div>
 
-        {this.props.newInsights.length > 0 && (
-          <Notification
-            thunderIcon={ThunderIconSmall}
-            numberInsights={this.props.newInsights.length}
-          />
-        )}
+        {!this.state.isHiddenNotification &&
+          this.props.newInsights.length > 0 && (
+            <Notification
+              thunderIcon={ThunderIconSmall}
+              numberInsights={this.props.newInsights.length}
+              onClose={() => this.setState({ isHiddenNotification: true })}
+            />
+          )}
         <div className="tooltips" />
       </div>
     );
