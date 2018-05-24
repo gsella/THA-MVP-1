@@ -8,7 +8,7 @@ export const insightType = PropTypes.shape({
   insight: PropTypes.string.isRequired,
   impact: PropTypes.number.isRequired,
   instances: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
 });
 
 export const insightsType = PropTypes.arrayOf(insightType);

@@ -78,22 +78,21 @@ export const addInsight = async insight => {
     {},
     {
       params: {
-        // insightKey: 1,
         insightId: insight.insightId,
         insightName: insight.insight,
         insightScale: '0.0',
-        insightCategoryKey: insight.categoryKey,
+        insightCategoryKey: insight.categoryId,
         insightPopularity: 0,
         insightDescription: insight.description,
         insightSize: 1,
         words: insight.insight,
         insightTagKey: insight.tagId,
-        CategoryKey: insight.categoryId, // TODO: excess field ?
+        CategoryKey: insight.categoryId,
         thunderkey: 4,
         insightDate: insight.insightDate,
-        InsightOrder: insight.order,
-        InsightImpact: insight.impact,
-        IsActive: insight.isActive,
+        insightOrder: insight.order,
+        insightImpact: insight.impact,
+        isActive: insight.isActive,
       },
     }
   );

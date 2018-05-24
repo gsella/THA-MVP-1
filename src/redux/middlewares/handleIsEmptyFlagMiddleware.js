@@ -15,6 +15,7 @@ const addNewInsight = store => {
       isCreated: true,
       isActive: true,
       impact: 0,
+      description: '',
     })
   );
 };

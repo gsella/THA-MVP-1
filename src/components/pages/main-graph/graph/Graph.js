@@ -34,7 +34,7 @@ class Graph extends React.Component {
         insight: PropTypes.string.isRequired,
         impact: PropTypes.number.isRequired,
         instances: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         category: PropTypes.shape({
           name: PropTypes.string.isRequired,
           color: PropTypes.string.isRequired,
