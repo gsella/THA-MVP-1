@@ -1,0 +1,46 @@
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 440px;
+}
+
+.stepper__icon {
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+.stepper__icon-wrapper--empty {
+  padding: 5px;
+}
+
+.stepper__icon-wrapper--selected {
+  border: 2px solid #0070c0;
+  border-radius: 40px;
+  padding: 3px;
+}
+
+.stepper__divider {
+  height: 1px;
+  width: 115px;
+}
+
+.stepper__divider--done {
+  border-bottom: 2px dashed #0070c0;
+}
+
+.stepper__divider--disabled {
+  border-bottom: 2px dashed #a4a4a4;
+}
+
+.stepper__title {
+  position: absolute;
+  margin-top: 10px;
+  width: 70px;
+  text-align: center;
+  margin-left: -15px;
+  font-weight: 500;
+  color: #222222;
+  font-size: var(--font-size-small);
+}
