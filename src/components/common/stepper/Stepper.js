@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import BlueLightningIcon from 'assets/images/lightning-blue-background.svg';
 import GreyLightningIcon from 'assets/images/lightning-disable-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';

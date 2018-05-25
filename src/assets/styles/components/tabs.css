@@ -1,0 +1,37 @@
+.tabs {
+  text-align: center;
+}
+
+.tabs__list {
+  width: 500px;
+  border: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.react-tabs__tab {
+  background: none;
+  border: none;
+  font-weight: normal;
+  width: 250px;
+  text-align: center;
+  display: inline-block;
+  font-size: var(--font-size-medium-2);
+  color: #222;
+}
+
+.react-tabs__tab--selected {
+  background: none;
+  border-bottom: 3px solid #0070c0;
+  font-weight: bold;
+  color: #0070c0;
+}
+
+.tabs__panel {
+  margin-top: 20px;
+}
+
+.tabs__panel-content-wrapper {
+  display: inline-block;
+  margin: 0 auto;
+}
