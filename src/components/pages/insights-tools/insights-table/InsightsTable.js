@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
 import GroupedInsights from './grouped-insights/GroupedInsightsContainer';
 import UngroupedInsights from './ungrouped-insights/UngroupedInsightsContainer';
+import { format } from 'date-fns';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../propTypes/categoryType';
 import { insightsType } from '../../../../propTypes/insightType';
@@ -28,7 +29,7 @@ class InsightsTable extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getInsights();
+    this.props.getInsights(format(this.props.selectedDate, 'YYYY-MM-DD'));
     this.props.initialize(this.props.initialValues);
   }
 

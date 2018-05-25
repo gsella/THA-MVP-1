@@ -22,4 +22,5 @@ export default reduxForm({
   initialValues: {
     selectedDate: new Date(),
   },
+  destroyOnUnmount: false,
 })(DataPickersForm);

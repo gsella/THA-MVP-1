@@ -7,7 +7,7 @@ export const mapInsightFromApi = insight => {
     insight: insight.InsightName,
     impact: insight.InsightImpact,
     instances: insight.InsightSize,
-    description: insight.InsightDescription,
+    description: insight.InsightDescription || '',
     order: insight.InsightOrder,
     isActive: insight.isActive,
 
@@ -25,7 +25,7 @@ export const mapInsightsFromPUTApi = insight => {
     insight: insight.InsightName,
     impact: insight.Impact,
     instances: insight.Size,
-    description: insight.Description,
+    description: insight.Description || '',
     order: insight.InsightOrder,
     isActive: insight.IsActive,
 

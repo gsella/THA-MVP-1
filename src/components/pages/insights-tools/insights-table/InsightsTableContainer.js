@@ -37,6 +37,10 @@ const mapStateToProps = state => {
           sortInsightsByCategoryAndOrder(state.categories.categories)
         )
       : insightTableSelector(state, 'insights'),
+    selectedDate:
+      'mainGraphDatepickers' in state.form
+        ? state.form.mainGraphDatepickers.values.selectedDate
+        : new Date(),
   };
 };
 

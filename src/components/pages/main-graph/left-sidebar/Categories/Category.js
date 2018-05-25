@@ -113,12 +113,13 @@ class Category extends React.Component {
   }
 
   render() {
+    console.log(this.props.insights);
     return (
       <div>
         <Panel
           defaultExpanded
           className={bemClasses('category', 'disable-border')}>
-          {this.renderPanelData()}
+          {this.renderPanelData() || ''}
         </Panel>
       </div>
     );

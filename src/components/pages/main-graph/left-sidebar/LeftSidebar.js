@@ -71,7 +71,7 @@ class LeftSidebar extends React.Component {
           <div>Gogoro 2 Series</div>
         </div>
         <div>
-          {insights.length && (
+          {insights.length > 0 && (
             <Category
               categories={this.getChartData()}
               hiddenInsights={this.props.hiddenInsights}

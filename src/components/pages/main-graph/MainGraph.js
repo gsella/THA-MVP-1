@@ -38,7 +38,6 @@ class MainGraph extends React.Component {
     insights: PropTypes.array.isRequired,
     newInsights: PropTypes.array.isRequired,
     getInsights: PropTypes.func.isRequired,
-    getNewInsights: PropTypes.func.isRequired,
     refreshThunder: PropTypes.func.isRequired,
   };
 

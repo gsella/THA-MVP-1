@@ -1,10 +1,7 @@
 import { connect } from 'react-redux';
 import MainGraph from './MainGraph';
 import { refreshThunder } from 'redux/modules/graphPage/graphPageActions';
-import {
-  getInsights,
-  getNewInsights,
-} from '../../../redux/modules/insights/insightsActions';
+import { getInsights } from '../../../redux/modules/insights/insightsActions';
 import { insightsKeySelector } from '../../../redux/selectors/insightsKeySelector';
 import { formValueSelector } from 'redux-form';
 
@@ -27,7 +24,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getInsights,
-  getNewInsights,
   refreshThunder,
 };
 
