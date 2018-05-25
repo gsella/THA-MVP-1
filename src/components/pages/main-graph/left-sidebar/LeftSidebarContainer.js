@@ -3,6 +3,7 @@ import LeftSidebar from './LeftSidebar';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
 import { hideCategory } from '../../../../redux/modules/graphPage/graphPageActions';
 import { insightsKeySelector } from '../../../../redux/selectors/insightsKeySelector';
+import { getThunderName } from 'helper/thunderHelper';
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
@@ -11,6 +12,7 @@ const mapStateToProps = state => ({
     state.categories.categories
   ),
   hiddenInsights: state.graphPage.hiddenInsights,
+  thunderName: getThunderName(state.thunders, state.thunders.currentThunderKey),
 });
 
 const mapDispatchToProps = {
@@ -18,4 +20,7 @@ const mapDispatchToProps = {
   hideCategory,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftSidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LeftSidebar);

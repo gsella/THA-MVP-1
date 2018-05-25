@@ -1,7 +1,7 @@
 import * as React from 'react';
+import history from './history';
 import { Router, Switch, Redirect } from 'react-router-dom';
 import InsightsToolsContainer from 'components/pages/insights-tools/InsightsToolsContainer';
-import history from './history';
 import MainGraphContainer from 'components/pages/main-graph/MainGraphContainer';
 import HeaderWrapperRoute from './custom-routers/HeaderWrapperRoute';
 

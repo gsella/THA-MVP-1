@@ -3,6 +3,12 @@
   padding: 0 81px 0 79px;
 }
 
+.insights-tools__titles {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 @media only screen and (max-width: 730px) {
   .insights-tools__search-panel {
     padding: 0 3%;

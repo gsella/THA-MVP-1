@@ -18,6 +18,10 @@ class HeaderWrapper extends React.Component {
     this.onMenuClick = this.onMenuClick.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getThunders();
+  }
+
   onMenuClick() {
     this.setState({ isMenuHidden: !this.state.isMenuHidden });
   }

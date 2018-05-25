@@ -6,30 +6,30 @@ import {
   getInsights,
   updateInsights,
 } from '../../../redux/modules/insights/insightsActions';
-import { getThunders } from 'redux/modules/thunders/thundersActions';
+import { getThunderName } from 'helper/thunderHelper';
 
 const mapStateToProps = state => {
   const groupingDropdownSelector = formValueSelector('dropdownByGroup');
 
-  const thunderKey = state.thunders.currentThunderKey;
-  const findThunder = thunder => {
-    return thunder.thunderKey === thunderKey;
-  };
-
   return {
     groupId: groupingDropdownSelector(state, 'groupId'),
     items: categoryFroupConstants,
-    currentThunder: state.thunders.activeThunders.find(findThunder) || {},
+    thunderName: getThunderName(
+      state.thunders,
+      state.thunders.currentThunderKey
+    ),
   };
 };
 
 const mapDispatchToProps = {
   getInsights,
   updateInsights,
-  getThunders,
 };
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTools);
+const Container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InsightsTools);
 
 export default reduxForm({
   form: 'dropdownByGroup',

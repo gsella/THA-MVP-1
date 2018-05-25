@@ -21,6 +21,7 @@ class LeftSidebar extends React.Component {
     insights: insightsType.isRequired,
     getInsights: PropTypes.func.isRequired,
     hideCategory: PropTypes.func.isRequired,
+    thunderName: PropTypes.string.isRequired,
   };
 
   getChartData() {
@@ -68,7 +69,7 @@ class LeftSidebar extends React.Component {
           <div className={bemClasses('thunder-icon')}>
             <img src={ThunderIcon} alt="thunder" width={28} height={28} />
           </div>
-          <div>Gogoro 2 Series</div>
+          <div>{this.props.thunderName}</div>
         </div>
         <div>
           {insights.length > 0 && (

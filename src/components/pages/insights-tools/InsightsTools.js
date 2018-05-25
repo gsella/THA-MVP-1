@@ -5,6 +5,7 @@ import Select from 'components/common/select/Select';
 import InsightsTable from './insights-table/InsightsTableContainer';
 import InsightsFooter from './insights-footer/InsightsFooter';
 import ThunderTitle from 'components/common/thunder-title/ThunderTitle';
+import Stepper from 'components/common/stepper/Stepper';
 import { getBEMClasses } from 'helper/BEMHelper';
 import 'assets/styles/components/insights-tools.css';
 
@@ -38,25 +39,21 @@ class InsightsTools extends React.Component {
     return null;
   }
 
-  componentDidMount() {
-    this.props.getThunders();
-  }
-
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     groupId: PropTypes.number,
-    currentThunder: PropTypes.object,
+    thunderName: PropTypes.string,
     updateInsights: PropTypes.func.isRequired,
   };
 
   render() {
-    const { items, currentThunder } = this.props;
+    const { items, thunderName } = this.props;
     return (
       <React.Fragment>
-        <ThunderTitle
-          title={'name' in currentThunder ? currentThunder.name : ''}
-        />
-
+        <ThunderTitle title={thunderName} />
+        <div className={bemClasses('titles')}>
+          <Stepper targetStep={2} />
+        </div>
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
             <SearchForm />

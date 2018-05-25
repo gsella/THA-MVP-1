@@ -20,8 +20,10 @@ class Stepper extends React.Component {
     const Icon = index <= targetStep ? BlueLightningIcon : GreyLightningIcon;
 
     return (
-      <div className={bemClasses('icon-wrapper', wrapperModifier)}>
-        <img className={bemClasses('icon')} alt={titles[index]} src={Icon} />
+      <div className={bemClasses('step-wrapper')}>
+        <div className={bemClasses('icon-wrapper', wrapperModifier)}>
+          <img className={bemClasses('icon')} alt={titles[index]} src={Icon} />
+        </div>
         <div className={bemClasses('title')}>{titles[index]}</div>
       </div>
     );
@@ -35,14 +37,7 @@ class Stepper extends React.Component {
         {titles.map((item, index) => (
           <React.Fragment>
             {this.renderIcon(index, this.props.targetStep)}
-            {index < length - 1 && (
-              <div
-                className={bemClasses(
-                  'divider',
-                  index < this.props.targetStep ? 'done' : 'disabled'
-                )}
-              />
-            )}
+            {index < length - 1 && <div className={bemClasses('divider')} />}
           </React.Fragment>
         ))}
       </div>

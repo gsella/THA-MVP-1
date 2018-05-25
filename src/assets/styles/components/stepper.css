@@ -2,14 +2,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 440px;
+  width: 540px;
   margin-bottom: 40px;
+}
+
+.stepper__step-wrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .stepper__icon {
   width: 40px;
   height: 40px;
   z-index: 10;
+}
+
+.stepper__icon-wrapper {
+  width: 50px;
 }
 
 .stepper__icon-wrapper--empty {
@@ -24,23 +36,13 @@
 
 .stepper__divider {
   height: 1px;
-  width: 115px;
-}
-
-.stepper__divider--done {
-  border-bottom: 2px dashed #0070c0;
-}
-
-.stepper__divider--disabled {
+  width: 165px;
   border-bottom: 2px dashed #a4a4a4;
 }
 
 .stepper__title {
-  position: absolute;
-  margin-top: 10px;
-  width: 70px;
+  position: relative;
   text-align: center;
-  margin-left: -15px;
   font-weight: 500;
   color: #222222;
   font-size: var(--font-size-small);

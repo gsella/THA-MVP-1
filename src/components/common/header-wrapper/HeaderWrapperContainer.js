@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
+import { getThunders } from 'redux/modules/thunders/thundersActions';
 import HeaderWrapper from './HeaderWrapper';
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { getThunders };
 
-export default connect(null, mapDispatchToProps)(HeaderWrapper);
+export default connect(
+  null,
+  mapDispatchToProps
+)(HeaderWrapper);
