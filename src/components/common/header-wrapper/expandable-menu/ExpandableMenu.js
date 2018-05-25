@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getBEMClasses } from 'helper/BEMHelper';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
@@ -34,8 +35,11 @@ class ExpandableMenu extends React.Component {
           />
         </div>
         <ul className={bemClasses('list')}>
+          {/*TODO: add correct URL when we'll have dashboard page*/}
           <li className={bemClasses('list-element')}>
-            <a className={bemClasses('link')}>Thunders Dashboard</a>
+            <Link to="/create-insights" className={bemClasses('link')}>
+              Thunders Dashboard
+            </Link>
           </li>
           <li className={bemClasses('list-element')}>
             <a

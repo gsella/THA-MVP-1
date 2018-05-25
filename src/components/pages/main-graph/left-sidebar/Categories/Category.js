@@ -113,7 +113,6 @@ class Category extends React.Component {
   }
 
   render() {
-    console.log(this.props.insights);
     return (
       <div>
         <Panel
