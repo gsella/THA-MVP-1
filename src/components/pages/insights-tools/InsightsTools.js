@@ -41,15 +41,15 @@ class InsightsTools extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     groupId: PropTypes.number,
+    currentThunder: PropTypes.object,
     updateInsights: PropTypes.func.isRequired,
   };
 
   render() {
-    const { items } = this.props;
-
+    const { items, currentThunder } = this.props;
     return (
       <React.Fragment>
-        <ThunderTitle title="Gogoro 2 Series" />
+        <ThunderTitle title={currentThunder.name} />
 
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>

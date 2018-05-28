@@ -42,6 +42,11 @@ class ExpandableMenu extends React.Component {
             </Link>
           </li>
           <li className={bemClasses('list-element')}>
+            <Link to="/create-insights" className={bemClasses('link')}>
+              Insights
+            </Link>
+          </li>
+          <li className={bemClasses('list-element')}>
             <a
               href="https://thunderact.com/"
               target="_blank"

@@ -10,9 +10,15 @@ import {
 const mapStateToProps = state => {
   const groupingDropdownSelector = formValueSelector('dropdownByGroup');
 
+  const thunderKey = state.thunders.currentThunderKey;
+  const findThunder = thunder => {
+    return thunder.id === thunderKey;
+  };
+
   return {
     groupId: groupingDropdownSelector(state, 'groupId'),
     items: categoryFroupConstants,
+    currentThunder: state.thunders.activeThunders.find(findThunder),
   };
 };
 

@@ -58,7 +58,10 @@ class Graph extends React.Component {
 
     return `<div
 		class=${bemClasses('tooltip')}
-	>
+  >
+    <div>
+			<span class="text-bold">ID:</span> ${item.categoryKey}
+		</div>
 		<div>
 			<span class="text-bold">Category:</span> ${item.category.name}
 		</div>
