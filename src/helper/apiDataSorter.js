@@ -14,6 +14,26 @@ export const sortInsightsByCategoryAndOrder = categories => (a, b) => {
     return -1;
   }
 
+  if ('isCreated' in a && !('isCreated' in b)) {
+    return 1;
+  }
+
+  if (!('isCreated' in a) && 'isCreated' in b) {
+    return -1;
+  }
+
+  if (!('categoryId' in a) && !('categoryId' in b)) {
+    return a.id - b.id;
+  }
+
+  if (!('categoryId' in a)) {
+    return 1;
+  }
+
+  if (!('categoryId' in b)) {
+    return -1;
+  }
+
   if (
     categories[a.categoryId].abbreviation >
     categories[b.categoryId].abbreviation

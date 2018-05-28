@@ -73,27 +73,29 @@ export const updateInsights = async (ThunderKey = 4, insights) => {
 
 export const addInsight = async insight => {
   const url = getApiBaseUrl('/Insight');
+  const params = {
+    insightName: insight.insight,
+    insightScale: '0.0',
+    insightCategoryKey: insight.categoryId || 0,
+    insightPopularity: 0,
+    insightDescription: insight.description,
+    insightSize: 1,
+    words: insight.insight,
+    insightTagKey: insight.tagId || 0,
+    CategoryKey: insight.categoryId || 0,
+    thunderkey: 4,
+    insightDate: insight.insightDate,
+    insightOrder: insight.order || 0,
+    insightImpact: insight.impact,
+    isActive: insight.isActive,
+  };
+  if (insight.insightId.length > 0) params.insightId = insight.insightId;
+
   const response = await axios.post(
     url,
     {},
     {
-      params: {
-        insightId: insight.insightId,
-        insightName: insight.insight,
-        insightScale: '0.0',
-        insightCategoryKey: insight.categoryId,
-        insightPopularity: 0,
-        insightDescription: insight.description,
-        insightSize: 1,
-        words: insight.insight,
-        insightTagKey: insight.tagId,
-        CategoryKey: insight.categoryId,
-        thunderkey: 4,
-        insightDate: insight.insightDate,
-        insightOrder: insight.order,
-        insightImpact: insight.impact,
-        isActive: insight.isActive,
-      },
+      params,
     }
   );
 

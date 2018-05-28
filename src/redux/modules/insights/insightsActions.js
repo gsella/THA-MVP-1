@@ -41,6 +41,7 @@ export const updateInsights = () => async (dispatch, getState) => {
   const insights = [...getState().form.insightsTable.values.insights].filter(
     i => !i.isEmpty
   );
+
   const createdInsights = getCreatedInsights(insights, categories.categories);
   const updatedInsights = insights.filter(item => item.isUpdated);
 
@@ -159,9 +160,9 @@ function getCreatedInsights(insights, categories) {
   const createdInsights = insights.filter(item => item.isCreated);
 
   return createdInsights.map(i => {
-    const category = categories[i.categoryId];
+    const category = categories[i.categoryId] || null;
 
-    i.insightId = `${category.abbreviation}${i.order}`;
+    i.insightId = category ? `${category.abbreviation}${i.order}` : '';
     i.insightDate = format(new Date(), 'YYYY-MM-DD');
 
     return i;

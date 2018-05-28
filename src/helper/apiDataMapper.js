@@ -1,6 +1,7 @@
 export const mapInsightFromApi = insight => {
   return {
     id: insight.InsightKey,
+    //TODO: it will be remove when server will ready
     categoryId: insight.Categorykey,
     tagId: insight.Tagkey === 0 ? 1 : insight.Tagkey,
     categoryKey: insight.InsightID,

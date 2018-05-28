@@ -148,7 +148,7 @@ class TableRow extends React.Component {
   }
 
   addDropdownTrigger(item, component) {
-    if ('id' in item) {
+    if ('categoryId' in item && 'insight' in item) {
       return (
         <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
           {component}
@@ -171,7 +171,7 @@ class TableRow extends React.Component {
     const selectedCategory = categories[item.categoryId];
     const color = selectedCategory ? selectedCategory.color : null;
 
-    if (!this.props.item.isActive) return null;
+    if (!item.isActive) return null;
     return (
       <tr id={`editable-row-${item.id}`}>
         <td className={bemClasses('cell', 'for-icons')}>

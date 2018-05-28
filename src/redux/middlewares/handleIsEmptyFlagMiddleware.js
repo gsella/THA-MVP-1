@@ -34,37 +34,25 @@ export default store => next => action => {
 
     /* Row gets order on setting category */
     /* and is marked as not empty if it containf all fields */
-    if (action.type === actionTypes.CHANGE) {
+    if (
+      action.type === actionTypes.CHANGE &&
+      action.meta.field.includes('categoryId')
+    ) {
       const index = action.meta.field.match(/\d{1,}/);
       const insight = form.insightsTable.values.insights[index];
-      const newInsights = form.insightsTable.values.insights.filter(
-        item => item.isCreated
-      );
 
       if (insight.isEmpty) {
-        if (action.meta.field.includes('categoryId')) {
-          const sameCategory = form.insightsTable.values.insights.filter(
-            item => item.categoryId === action.payload
-          );
+        const sameCategory = form.insightsTable.values.insights.filter(
+          item => item.categoryId === action.payload
+        );
 
-          store.dispatch(
-            change(
-              'insightsTable',
-              `insights[${index}].order`,
-              sameCategory.length + 1
-            )
-          );
-
-          if ('tagId' in insight && 'insight' in insight) {
-            markAsNotEmpty(store, index, newInsights.length);
-            addNewInsight(store);
-          }
-        } else if (action.meta.field.includes('tagId')) {
-          if ('categoryId' in insight && 'insight' in insight) {
-            markAsNotEmpty(store, index, newInsights.length);
-            addNewInsight(store);
-          }
-        }
+        store.dispatch(
+          change(
+            'insightsTable',
+            `insights[${index}].order`,
+            sameCategory.length + 1
+          )
+        );
       }
     }
 
@@ -80,7 +68,7 @@ export default store => next => action => {
       );
 
       if (insight.isEmpty) {
-        if ('categoryId' in insight && 'tagId' in insight) {
+        if (insight.insight && insight.insight.length > 0) {
           markAsNotEmpty(store, index, newInsights.length);
           addNewInsight(store);
         }
