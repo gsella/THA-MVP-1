@@ -15,6 +15,7 @@ export const InputComponent = props => {
   return (
     <FormControl
       {...input}
+      autoComplete="off"
       placeholder={props.placeholder}
       className={classes()}
     />
