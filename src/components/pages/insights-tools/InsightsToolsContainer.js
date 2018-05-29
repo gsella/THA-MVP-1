@@ -6,25 +6,27 @@ import {
   getInsights,
   updateInsights,
 } from '../../../redux/modules/insights/insightsActions';
+import { getThunders } from 'redux/modules/thunders/thundersActions';
 
 const mapStateToProps = state => {
   const groupingDropdownSelector = formValueSelector('dropdownByGroup');
 
   const thunderKey = state.thunders.currentThunderKey;
   const findThunder = thunder => {
-    return thunder.id === thunderKey;
+    return thunder.thunderKey === thunderKey;
   };
 
   return {
     groupId: groupingDropdownSelector(state, 'groupId'),
     items: categoryFroupConstants,
-    currentThunder: state.thunders.activeThunders.find(findThunder),
+    currentThunder: state.thunders.activeThunders.find(findThunder) || {},
   };
 };
 
 const mapDispatchToProps = {
   getInsights,
   updateInsights,
+  getThunders,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTools);

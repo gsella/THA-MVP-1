@@ -1,49 +1,9 @@
-const thunders = [
-  {
-    id: 1,
-    name: 'Jira',
-    dateCreated: new Date(),
-    author: 'Noy Bar',
-    description:
-      'Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions.',
-    isActive: true,
-  },
-  {
-    id: 2,
-    name: 'Trello',
-    dateCreated: new Date(),
-    author: 'Noy Bar',
-    description: 'Trello is a web-based project management application.',
-    isActive: true,
-  },
-  {
-    id: 3,
-    name: 'Service Desk',
-    dateCreated: new Date(),
-    author: 'Noy Bar',
-    description: `A help desk is a resource intended to provide the customer or end user with information and support related to a company's or institution's products and services.`,
-    isActive: true,
-  },
-  {
-    id: 4,
-    name: 'WorkDay',
-    dateCreated: new Date(),
-    author: 'Noy Bar',
-    description:
-      'Workday is an on‑demand financial management and human capital management software.',
-    isActive: true,
-  },
-  {
-    id: 5,
-    name: 'Confluence',
-    dateCreated: new Date(),
-    author: 'Noy Bar',
-    description:
-      'Confluence is a team collaboration software. Written in Java and mainly used in corporate environments. Confluence is sold as either on-premises software or as software as a service.',
-    isActive: true,
-  },
+import { GET_THUNDERS, SET_THUNDERS_PENDING } from './thundersActionConstants';
+
+const archivedThunders = [
   {
     id: 6,
+    thunderKey: 6,
     name: 'Apple computer',
     dateCreated: new Date(),
     author: 'Noy Bar',
@@ -53,6 +13,7 @@ const thunders = [
   },
   {
     id: 7,
+    thunderKey: 7,
     name: 'Nike ACG',
     dateCreated: new Date(),
     author: 'Noy Bar',
@@ -63,14 +24,27 @@ const thunders = [
 ];
 
 const defaultState = {
-  activeThunders: thunders.filter(item => item.isActive),
-  archivedThunders: thunders.filter(item => !item.isActive),
+  activeThunders: [],
+  archivedThunders: archivedThunders,
+  isDataLoading: true,
   currentThunderKey: 4,
 };
 
 export default function(state = defaultState, { type, payload }) {
   switch (type) {
+    case GET_THUNDERS:
+      return handleGetThunders(state, payload);
+    case SET_THUNDERS_PENDING:
+      return handleLoadingData(state, payload);
     default:
       return state;
   }
+}
+
+function handleLoadingData(state, isDataLoading) {
+  return { ...state, isDataLoading };
+}
+
+function handleGetThunders(state, thunders) {
+  return { ...state, activeThunders: thunders };
 }

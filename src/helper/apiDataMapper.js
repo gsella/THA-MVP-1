@@ -33,3 +33,16 @@ export const mapInsightsFromPUTApi = insight => {
     popularity: insight.Popularity,
   };
 };
+
+export const mapThundersFromApi = thunder => {
+  return {
+    id: thunder.ThunderId,
+    thunderKey: thunder.ThunderKey,
+    name: thunder.ThunderName,
+    description: thunder.ThundreDescription,
+    // TODO need actual data for that
+    dateCreated: new Date(),
+    author: 'Noy Bar',
+    isActive: true,
+  };
+};

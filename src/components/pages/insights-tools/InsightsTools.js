@@ -38,6 +38,10 @@ class InsightsTools extends React.Component {
     return null;
   }
 
+  componentDidMount() {
+    this.props.getThunders();
+  }
+
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     groupId: PropTypes.number,
@@ -49,7 +53,9 @@ class InsightsTools extends React.Component {
     const { items, currentThunder } = this.props;
     return (
       <React.Fragment>
-        <ThunderTitle title={currentThunder.name} />
+        <ThunderTitle
+          title={'name' in currentThunder ? currentThunder.name : ''}
+        />
 
         <div className={bemClasses()}>
           <div className={bemClasses('search-panel')}>
