@@ -86,7 +86,6 @@ export const addInsight = async insight => {
     isActive: insight.isActive,
   };
 
-  if (insight.insightId) params.insightId = insight.insightId;
   if (insight.categoryId) {
     params.insightCategoryKey = insight.categoryId;
     params.CategoryKey = insight.categoryId;

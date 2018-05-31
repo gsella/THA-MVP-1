@@ -13,6 +13,7 @@ import {
 import { change } from 'redux-form';
 import history from 'components/containers/history';
 import { sortInsightsByCategoryAndOrder } from '../../../helper/apiDataSorter';
+import delayPostRequest from 'helper/delayPostRequest';
 
 export const getInsights = (date, thunderkey = 4) => async (
   dispatch,
@@ -36,28 +37,25 @@ export const getInsights = (date, thunderkey = 4) => async (
 };
 
 export const updateInsights = () => async (dispatch, getState) => {
-  const { categories } = getState();
   const thunderKey = 4;
   const insights = [...getState().form.insightsTable.values.insights].filter(
     i => !i.isEmpty
   );
 
-  const createdInsights = getCreatedInsights(insights, categories.categories);
+  const createdInsights = getCreatedInsights(insights);
   const updatedInsights = insights.filter(item => item.isUpdated);
 
   let promises = [];
-  const promisesPost = createdInsights.map(insight => {
-    return insightsApi.addInsight(insight);
-  });
+
+  const promisesPost = delayPostRequest(createdInsights);
 
   if (updatedInsights.length) {
     promises.push(insightsApi.updateInsights(thunderKey, updatedInsights));
   }
 
-  promises = promises.concat(promisesPost);
+  promises = promises.concat(await promisesPost);
 
   const responses = await Promise.all(promises);
-
   if (!responses.every(i => i.status === 200)) {
     console.error("some response isn't successful", responses);
     return;
@@ -156,13 +154,10 @@ export const moveInsightDown = (
   );
 };
 
-function getCreatedInsights(insights, categories) {
+function getCreatedInsights(insights) {
   const createdInsights = insights.filter(item => item.isCreated);
 
   return createdInsights.map(i => {
-    const category = categories[i.categoryId] || null;
-
-    i.insightId = category ? `${category.abbreviation}${i.order}` : '';
     i.insightDate = format(new Date(), 'YYYY-MM-DD');
 
     return i;
