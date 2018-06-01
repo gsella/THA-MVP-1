@@ -86,6 +86,7 @@ class Graph extends React.Component {
       .append('div')
       .style('position', 'absolute')
       .style('z-index', '10')
+      .style('pointer-events', 'none')
       .style('visibility', 'hidden')
       .style('padding', '8px')
       .style('border-radius', '2px')
