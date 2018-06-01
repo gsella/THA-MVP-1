@@ -28,7 +28,7 @@ export class TextareaComponent extends React.Component {
   render() {
     const classes = getBEMClasses([baseClass, this.props.customClass]);
     const { input } = this.props;
-    let textareaStyle = { height: this.state.textareaHeight };
+    // let textareaStyle = { height: this.state.textareaHeight };
 
     return (
       <div className={classes('wrapper-1')}>
@@ -36,7 +36,7 @@ export class TextareaComponent extends React.Component {
           <FormControl
             {...input}
             onKeyUp={this.handleKeyUp.bind(this)}
-            style={textareaStyle}
+            // style={textareaStyle}
             componentClass="textarea"
             autoComplete="off"
             placeholder={this.props.placeholder}
