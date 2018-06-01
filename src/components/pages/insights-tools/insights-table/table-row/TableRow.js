@@ -7,7 +7,7 @@ import {
   SubMenu,
 } from 'react-contextmenu';
 import Select from 'components/common/select/Select';
-import Input from 'components/common/input/InputField';
+import Textarea from 'components/common/input/TextareaField';
 import LightningIcon from 'assets/images/lightning-icon.svg';
 import { getBEMClasses } from 'helper/BEMHelper';
 import { categoriesType } from '../../../../../propTypes/categoryType';
@@ -19,7 +19,7 @@ import 'assets/styles/components/right-click-dropdown.css';
 
 const tableRow = 'data-table-row';
 const bemClasses = getBEMClasses([tableRow]);
-const inputClass = 'data-table-input';
+const inputClass = 'data-table-textarea';
 
 class TableRow extends React.Component {
   constructor(props) {
@@ -197,7 +197,7 @@ class TableRow extends React.Component {
         <td className={bemClasses('cell', 'for-input')}>
           {this.addDropdownTrigger(
             item,
-            <Input
+            <Textarea
               placeholder="Key words"
               name={`${namePrefix}.insight`}
               customClass={inputClass}
@@ -207,7 +207,7 @@ class TableRow extends React.Component {
         <td className={bemClasses('cell', 'for-input')}>
           {this.addDropdownTrigger(
             item,
-            <Input
+            <Textarea
               placeholder="Description"
               name={`${namePrefix}.description`}
               customClass={inputClass}

@@ -35,7 +35,7 @@ class Stepper extends React.Component {
     return (
       <div className={bemClasses()}>
         {titles.map((item, index) => (
-          <React.Fragment>
+          <React.Fragment key={item}>
             {this.renderIcon(index, this.props.targetStep)}
             {index < length - 1 && <div className={bemClasses('divider')} />}
           </React.Fragment>
