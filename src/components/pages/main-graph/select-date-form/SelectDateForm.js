@@ -13,6 +13,7 @@ const DataPickersForm = () => {
       <div className={bemClasses('input')}>
         <DatePickerWrapper name="selectedDate" label="Select date:" />
       </div>
+      <span className={bemClasses('update')}>Last Update: 6:49 PM | Feb 6</span>
     </form>
   );
 };

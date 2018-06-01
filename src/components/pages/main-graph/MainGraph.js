@@ -208,8 +208,8 @@ class MainGraph extends React.Component {
               <React.Fragment>
                 <div className={bemClasses('graph-layout-wrapper')}>
                   {this.renderGraphLayout()}
+                  <SelectDateForm />
                 </div>
-                <SelectDateForm />
               </React.Fragment>
             ) : (
               this.renderLaunchingPreloader()
