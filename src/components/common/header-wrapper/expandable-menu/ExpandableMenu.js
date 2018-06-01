@@ -37,12 +37,18 @@ class ExpandableMenu extends React.Component {
         <ul className={bemClasses('list')}>
           {/*TODO: add correct URL when we'll have dashboard page*/}
           <li className={bemClasses('list-element')}>
-            <Link to="/create-insights" className={bemClasses('link')}>
+            <Link
+              to="/create-insights"
+              onClick={() => this.onCloseClick()}
+              className={bemClasses('link')}>
               Thunders Dashboard
             </Link>
           </li>
           <li className={bemClasses('list-element')}>
-            <Link to="/create-insights" className={bemClasses('link')}>
+            <Link
+              to="/create-insights"
+              onClick={() => this.onCloseClick()}
+              className={bemClasses('link')}>
               Insights
             </Link>
           </li>

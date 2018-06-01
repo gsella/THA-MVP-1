@@ -19,3 +19,40 @@
   box-shadow: none;
   padding: 0 10px;
 }
+
+.data-table-textarea__wrapper-1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.data-table-textarea__wrapper-2 {
+  display: inline;
+  height: auto;
+  width: 100%;
+}
+
+.data-table-textarea {
+  display: inline;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: hidden;
+  resize: none;
+}
+
+.data-table-textarea,
+.data-table-textarea:hover,
+.data-table-textarea:focus,
+.data-table-textarea:active {
+  outline: 0;
+  outline-offset: 0;
+  border: 0;
+  box-shadow: none;
+  padding: 0 10px;
+  max-height: 56px;
+}

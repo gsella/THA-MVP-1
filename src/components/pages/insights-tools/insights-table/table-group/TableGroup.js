@@ -25,7 +25,7 @@ class TableGroup extends React.Component {
   }
 
   renderGroupRow() {
-    const cellColorClass = this.props.color ? 'for-color-cell' : '';
+    const cellColorClass = this.props.color ? 'white-text' : '';
 
     return (
       <tr className={bemClasses()}>
