@@ -3,6 +3,9 @@
   border: 0;
 }
 
+.button__btn--disabled {
+}
+
 .button__btn--default {
   font-size: var(--font-size-medium-1);
   font-weight: bold;
@@ -34,4 +37,8 @@
   color: #fff !important;
   outline: none;
   box-shadow: none;
+}
+
+.button__btn--primary.button__btn--disabled:hover {
+  background-color: var(--color-blue-1);
 }

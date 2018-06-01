@@ -3,7 +3,7 @@ import SearchForm from './search-form/SearchForm';
 import PropTypes from 'prop-types';
 import Select from 'components/common/select/Select';
 import InsightsTable from './insights-table/InsightsTableContainer';
-import InsightsFooter from './insights-footer/InsightsFooter';
+import InsightsFooter from './insights-footer/InsightsFooterContainer';
 import ThunderTitle from 'components/common/thunder-title/ThunderTitle';
 import Stepper from 'components/common/stepper/Stepper';
 import { getBEMClasses } from 'helper/BEMHelper';

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import { getApiBaseUrl } from '../helper/apiHelper';
 
 export const getInsights = async (thunderkey, endDate) => {
@@ -64,6 +65,7 @@ export const updateInsights = async (ThunderKey = 4, insights) => {
     InsightOrder: insight.order,
     Impact: insight.impact,
     IsActive: insight.isActive,
+    insightDate: format(new Date(), 'YYYY-MM-DD'),
   }));
 
   const response = await axios.put(url, mappedInsights);

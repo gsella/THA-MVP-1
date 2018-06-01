@@ -6,15 +6,26 @@ import 'assets/styles/components/button.css';
 const button = 'button';
 const bemClasses = getBEMClasses([button]);
 
-const customButton = props => (
-  <ButtonToolbar>
-    <Button
-      bsSize="large"
-      className={bemClasses('btn', props.buttonColor)}
-      onClick={props.onClickFunction}>
-      {props.label}
-    </Button>
-  </ButtonToolbar>
-);
+const CustomButton = props => {
+  const { buttonColor, onClickFunction, label, ...other } = props;
 
-export default customButton;
+  const modifiers = [buttonColor];
+
+  if (props.disabled) {
+    modifiers.push('disabled');
+  }
+
+  return (
+    <ButtonToolbar>
+      <Button
+        bsSize="large"
+        className={bemClasses('btn', modifiers)}
+        onClick={onClickFunction}
+        {...other}>
+        {label}
+      </Button>
+    </ButtonToolbar>
+  );
+};
+
+export default CustomButton;

@@ -14,6 +14,7 @@ import { change } from 'redux-form';
 import history from 'components/containers/history';
 import { sortInsightsByCategoryAndOrder } from '../../../helper/apiDataSorter';
 import delayPostRequest from 'helper/delayPostRequest';
+import { setLaunching } from '../insightsPage/InsightsPageActions';
 
 export const getInsights = (date, thunderkey = 4) => async (
   dispatch,
@@ -37,6 +38,8 @@ export const getInsights = (date, thunderkey = 4) => async (
 };
 
 export const updateInsights = () => async (dispatch, getState) => {
+  dispatch(setLaunching(true));
+
   const thunderKey = 4;
   const insights = [...getState().form.insightsTable.values.insights].filter(
     i => !i.isEmpty
@@ -58,6 +61,7 @@ export const updateInsights = () => async (dispatch, getState) => {
   const responses = await Promise.all(promises);
   if (!responses.every(i => i.status === 200)) {
     console.error("some response isn't successful", responses);
+    dispatch(setLaunching(false));
     return;
   }
 
@@ -76,6 +80,8 @@ export const updateInsights = () => async (dispatch, getState) => {
     type: GET_NEW_INSIGHTS,
     payload: [],
   });
+
+  dispatch(setLaunching(false));
 
   history.push('/main-graph');
 };

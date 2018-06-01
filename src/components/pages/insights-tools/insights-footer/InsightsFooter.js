@@ -9,11 +9,12 @@ const bemClasses = getBEMClasses([footer]);
 
 class InsightsFooter extends React.Component {
   static propTypes = {
+    isLaunching: PropTypes.bool.isRequired,
     updateInsights: PropTypes.func.isRequired,
   };
 
   render() {
-    const { updateInsights } = this.props;
+    const { updateInsights, isLaunching } = this.props;
 
     return (
       <div className={bemClasses(null, 'for-insights')}>
@@ -24,7 +25,8 @@ class InsightsFooter extends React.Component {
         />
         <Button
           buttonColor="primary"
-          label="Launch"
+          label={isLaunching ? 'Loading...' : 'Launch'}
+          disabled={isLaunching}
           onClickFunction={updateInsights}
         />
       </div>
