@@ -4,9 +4,22 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  top: -40px;
 }
 
 .select-date-form__input {
   display: inline-block;
+}
+
+.select-date-form__update {
+  position: absolute;
+  right: 60px;
+  top: 0;
+  font-size: 12px;
+  color: #222222;
+}
+
+@media (max-width: 1000px) {
+  .select-date-form {
+    justify-content: start;
+  }
 }
