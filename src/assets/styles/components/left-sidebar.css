@@ -73,6 +73,7 @@
   align-items: center;
   padding-left: 10px;
   cursor: pointer;
+  user-select: none;
 }
 
 .left-sidebar__category--background:hover
@@ -100,6 +101,7 @@
 .left-sidebar__insight--eye-icon {
   display: inline-flex;
   vertical-align: text-top;
+  user-select: none;
 }
 
 .left-sidebar__insight--description {

@@ -3,7 +3,7 @@ export function graphSizeHelper(tags, options, zoom, graphLayoutClass) {
   const tagsArray = tags ? Object.values(tags) : [];
 
   if (graphLayout && tagsArray.length > 0) {
-    const height = graphLayout.clientHeight - 125;
+    const height = graphLayout.clientHeight - 100;
     const width = graphLayout.clientWidth - 80;
     const impactSize =
       height / 3 < options.minHeigth ? options.minHeigth : height / 3;
