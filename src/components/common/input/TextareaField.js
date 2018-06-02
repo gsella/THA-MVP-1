@@ -16,28 +16,17 @@ export class TextareaComponent extends React.Component {
     };
   }
 
-  handleKeyUp(evt) {
-    let newHeight = Math.max(Math.min(evt.target.scrollHeight + 2, 56), 20);
-    if (newHeight !== this.state.textareaHeight) {
-      this.setState({
-        textareaHeight: newHeight,
-      });
-    }
-  }
-
   render() {
     const classes = getBEMClasses([baseClass, this.props.customClass]);
     const { input } = this.props;
-    // let textareaStyle = { height: this.state.textareaHeight };
 
     return (
       <div className={classes('wrapper-1')}>
         <div className={classes('wrapper-2')}>
           <FormControl
             {...input}
-            onKeyUp={this.handleKeyUp.bind(this)}
-            // style={textareaStyle}
             componentClass="textarea"
+            maxLength="300"
             autoComplete="off"
             placeholder={this.props.placeholder}
             className={classes()}
