@@ -95,29 +95,7 @@ const GroupedByCategoryInsights = props => {
     );
   });
 
-  // TODO: make sure this is working (no, its not working) after adding new insight feature
-  // let ungrouped = matchingData.filter(item => item[filterField] === 0);
-  // const amount = ungrouped.length;
-  //
-  // const ungroupedComponents = ungrouped.map((item, key) => (
-  //   <TableRow
-  //     key={item.id}
-  //     item={item}
-  //     categories={categories}
-  //     allTags={tags}
-  //     isNew={'isNew' in item ? item.isNew : false}
-  //     {...this.props}
-  //     disableMoveUp={key === 0}
-  //     disableMoveDown={key === amount - 1}
-  //   />
-  // ));
-
-  return (
-    <React.Fragment>
-      {groups}
-      {/*{ungroupedComponents}*/}
-    </React.Fragment>
-  );
+  return <React.Fragment>{groups}</React.Fragment>;
 };
 
 GroupedByCategoryInsights.propTypes = {

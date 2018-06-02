@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import TableRow from './TableRow';
-import { change, formValueSelector } from 'redux-form';
+import { formValueSelector } from 'redux-form';
+import { deleteInsight } from '../../../../../redux/modules/insights/insightsActions';
 
 const insightsTableSelector = formValueSelector('insightsTable');
 
@@ -10,9 +11,8 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  deleteInsight: namePrefix =>
-    dispatch(change('insightsTable', `${namePrefix}.isActive`, false)),
-});
+const mapDispatchToProps = {
+  deleteInsight,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableRow);

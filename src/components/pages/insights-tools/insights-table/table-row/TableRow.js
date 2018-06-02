@@ -104,16 +104,21 @@ class TableRow extends React.Component {
       filterInsightsByCategoryLength,
     } = this.props;
 
+    const notFullyCreated =
+      item.isCreated && (!('categoryId' in item) || !item.insight);
+
     return (
       <ContextMenu id={`row-dropdown-${item.id}`}>
         <MenuItem
-          disabled={item.order === 1}
+          disabled={item.order === 1 || notFullyCreated}
           onClick={() => moveInsightUp(item.id, item.categoryId)}
           data={{ action: 'move up' }}>
           Move Insight Up
         </MenuItem>
         <MenuItem
-          disabled={filterInsightsByCategoryLength === item.order}
+          disabled={
+            filterInsightsByCategoryLength === item.order || notFullyCreated
+          }
           onClick={() =>
             moveInsightDown(
               item.id,
@@ -129,7 +134,7 @@ class TableRow extends React.Component {
           data={{ action: 'delete' }}>
           Delete Selected Insight(s)
         </MenuItem>
-        <SubMenu title="Mute Selected Insight(s)..">
+        <SubMenu title="Mute Selected Insight(s).." disabled={notFullyCreated}>
           <MenuItem onClick={() => {}} data={{ action: 'mute till tomorrow' }}>
             Mute till Tomorrow
           </MenuItem>
@@ -148,15 +153,11 @@ class TableRow extends React.Component {
   }
 
   addDropdownTrigger(item, component) {
-    if ('categoryId' in item && 'insight' in item) {
-      return (
-        <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
-          {component}
-        </ContextMenuTrigger>
-      );
-    } else {
-      return component;
-    }
+    return (
+      <ContextMenuTrigger id={`row-dropdown-${item.id}`}>
+        {component}
+      </ContextMenuTrigger>
+    );
   }
 
   render() {

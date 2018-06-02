@@ -85,6 +85,10 @@ export const updateInsights = () => async (dispatch, getState) => {
   }
 };
 
+export const deleteInsight = namePrefix => (dispatch, getState) => {
+  dispatch(change('insightsTable', `${namePrefix}.isActive`, false));
+};
+
 export const moveInsightUp = (id, categoryId) => (dispatch, getState) => {
   const insights = getState().form.insightsTable.values.insights;
 
