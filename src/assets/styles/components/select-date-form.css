@@ -8,6 +8,15 @@
 
 .select-date-form__input {
   display: inline-block;
+  display: flex;
+  position: relative;
+}
+
+.select-date-form__icon {
+  position: absolute;
+  right: 4px;
+  top: 2px;
+  pointer-events: none;
 }
 
 .select-date-form__update {

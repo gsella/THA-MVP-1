@@ -6,7 +6,8 @@
   font-size: var(--font-size-small);
   height: 20px;
   display: inline-block;
-  width: 100px;
+  width: 115px;
+  padding-right: 25px;
 }
 
 .custom-datepicker__dpk-label {

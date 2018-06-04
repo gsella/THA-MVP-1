@@ -104,6 +104,7 @@ class DatePicker extends React.Component {
         </label>
         <input
           ref={ref => (this.datepickerRef = ref)}
+          autoComplete={'off'}
           className={`form-control ${bemClasses('input')} ${customClasses(
             'dpk-input'
           )}`}
