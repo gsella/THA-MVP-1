@@ -97,7 +97,10 @@ export const refreshThunder = (
 
   const newInsightsResponse = await insightsApi.getNewInsights(
     thunderkey,
-    format(selectedDate.setDate(selectedDate.getDate() + 1), 'YYYY-MM-DD'),
+    format(
+      new Date(selectedDate.getTime()).setDate(selectedDate.getDate() + 1),
+      'YYYY-MM-DD'
+    ),
     format(new Date().setDate(new Date().getDate() + 1), 'YYYY-MM-DD')
   );
   const { categories } = getState().categories;

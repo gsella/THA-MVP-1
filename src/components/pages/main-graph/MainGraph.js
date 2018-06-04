@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { format } from 'date-fns';
 import ThunderIconSmall from 'assets/images/lightning-icon-small.svg';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { MenuItem, ButtonToolbar, DropdownButton } from 'react-bootstrap';
@@ -37,6 +38,7 @@ class MainGraph extends React.Component {
     isRefresh: PropTypes.bool.isRequired,
     insights: PropTypes.array.isRequired,
     newInsights: PropTypes.array.isRequired,
+    lastUpdatedInMilliseconds: PropTypes.number.isRequired,
     getInsights: PropTypes.func.isRequired,
     refreshThunder: PropTypes.func.isRequired,
   };
@@ -55,6 +57,15 @@ class MainGraph extends React.Component {
 
   async componentDidMount() {
     await this.props.getInsights();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.selectedDate &&
+      prevProps.selectedDate !== this.props.selectedDate
+    ) {
+      this.refreshThunder();
+    }
   }
 
   toggleFullScreenGraph() {
@@ -145,7 +156,6 @@ class MainGraph extends React.Component {
 
   renderGraphLayout() {
     const { insights } = this.props;
-
     return (
       <div className={bemClasses(null, 'padding')}>
         <GraphLayout
@@ -186,17 +196,12 @@ class MainGraph extends React.Component {
     );
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.selectedDate &&
-      prevProps.selectedDate !== this.props.selectedDate
-    ) {
-      this.refreshThunder();
-    }
-  }
-
   render() {
-    const { isDataLoading } = this.props;
+    const { isDataLoading, lastUpdatedInMilliseconds } = this.props;
+    const lastUpdatedInsight = format(
+      lastUpdatedInMilliseconds,
+      'h.mm A | MMM D'
+    );
 
     return (
       <div className={bemClasses()}>
@@ -208,7 +213,7 @@ class MainGraph extends React.Component {
               <React.Fragment>
                 <div className={bemClasses('graph-layout-wrapper')}>
                   {this.renderGraphLayout()}
-                  <SelectDateForm />
+                  <SelectDateForm lastUpdatedInsight={lastUpdatedInsight} />
                 </div>
               </React.Fragment>
             ) : (

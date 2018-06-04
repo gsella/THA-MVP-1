@@ -11,6 +11,7 @@ export const mapInsightFromApi = insight => {
     description: insight.InsightDescription || '',
     order: insight.InsightOrder,
     isActive: insight.isActive,
+    insightDate: insight.InsightDate,
 
     // fields that can be modified on server side only
     popularity: insight.InsightPopularity,
