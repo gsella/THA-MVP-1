@@ -10,7 +10,7 @@ async function delayPostRequest(createdInsights) {
   let result = [];
   for (let i = 0; i < createdInsights.length; i++) {
     result.push(await insightsApi.addInsight(createdInsights[i]));
-    await delay(4000);
+    await delay(2000);
   }
 
   return result.map(i => Promise.resolve(i));

@@ -46,28 +46,26 @@ export const updateInsights = () => async (dispatch, getState) => {
     );
 
     const createdInsights = getCreatedInsights(insights);
-    const updatedInsights = insights.filter(item => item.isUpdated);
+    const updatedInsights = insights.filter(
+      item => item.isUpdated && !item.isCreated
+    );
 
-    let promises = [];
-
-    const promisesPost = delayPostRequest(createdInsights);
-
-    if (updatedInsights.length) {
-      promises.push(insightsApi.updateInsights(thunderKey, updatedInsights));
+    if (createdInsights.length) {
+      const promisesPost = delayPostRequest(createdInsights);
+      await Promise.all(await promisesPost);
     }
 
-    promises = promises.concat(await promisesPost);
-
-    const responses = await Promise.all(promises);
-
     if (updatedInsights.length) {
-      const updatedInsights = responses[0].data.insights.map(
+      const response = await Promise.resolve(
+        insightsApi.updateInsights(thunderKey, updatedInsights)
+      );
+      const updatedInsightsResponse = response.data.insights.map(
         mapInsightsFromPUTApi
       );
 
       dispatch({
         type: UPDATE_INSIGHTS,
-        payload: updatedInsights,
+        payload: updatedInsightsResponse,
       });
     }
 
