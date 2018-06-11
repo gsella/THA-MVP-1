@@ -21,9 +21,9 @@ export const getInsights = (date, thunderkey = 4) => async (
   getState
 ) => {
   dispatch({ type: SET_INSIGHTS_PENDING, payload: true });
-  const { categories } = getState().categories;
-
   const response = await insightsApi.getInsights(thunderkey, date);
+
+  const { categories } = getState().categories;
 
   if (response.status === 200) {
     dispatch({

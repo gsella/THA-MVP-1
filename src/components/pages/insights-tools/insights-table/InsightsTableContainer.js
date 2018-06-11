@@ -3,6 +3,8 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 import InsightsTable from './InsightsTable';
 import { getInsights } from '../../../../redux/modules/insights/insightsActions';
+import { getCategories } from '../../../../redux/modules/categories/categoriesActions';
+import { getTags } from '../../../../redux/modules/tags/tagsActions';
 import { sortInsightsByCategoryAndOrder } from '../../../../helper/apiDataSorter';
 
 const insightsArrayToObject = (insights, newInsights) => {
@@ -46,6 +48,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getInsights,
+  getTags,
+  getCategories,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(InsightsTable);

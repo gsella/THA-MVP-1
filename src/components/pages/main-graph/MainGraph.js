@@ -56,6 +56,8 @@ class MainGraph extends React.Component {
   }
 
   async componentDidMount() {
+    await this.props.getTags();
+    await this.props.getCategories();
     await this.props.getInsights();
   }
 

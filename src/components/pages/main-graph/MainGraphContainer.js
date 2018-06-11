@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import MainGraph from './MainGraph';
 import { refreshThunder } from 'redux/modules/graphPage/graphPageActions';
 import { getInsights } from '../../../redux/modules/insights/insightsActions';
+import { getTags } from '../../../redux/modules/tags/tagsActions';
+import { getCategories } from '../../../redux/modules/categories/categoriesActions';
 import { insightsKeySelector } from '../../../redux/selectors/insightsKeySelector';
 import { formValueSelector } from 'redux-form';
 import { lastUpdatedInMilliseconds } from 'redux/selectors/lastUpdatedInsight';
@@ -29,9 +31,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getInsights,
   refreshThunder,
+  getTags,
+  getCategories,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainGraph);
+export default connect(mapStateToProps, mapDispatchToProps)(MainGraph);

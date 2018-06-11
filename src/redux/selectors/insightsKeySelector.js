@@ -12,7 +12,7 @@ const calcInsightsKey = (insights, categories) => {
       .map(insight => {
         const newInsight = { ...insight };
 
-        if ('categoryId' in newInsight) {
+        if ('categoryId' in newInsight && newInsight.categoryId) {
           newInsight.categoryKey =
             categories[newInsight.categoryId].abbreviation + newInsight.order;
         }

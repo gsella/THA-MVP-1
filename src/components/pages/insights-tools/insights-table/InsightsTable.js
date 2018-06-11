@@ -29,6 +29,8 @@ class InsightsTable extends React.Component {
   };
 
   componentDidMount() {
+    this.props.getTags();
+    this.props.getCategories();
     this.props.getInsights(format(this.props.selectedDate, 'YYYY-MM-DD'));
     this.props.initialize(this.props.initialValues);
   }

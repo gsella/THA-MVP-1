@@ -2,6 +2,42 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import { getApiBaseUrl } from '../helper/apiHelper';
 
+export const getTags = async () => {
+  const url = getApiBaseUrl('/Tag');
+  const response = await axios.get(url);
+
+  const result = {
+    status: response.status,
+    data: [],
+  };
+
+  if (!response.status === 200) {
+    return result;
+  }
+
+  result.data = response.data.list;
+
+  return result;
+};
+
+export const getCategories = async () => {
+  const url = getApiBaseUrl('/Category');
+  const response = await axios.get(url);
+
+  const result = {
+    status: response.status,
+    data: [],
+  };
+
+  if (!response.status === 200) {
+    return result;
+  }
+
+  result.data = response.data.list;
+
+  return result;
+};
+
 export const getInsights = async (thunderkey, endDate) => {
   const url = getApiBaseUrl('/Insight');
   const response = await axios.get(url, {
