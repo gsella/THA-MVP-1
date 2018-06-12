@@ -126,3 +126,10 @@ export const refreshThunder = (
     payload: false,
   });
 };
+
+export const setGraphCellExpandCounter = (counter, initStatus) => dispatch => {
+  dispatch({
+    type: ACTION_CONSTANTS.SET_SELL_EXPAND_COUNTER,
+    payload: { counter, initStatus },
+  });
+};

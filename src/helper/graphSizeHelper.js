@@ -1,3 +1,5 @@
+import { radiusHelper } from 'helper/radiusHelper';
+
 export function graphSizeHelper(tags, options, zoom, graphLayoutClass) {
   const graphLayout = document.getElementsByClassName(graphLayoutClass)[0];
   const tagsArray = tags ? Object.values(tags) : [];
@@ -15,4 +17,39 @@ export function graphSizeHelper(tags, options, zoom, graphLayoutClass) {
   }
 
   return { height: options.minHeigth, width: options.minWidth };
+}
+
+export function graphParamsInitialize(
+  tags,
+  insights,
+  categories,
+  zoom,
+  graphSize,
+  counter
+) {
+  let graphParams = {
+    radiuses: {},
+    graphSize,
+    counter,
+  };
+
+  graphParams.graphSize.height += counter * 20;
+  graphParams.graphSize.width += counter * 22;
+
+  do {
+    graphParams.radiuses = insights
+      ? radiusHelper(tags, insights, categories, graphParams.graphSize)
+      : undefined;
+
+    if (graphParams.radiuses['1'] / zoom < 13.7 && graphSize.height < 460) {
+      graphParams.graphSize.height += 20;
+      graphParams.graphSize.width += 22;
+      graphParams.counter += 1;
+    }
+  } while (
+    graphParams.radiuses['1'] / zoom < 13.7 &&
+    graphParams.graphSize.height < 460
+  );
+
+  return graphParams;
 }

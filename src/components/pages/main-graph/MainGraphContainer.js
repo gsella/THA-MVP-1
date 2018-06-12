@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import MainGraph from './MainGraph';
-import { refreshThunder } from 'redux/modules/graphPage/graphPageActions';
+import {
+  refreshThunder,
+  setGraphCellExpandCounter,
+} from 'redux/modules/graphPage/graphPageActions';
 import { getInsights } from '../../../redux/modules/insights/insightsActions';
 import { getTags } from '../../../redux/modules/tags/tagsActions';
 import { getCategories } from '../../../redux/modules/categories/categoriesActions';
@@ -33,6 +36,10 @@ const mapDispatchToProps = {
   refreshThunder,
   getTags,
   getCategories,
+  setGraphCellExpandCounter,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainGraph);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainGraph);

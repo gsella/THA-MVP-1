@@ -20,10 +20,10 @@ class Graph extends React.Component {
     ).isRequired,
     radiuses: PropTypes.shape({
       '1': PropTypes.number.isRequired,
-      '2': PropTypes.number.isRequired,
       '3': PropTypes.number.isRequired,
-      '4': PropTypes.number.isRequired,
       '5': PropTypes.number.isRequired,
+      '8': PropTypes.number.isRequired,
+      '14': PropTypes.number.isRequired,
     }),
     bubbles: PropTypes.arrayOf(
       PropTypes.shape({
@@ -144,7 +144,7 @@ class Graph extends React.Component {
         .style('stroke', '#fff')
         .style('stroke-width', 0.7)
         .style('text-anchor', 'middle')
-        .text(d => (d.r < 10 ? '' : d.data.label))
+        .text(d => (d.r < 13 ? '' : d.data.label))
         .on('mouseover', d => {
           tooltip.html(this.getTooltipContent(d.data.label));
           tooltip.style('visibility', 'visible');

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import GraphLayout from './GraphLayout';
 import { insightsKeySelector } from '../../../../redux/selectors/insightsKeySelector';
+import { setGraphCellExpandCounter } from 'redux/modules/graphPage/graphPageActions';
 
 const mapStateToProps = state => ({
   tags: state.tags.tags,
@@ -10,6 +11,15 @@ const mapStateToProps = state => ({
     state.categories.categories
   ),
   hiddenInsights: state.graphPage.hiddenInsights,
+  graphCellExpandCounter: state.graphPage.graphCellExpandCounter,
+  isCellCounterInitialized: state.graphPage.isCellCounterInitialized,
 });
 
-export default connect(mapStateToProps, null)(GraphLayout);
+const mapDispatchToProps = {
+  setGraphCellExpandCounter,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GraphLayout);

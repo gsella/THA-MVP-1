@@ -53,21 +53,18 @@ function getMaxСongestion(tags, impacts, bubbles) {
 }
 
 function getRadiuses(maxСongestion, size) {
-  const radiuses = {
-    '1': 0,
-    '2': 0,
-    '3': 0,
-    '4': 0,
-    '5': 0,
-  };
+  const radiuses = {};
+  for (let key in SIZES) {
+    radiuses[SIZES[key]] = 0;
+  }
 
-  const auxiliaryBubbles = [
-    { label: '', color: '', size: 1 },
-    { label: '', color: '', size: 2 },
-    { label: '', color: '', size: 3 },
-    { label: '', color: '', size: 4 },
-    { label: '', color: '', size: 5 },
-  ];
+  maxСongestion.items = mapSizes(maxСongestion.items);
+
+  let auxiliaryBubbles = [];
+  for (let i = 0; i < 5; i++) {
+    auxiliaryBubbles.push({ label: '', color: '', size: i + 1 });
+  }
+  auxiliaryBubbles = mapSizes(auxiliaryBubbles);
 
   auxiliaryBubbles.forEach(bubble => {
     const items = maxСongestion.items.filter(item => bubble.size === item.size);
@@ -93,3 +90,24 @@ function getRadiuses(maxСongestion, size) {
 
   return radiuses;
 }
+
+export function mapSizes(items) {
+  // mapping sizes from 1, 2, 3, 4, 5 to 1, 3, 5, 8, 14
+  const newItems = items.map(item => ({
+    ...item,
+    size:
+      item.size < 4
+        ? 2 * item.size - 1
+        : Math.pow(2, item.size - 1) - 2 * (item.size % 2),
+  }));
+
+  return newItems;
+}
+
+const SIZES = {
+  SIZE_1: '1',
+  SIZE_2: '3',
+  SIZE_3: '5',
+  SIZE_4: '8',
+  SIZE_5: '14',
+};

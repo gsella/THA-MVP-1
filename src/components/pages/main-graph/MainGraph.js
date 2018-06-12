@@ -59,6 +59,7 @@ class MainGraph extends React.Component {
     await this.props.getTags();
     await this.props.getCategories();
     await this.props.getInsights();
+    this.props.setGraphCellExpandCounter(0, false);
   }
 
   componentDidUpdate(prevProps) {
@@ -177,7 +178,7 @@ class MainGraph extends React.Component {
                 zoom:
                   this.state.zoom >= 2
                     ? this.state.zoom
-                    : this.state.zoom + 0.1,
+                    : this.state.zoom + 0.2,
               });
             }}
           />
@@ -187,9 +188,9 @@ class MainGraph extends React.Component {
             onClick={() => {
               this.setState({
                 zoom:
-                  this.state.zoom <= 1
+                  this.state.zoom <= 0.4
                     ? this.state.zoom
-                    : this.state.zoom - 0.1,
+                    : this.state.zoom - 0.2,
               });
             }}
           />

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getBEMClasses } from 'helper/BEMHelper';
-import { radiusHelper } from 'helper/radiusHelper';
+import { mapSizes } from 'helper/radiusHelper';
 import TagsSection from './TagsSection';
 import { IMPACTS } from 'constants/impactConstants';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { graphSizeHelper } from 'helper/graphSizeHelper';
+import { graphSizeHelper, graphParamsInitialize } from 'helper/graphSizeHelper';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/fontawesome-free-solid';
 
 import 'assets/styles/components/graph-layout.css';
@@ -54,11 +54,13 @@ class GraphLayout extends React.Component {
             )
         );
 
-        const items = currentBubbles.map(bubble => ({
-          label: bubble.categoryKey,
-          color: bubble.category.color,
-          size: bubble.instances,
-        }));
+        const items = mapSizes(
+          currentBubbles.map(bubble => ({
+            label: bubble.categoryKey,
+            color: bubble.category.color,
+            size: bubble.instances,
+          }))
+        );
 
         const key = `graph-${impactsClasses[impact]}-${i}`;
 
@@ -112,7 +114,14 @@ class GraphLayout extends React.Component {
   }
 
   render() {
-    const { tags, categories, insights } = this.props;
+    const {
+      tags,
+      categories,
+      insights,
+      zoom,
+      graphCellExpandCounter,
+      isCellCounterInitialized,
+    } = this.props;
 
     const graphSize = graphSizeHelper(
       tags,
@@ -121,9 +130,18 @@ class GraphLayout extends React.Component {
       'main-graph__graph-layout-container'
     );
 
-    const radiuses = insights
-      ? radiusHelper(tags, insights, categories, graphSize)
-      : undefined;
+    const graphParams = graphParamsInitialize(
+      tags,
+      insights,
+      categories,
+      zoom,
+      graphSize,
+      graphCellExpandCounter
+    );
+
+    if (!isCellCounterInitialized) {
+      this.props.setGraphCellExpandCounter(graphParams.counter, true);
+    }
 
     this.clearTooltips();
 
@@ -133,32 +151,44 @@ class GraphLayout extends React.Component {
       <div className={bemClasses()}>
         <TagsSection
           tags={tags ? Object.values(tags) : []}
-          size={graphSize.width}
+          size={graphParams.graphSize.width}
         />
 
         <div
           className={bemClasses('impact-block')}
-          style={{ minHeight: graphSize.height }}>
+          style={{ minHeight: graphParams.graphSize.height }}>
           <div className={bemClasses('impact-icon')}>
             <FontAwesomeIcon icon={faThumbsUp} />
           </div>
-          {this.renderGraphs(IMPACTS.POS, radiuses, graphSize)}
+          {this.renderGraphs(
+            IMPACTS.POS,
+            graphParams.radiuses,
+            graphParams.graphSize
+          )}
         </div>
 
         <div
           className={bemClasses('impact-block')}
-          style={{ minHeight: graphSize.height }}>
+          style={{ minHeight: graphParams.graphSize.height }}>
           <div className={bemClasses('impact-icon')}>0</div>
-          {this.renderGraphs(IMPACTS.ZERO, radiuses, graphSize)}
+          {this.renderGraphs(
+            IMPACTS.ZERO,
+            graphParams.radiuses,
+            graphParams.graphSize
+          )}
         </div>
 
         <div
           className={bemClasses('impact-block')}
-          style={{ minHeight: graphSize.height }}>
+          style={{ minHeight: graphParams.graphSize.height }}>
           <div className={bemClasses('impact-icon')}>
             <FontAwesomeIcon icon={faThumbsDown} />
           </div>
-          {this.renderGraphs(IMPACTS.NEG, radiuses, graphSize)}
+          {this.renderGraphs(
+            IMPACTS.NEG,
+            graphParams.radiuses,
+            graphParams.graphSize
+          )}
         </div>
       </div>
     );

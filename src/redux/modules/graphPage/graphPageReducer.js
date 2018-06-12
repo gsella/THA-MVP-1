@@ -6,6 +6,8 @@ const defaultState = {
   showSearchResults: false,
   matchingData: [],
   isRefresh: false,
+  graphCellExpandCounter: 0,
+  isCellCounterInitialized: false,
 };
 
 export default function(state = defaultState, { type, payload }) {
@@ -18,6 +20,8 @@ export default function(state = defaultState, { type, payload }) {
       return handleRefreshThunder(state, payload);
     case ACTION_CONSTANTS.PRELOADER:
       return handlePreloader(state, payload);
+    case ACTION_CONSTANTS.SET_SELL_EXPAND_COUNTER:
+      return handleSetGraphCellExpandCounter(state, payload);
 
     default:
       return state;
@@ -45,5 +49,18 @@ function handleRefreshThunder(state, chartData) {
 }
 
 function handlePreloader(state, isRefresh) {
-  return { ...state, isRefresh };
+  return {
+    ...state,
+    isRefresh,
+    graphCellExpandCounter: 0,
+    isCellCounterInitialized: false,
+  };
+}
+
+function handleSetGraphCellExpandCounter(state, cellExpand) {
+  return {
+    ...state,
+    graphCellExpandCounter: cellExpand.counter,
+    isCellCounterInitialized: cellExpand.initStatus,
+  };
 }
