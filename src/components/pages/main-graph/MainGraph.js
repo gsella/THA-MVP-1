@@ -23,6 +23,10 @@ import 'assets/styles/components/main-graph.css';
 const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);
 
+const refreshThunderText =
+  'Depending on the amount of data, fetching it can take a while or two.' +
+  '\n Good time to make yourself a cup of something';
+
 class MainGraph extends React.Component {
   constructor(props) {
     super(props);
@@ -94,10 +98,7 @@ class MainGraph extends React.Component {
           />
         }
         title="Refreshing your Thunder..."
-        description={
-          'Depending om the amount of data, fetching it can take a while or two.' +
-          '\n Good time to make yourself a cup of something'
-        }
+        description={refreshThunderText}
       />
     );
   }
@@ -107,10 +108,7 @@ class MainGraph extends React.Component {
       <Preloader
         preloadIcon={<img src={ThunderIcon} alt="preloader-icon" width={150} />}
         title="Launching your Thunder..."
-        description={
-          'Depending om the amount of data, fetching it can take a while or two.' +
-          '\n Good time to make yourself a cup of something'
-        }
+        description={refreshThunderText}
       />
     );
   }
