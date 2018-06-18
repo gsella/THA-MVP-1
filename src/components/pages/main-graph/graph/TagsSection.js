@@ -7,12 +7,12 @@ const tagSectionClass = 'tags-sections';
 const bemClasses = getBEMClasses([tagSectionClass]);
 
 const TagSection = ({ tags, size }) => (
-  <div className={bemClasses()}>
+  <div className={bemClasses()} style={{ width: size * tags.length }}>
     {tags.map(tag => (
       <div
         className={bemClasses('item')}
         key={tag.name}
-        style={{ minWidth: size }}>
+        style={{ width: size }}>
         {tag.name}
       </div>
     ))}

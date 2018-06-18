@@ -22,6 +22,12 @@ import 'assets/styles/components/main-graph.css';
 
 const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);
+const ZOOM_CONST = {
+  minimum: 0.35,
+  breakpoint: 0.85,
+  maximum: 2,
+  step: 0.2,
+};
 
 const refreshThunderText =
   'Depending on the amount of data, fetching it can take a while or two.' +
@@ -82,6 +88,34 @@ class MainGraph extends React.Component {
   async refreshThunder() {
     await this.props.refreshThunder(4, this.props.selectedDate);
     this.setState({ isHiddenNotification: false });
+  }
+
+  zoomIn() {
+    let zoom = this.state.zoom;
+
+    if (zoom < ZOOM_CONST.maximum) {
+      if (zoom >= ZOOM_CONST.breakpoint) {
+        zoom += ZOOM_CONST.step;
+      } else {
+        zoom += ZOOM_CONST.step / 2;
+      }
+    }
+
+    this.setState({ zoom: zoom });
+  }
+
+  zoomOut() {
+    let zoom = this.state.zoom;
+
+    if (zoom > ZOOM_CONST.minimum) {
+      if (zoom >= ZOOM_CONST.breakpoint) {
+        zoom -= ZOOM_CONST.step;
+      } else {
+        zoom -= ZOOM_CONST.step / 2;
+      }
+    }
+
+    this.setState({ zoom: zoom });
   }
 
   renderRefreshingPreloader() {
@@ -171,26 +205,12 @@ class MainGraph extends React.Component {
           <FontAwesomeIcon
             icon={faPlus}
             className={bemClasses('zoom', 'color')}
-            onClick={() => {
-              this.setState({
-                zoom:
-                  this.state.zoom >= 2
-                    ? this.state.zoom
-                    : this.state.zoom + 0.2,
-              });
-            }}
+            onClick={() => this.zoomIn()}
           />
           <FontAwesomeIcon
             icon={faMinus}
             className={bemClasses('zoom', 'color')}
-            onClick={() => {
-              this.setState({
-                zoom:
-                  this.state.zoom <= 0.4
-                    ? this.state.zoom
-                    : this.state.zoom - 0.2,
-              });
-            }}
+            onClick={() => this.zoomOut()}
           />
         </div>
       </div>
