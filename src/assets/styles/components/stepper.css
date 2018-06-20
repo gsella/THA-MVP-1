@@ -2,26 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 540px;
+  width: 720px;
   margin-bottom: 40px;
 }
 
 .stepper__step-wrapper {
-  width: 50px;
-  height: 50px;
+  width: 67px;
+  height: 67px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 0 20px;
 }
 
 .stepper__icon {
-  width: 40px;
-  height: 40px;
+  width: 57px;
+  height: 57px;
   z-index: 10;
 }
 
 .stepper__icon-wrapper {
-  width: 50px;
+  width: 67px;
 }
 
 .stepper__icon-wrapper--empty {
@@ -36,7 +37,7 @@
 
 .stepper__divider {
   height: 1px;
-  width: 165px;
+  width: 260px;
   border-bottom: 2px dashed #a4a4a4;
 }
 
@@ -45,5 +46,6 @@
   text-align: center;
   font-weight: 500;
   color: #222222;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-medium-2);
+  margin-top: 5px;
 }

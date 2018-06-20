@@ -10,8 +10,8 @@ body {
 }
 
 html {
-  font-size: 14px;
   height: 100%;
+  font-size: 12px;
   min-width: 700px;
 }
 

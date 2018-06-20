@@ -7,7 +7,7 @@
 }
 
 .button__btn--default {
-  font-size: var(--font-size-medium-1);
+  font-size: var(--font-size-medium-2);
   font-weight: bold;
   color: #4a90e2;
   padding: 10px 40px;
@@ -23,7 +23,7 @@
 }
 
 .button__btn--primary {
-  font-size: var(--font-size-medium-1);
+  font-size: var(--font-size-medium-2);
   font-weight: bold;
   color: #fff;
   padding: 10px 40px;

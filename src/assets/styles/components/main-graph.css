@@ -52,8 +52,8 @@
 }
 
 .main-graph__navigate-icons .main-graph__navigate-icons--size {
-  width: 23px;
-  height: 23px;
+  width: 21px;
+  height: 21px;
   opacity: 0.5;
   cursor: pointer;
 }
@@ -73,9 +73,9 @@
 .main-graph__zoom .main-graph__zoom--color {
   background-color: #e4e4e4;
   margin: 10px 0;
-  padding: 5px;
-  width: 25px;
-  height: 25px;
+  padding: 7px;
+  width: 23px;
+  height: 23px;
   cursor: pointer;
 }
 
@@ -91,4 +91,8 @@
 /*use nested selectors to overlap bootstrap styles*/
 .caret {
   display: none;
+}
+
+.graph-layout__svg {
+  font-size: var(--font-size-small);
 }

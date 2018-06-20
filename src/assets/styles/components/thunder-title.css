@@ -1,7 +1,7 @@
 .thunder-title {
   display: flex;
   justify-content: center;
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-large-2);
   font-weight: 900;
   position: relative;
   top: -15px;

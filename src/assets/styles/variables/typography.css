@@ -1,8 +1,9 @@
 :root {
-  --font-size-small: 1rem;
-  --font-size-medium-1: 1.25rem;
-  --font-size-medium-2: 1.3rem;
-  --font-size-large: 2.4rem;
+  --font-size-small: 1.05rem;
+  --font-size-medium-1: 1.17rem;
+  --font-size-medium-2: 1.5rem;
+  --font-size-large: 1.75rem;
+  --font-size-large-2: 2.4rem;
 
-  --width-sidebar: 255px;
+  --width-sidebar: 207px;
 }

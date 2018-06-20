@@ -2,8 +2,8 @@
   background-color: var(--bgcolor-default);
   position: fixed;
   top: 0;
-  left: -255px;
-  width: 255px;
+  left: -207px;
+  width: var(--width-sidebar);
   height: 100%;
   transition: left 250ms ease !important;
   z-index: 100;

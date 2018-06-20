@@ -2,6 +2,10 @@
   margin-right: 10px;
 }
 
+.search-form__input {
+  font-size: var(--font-size-medium-2);
+}
+
 .search-form__input--border {
   border-radius: 0;
   border: none;

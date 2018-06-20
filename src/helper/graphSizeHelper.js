@@ -33,14 +33,17 @@ export function graphParamsInitialize(
     counter,
   };
 
+  // TODO uncomment this to enable dynamic graph size
+  /*
   graphParams.graphSize.height += counter * 20 * zoom;
   graphParams.graphSize.width += counter * 22 * zoom;
 
   do {
-    graphParams.radiuses = insights
-      ? radiusHelper(tags, insights, categories, graphParams.graphSize)
-      : undefined;
-
+  */
+  graphParams.radiuses = insights
+    ? radiusHelper(tags, insights, categories, graphParams.graphSize)
+    : undefined;
+  /*
     if (
       graphParams.radiuses['1'] / zoom < 13.7 &&
       graphSize.height / zoom < 460
@@ -53,6 +56,7 @@ export function graphParamsInitialize(
     graphParams.radiuses['1'] / zoom < 13.7 &&
     graphParams.graphSize.height / zoom < 460
   );
+  */
 
   return graphParams;
 }

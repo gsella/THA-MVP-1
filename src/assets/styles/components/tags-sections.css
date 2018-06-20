@@ -1,7 +1,9 @@
 .tags-sections {
   display: flex;
-  margin-left: 35px;
+  margin-left: 57px;
   min-height: 40px;
+  font-size: var(--font-size-medium-1);
+  font-weight: 900;
 }
 
 .tags-sections__item {

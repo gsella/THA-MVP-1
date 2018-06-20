@@ -11,12 +11,14 @@
 }
 
 .graph-layout__impact-icon {
-  min-width: 14px;
+  min-width: 32px;
   width: 14px;
-  margin: 0 10px;
+  margin: 0 5px 0 20px;
   display: flex;
   align-items: center;
   font-weight: 800;
+  font-size: var(--font-size-large);
+  padding: 3.5px;
 }
 
 .graph-layout__graph-container {

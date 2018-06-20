@@ -7,11 +7,12 @@
 .header-wrapper__header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 8px 50px;
 }
 
 .header-wrapper__user-name {
-  font-size: var(--font-size-medium-2);
+  font-size: var(--font-size-small);
   font-weight: bold;
   margin-bottom: 0;
 }
