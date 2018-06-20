@@ -125,7 +125,7 @@ class GraphLayout extends React.Component {
 
     const graphSize = graphSizeHelper(
       tags,
-      { minWidth: 250, minHeigth: 250 },
+      { minWidth: 250, minHeigth: 130 },
       this.props.zoom,
       'main-graph__graph-layout-container'
     );
