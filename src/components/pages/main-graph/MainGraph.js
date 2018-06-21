@@ -24,7 +24,7 @@ const mainGraph = 'main-graph';
 const bemClasses = getBEMClasses([mainGraph]);
 const ZOOM_CONST = {
   minimum: 0.35,
-  breakpoint: 0.85,
+  breakpoint: 0.8,
   maximum: 2,
   step: 0.2,
 };
@@ -108,7 +108,7 @@ class MainGraph extends React.Component {
     let zoom = this.state.zoom;
 
     if (zoom > ZOOM_CONST.minimum) {
-      if (zoom >= ZOOM_CONST.breakpoint) {
+      if (zoom > ZOOM_CONST.breakpoint) {
         zoom -= ZOOM_CONST.step;
       } else {
         zoom -= ZOOM_CONST.step / 2;
